@@ -1,0 +1,69 @@
+<div class="card mb-3" style="margin: auto; width: 90%;">
+    <div class="row g-0">
+      <div class="col-md-2">
+        <img src="http://www.salineritotqb.com/web/image/product.template/12837/image" class="img-fluid rounded-start" alt="..." width="200">
+      </div>
+      <div class="col-md-10">
+        <div class="card-body">
+          <h5 class="card-title">Producto</h5>
+          <p class="card-text">Este es un producto.</p>
+          <p class="card-text"><small class="text-muted">Subido hace 3 min</small></p>
+          
+          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <button class="btn btn-success me-md-2" type="button">Aumentar</button>
+            <button class="btn btn-danger me-md-2" type="button">Disminuir</button>
+            <button type="button" class="btn btn-outline-primary me-md-2" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Editar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="d-grid gap-2">
+    <button style="width: 90%;margin: auto;" type="button" class="btn btn-success btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo">Añadir Producto</button>
+  </div>
+  
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Añadir Producto</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Nombre Producto:</label>
+            <input type="text" class="form-control" id="recipient-name">
+          </div>
+          <div class="mb-3">
+            <label for="message-text" class="col-form-label">Descripcion:</label>
+            <textarea class="form-control" id="message-text"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-success">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>const exampleModal = document.getElementById('exampleModal')
+    exampleModal.addEventListener('show.bs.modal', event => {
+      // Button that triggered the modal
+      const button = event.relatedTarget
+      // Extract info from data-bs-* attributes
+      const recipient = button.getAttribute('data-bs-whatever')
+      // If necessary, you could initiate an AJAX request here
+      // and then do the updating in a callback.
+      //
+      // Update the modal's content.
+      const modalTitle = exampleModal.querySelector('.modal-title')
+      const modalBodyInput = exampleModal.querySelector('.modal-body input')
+    
+      modalTitle.textContent = `New message to ${recipient}`
+      modalBodyInput.value = recipient
+    })</script>
