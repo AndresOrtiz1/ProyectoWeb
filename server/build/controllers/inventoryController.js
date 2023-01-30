@@ -7,7 +7,8 @@ exports.inventoryController = void 0;
 const database_1 = __importDefault(require("../database"));
 class InventoryController {
     index(req, res) {
-        database_1.default.query('DESCRIBE inventarios_productos_db');
+        database_1.default.query('DESCRIBE productos');
+        res.json('productos');
     }
 }
 exports.inventoryController = new InventoryController();

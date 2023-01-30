@@ -4,7 +4,8 @@ import  pool  from '../database';
 
 class InventoryController {
     public index (req: Request, res: Response) {
-        pool.query('DESCRIBE inventarios_productos_db')
+        pool.query('DESCRIBE productos');
+        res.json('productos');
     }
 }
 
