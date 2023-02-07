@@ -15,7 +15,7 @@ class Materia_primaController {
         const materia_prima = await pool.query ('SELEC * FROM materia_prima WHERE id= ?', [id]);
         //verificacion de existencial del elemento
         if (materia_prima.length > 0){
-            return res.json(materia_prima[1][0]);
+            return res.json(materia_prima[0]);
         }
         res.status(404).json({Text:'El elemento no existe'})
     }
