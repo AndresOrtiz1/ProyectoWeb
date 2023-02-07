@@ -4,6 +4,7 @@ import cors from 'cors';
 
 import indexRoutes from './routes/indexRoutes';
 import inventoryRoutes from './routes/inventoryRoutes';
+import materia_primaRoutes from './routes/materia_primaRoutes';
 class Server{
 
     public app: express.Application;
@@ -25,6 +26,7 @@ class Server{
     routes(): void{
         this.app.use('/', indexRoutes);
         this.app.use('/api/inventario', inventoryRoutes);    
+        this.app.use('/api/materia-prima', materia_primaRoutes);    
     }
 
     start(): void{
