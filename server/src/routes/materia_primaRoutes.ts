@@ -12,7 +12,7 @@ class InventoryRoutes {
     config(): void {
         this.router.get('/', materia_primaController.list_materia_prima );
         this.router.get('/:id', materia_primaController.getOne );
-        this.router.post('/',materia_primaController.creat);
+        this.router.post('/',materia_primaController.create);
         this.router.put('/:id',materia_primaController.update); 
         this.router.delete('/:id',materia_primaController.delete);       
 

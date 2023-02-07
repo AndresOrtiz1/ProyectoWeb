@@ -4,6 +4,6 @@ export interface MateriaPrima {
     tittle?:string;
     description?: string;
     image?: string;
-    created_at?: Date
+    created_at?: Date;
 
 }

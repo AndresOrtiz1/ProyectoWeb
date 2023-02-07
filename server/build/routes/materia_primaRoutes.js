@@ -13,7 +13,7 @@ class InventoryRoutes {
     config() {
         this.router.get('/', materia_primaController_1.default.list_materia_prima);
         this.router.get('/:id', materia_primaController_1.default.getOne);
-        this.router.post('/', materia_primaController_1.default.creat);
+        this.router.post('/', materia_primaController_1.default.create);
         this.router.put('/:id', materia_primaController_1.default.update);
         this.router.delete('/:id', materia_primaController_1.default.delete);
     }

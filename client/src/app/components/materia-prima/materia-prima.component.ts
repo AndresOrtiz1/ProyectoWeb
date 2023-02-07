@@ -10,18 +10,16 @@ import { MateriaPrimaServicesService } from '../../services/materia-prima.servic
 })
 export class MateriaPrimaComponent implements OnInit{
   
-  materias_primas: any = [];
-
+  materias_primasArr: any = [];
   constructor(private materiaPrimaServicesService: MateriaPrimaServicesService){
 
   }
   
   ngOnInit() {
-    this.materiaPrimaServicesService.getMateria_prima_list().subscribe(
-      res =>{
-        this.materias_primas =res;
-      },
-      err => console.log(err)
-    );
+    this.materiaPrimaServicesService.getMateria_prima_list().subscribe({
+      next: (v: any) => this.materias_primasArr = v,
+      error: (e: any) => console.error(e),
+      complete: () => console.info('complete')
+  })
   }
 }
