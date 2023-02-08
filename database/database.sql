@@ -16,11 +16,11 @@ CREATE TABLE `materia_prima` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `codigo` varchar(255) NOT NULL,
   `nombre` varchar(255) NOT NULL,
-  `precio` decimal(10,2) NOT NULL,
+  `precio` varchar(255) NOT NULL,
   `unidad_medida` varchar(255) NOT NULL,  
-  `cantidad` decimal(10,2) NOT NULL,
-  `fecha_ingreso` datetime NOT NULL,
-  `fecha_caducidad` datetime NOT NULL,
+  `cantidad` varchar(255) NOT NULL,,
+  `fecha_ingreso` varchar(255) NOT NULL,
+  `fecha_caducidad` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
