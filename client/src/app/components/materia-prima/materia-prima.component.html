@@ -1,6 +1,6 @@
 
-
-<div class="row-md-4"  *ngFor="let materia_prima of materias_primasArr">
+<h2 style="margin: auto; width: 95%;text-align: center;" >Materia Prima</h2> <br>
+<div class="row-md-3"  *ngFor="let materia_prima of materias_primasArr">
     <!-- <div class="cad text-center">
         {{materia_prima.title}}
     </div>
@@ -10,17 +10,20 @@
     </div> -->
     <div class="row-md-1">
 
-        <div class="card mb-3" style="margin: auto; width: 90%;">
+        <div class="card mb-3" style="margin: auto; width: 95%;">
             <div class="row g-0">
                 <div class="col-md-2">
-                    <img src={{materia_prima.image}}
+                    <img src="{{materia_prima.imagen}}"
                         class="img-fluid rounded-start" alt="..." width="200">
                 </div>
                 <div class="col-md-10">
                     <div class="card-body">
-                        <h5 class="card-title">{{materia_prima.title}}</h5>
-                        <p class="card-text">{{materia_prima.description}}</p>
-                        <p class="card-text"><small class="text-muted">{{materia_prima.description}}</small></p>
+                        <h5 class="card-title">{{materia_prima.nombre}}</h5>
+                        <p class="card-text"> Codigo: {{materia_prima.codigo}} </p>
+                        <p class="card-text">Precio: {{materia_prima.precio}} USD</p>
+                        <p class="card-text">Cantidad: {{materia_prima.cantidad}} - {{materia_prima.unidad_medida}}  USD</p>
+                        
+                        <p class="card-text"><small class="text-muted">asdasd</small></p>
         
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                             <button class="btn btn-success me-md-2" type="button">Aumentar</button>
@@ -47,7 +50,7 @@
                         <form>
                             <div class="mb-3">
                                 <label for="recipient-name" class="col-form-label">Codigo:</label>
-                                <input type="text" class="form-control" id="recipient-name">
+                                <input type="text" class="form-control" id="recipient-name" autofocus>
                             </div>
                             <div class="mb-3">
                                 <label for="recipient-name" class="col-form-label">Nombre:</label>

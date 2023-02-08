@@ -48,7 +48,7 @@ class Materia_primaController {
     public async update (req: Request, res: Response): Promise<void> {
         const { id } = req.params;
         await pool.query('UPDATE materia_prima set ? WHERE id = ?',[req.body , id]);
-        res.json({message: ' se actualizo el elemento' })
+        res.json({message: ' se actualizo el elemento'})
     }
     
     
