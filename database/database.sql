@@ -1,6 +1,7 @@
 CREATE DATABASE inventarios_productos_db;
 USE inventarios_productos_db;
 /* La tabla debe cambiar al que le toco esta parte a su conveniencia*/
+
 CREATE TABLE `productos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(255) NOT NULL,
@@ -12,6 +13,7 @@ CREATE TABLE `productos` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
+-- tabla de datos de materia prima
 CREATE TABLE `materia_prima` (
   `id` int NOT NULL AUTO_INCREMENT,
   `codigo` varchar(255) NOT NULL,
@@ -24,3 +26,5 @@ CREATE TABLE `materia_prima` (
   `imagen` longtext NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3
+
+
