@@ -18,7 +18,7 @@ npm instal -g typescript
 
 
 npm run build   
-// activa el coando para la vijilancia de los cambios en los archivos .js
+// activa el comando para la Vigilancia de los cambios en los archivos .js
 
 npm run dev  
 //en nueva terminal 
