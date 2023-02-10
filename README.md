@@ -20,7 +20,8 @@ npm instal -g typescript
 npm run build   
 // activa el coando para la vijilancia de los cambios en los archivos .js
 
-npm run dev  en nueva terminal 
+npm run dev  
+//en nueva terminal 
 //activa el comando para transformar los archivos .ts en .js e inicia el servidor en el puerto 3000
 
 npm i @types/express -D 
