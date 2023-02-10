@@ -41,7 +41,7 @@ class Materia_primaController {
     
     public async create (req: Request, res: Response): Promise<void> {
         await pool.query('INSERT INTO materia_prima set ? ', [req.body] )
-        res.json({message:'nuevo material ingresaso. '})
+        res.json({message:'nuevo material ingresaso . '})
         
     }
     
@@ -63,4 +63,3 @@ class Materia_primaController {
 
 export const materia_primaController = new Materia_primaController();
 export default materia_primaController;
-

@@ -22,7 +22,7 @@ export class MateriaPrimaServicesService {
   }
 
   deleteMateria_pirma(id: string): Observable <MateriaPrima>{
-    return this.http.get(`${this.API_URI}/materia-prima/${id}`)
+    return this.http.delete(`${this.API_URI}/materia-prima/${id}`)
 
   }
 
@@ -30,7 +30,7 @@ export class MateriaPrimaServicesService {
     return this.http.post(`${this.API_URI}/materia-prima/`,materia_prima)
   }
   
-  updateMateria_prima(id: string , updateMateria_prima: MateriaPrima): Observable <MateriaPrima>{
+  updateMateria_prima(id: string | number , updateMateria_prima: MateriaPrima): Observable <MateriaPrima>{
     
     return this.http.put(`${this.API_URI}/materia-prima/${id}`,updateMateria_prima)
   }

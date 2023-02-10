@@ -7,7 +7,7 @@ pool.getConnection()
     .then(connection => {
         
         connection.release();
-        console.log('DB is connected');
+        console.log('DB conectada');
     });
 
 

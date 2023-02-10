@@ -9,6 +9,6 @@ const pool = promise_1.default.createPool(keys_1.default.database);
 pool.getConnection()
     .then(connection => {
     connection.release();
-    console.log('DB is connected');
+    console.log('DB conectada');
 });
 exports.default = pool;

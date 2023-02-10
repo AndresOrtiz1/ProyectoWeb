@@ -1,6 +1,5 @@
-
-<h2 style="margin: auto; width: 95%;text-align: center;" >Materia Prima</h2> <br>
-<div class="row-md-3"  *ngFor="let materia_prima of materias_primasArr">
+<h2 style="margin: auto; width: 95%;text-align: center;">Materia Prima</h2> <br>
+<div class="row-md-3" *ngFor="let materia_prima of materias_primasArr">
     <!-- <div class="cad text-center">
         {{materia_prima.title}}
     </div>
@@ -13,89 +12,101 @@
         <div class="card mb-3" style="margin: auto; width: 95%;">
             <div class="row g-0">
                 <div class="col-md-2">
-                    <img src="{{materia_prima.imagen}}"
-                        class="img-fluid rounded-start" alt="..." width="200">
+                    <img src="{{materia_prima.imagen}}" class="img-fluid rounded-start" alt="..." width="200">
                 </div>
                 <div class="col-md-10">
                     <div class="card-body">
                         <h5 class="card-title">{{materia_prima.nombre}}</h5>
                         <p class="card-text"> Codigo: {{materia_prima.codigo}} </p>
                         <p class="card-text">Precio: {{materia_prima.precio}} USD</p>
-                        <p class="card-text">Cantidad: {{materia_prima.cantidad}} - {{materia_prima.unidad_medida}}  USD</p>
-                        
-                        <p class="card-text"><small class="text-muted">asdasd</small></p>
-        
+                        <p class="card-text">Cantidad: {{materia_prima.cantidad}} - {{materia_prima.unidad_medida}} </p>
+
+                        <p class="card-text"><small class="text-muted">Fecha de ingreso :
+                                {{materia_prima.fecha_ingreso}} &nbsp;&nbsp;&nbsp;&nbsp; Fecha de caducidad
+                                :{{materia_prima.fecha_caducidad}}</small></p>
+
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                             <button class="btn btn-success me-md-2" type="button">Aumentar</button>
                             <button class="btn btn-danger me-md-2" type="button">Disminuir</button>
-                            <button type="button" class="btn btn-outline-primary me-md-2" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal" data-bs-whatever="@mdo">Editar</button>
+                            <button type="button" class="btn btn-outline-primary me-md-2" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo" (click)="editMP(materia_prima.id)">Editar</button>
+                            <button class="btn btn-danger me-md-2" type="button" (click)="deleteMP(materia_prima.id)">Eliminar</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        
-        
-        
-        
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-xl">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Añadir Materia Prima</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form>
+
+
+
+        <form>
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Añadir Materia Prima</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+
                             <div class="mb-3">
-                                <label for="recipient-name" class="col-form-label">Codigo:</label>
-                                <input type="text" class="form-control" id="recipient-name" autofocus>
+                                <label for="Codigo" class="col-form-label">Codigo:</label>
+                                <input type="text" class="form-control" id="Codigo" autofocus required [(ngModel)]="mateiraP.codigo" name="Codigo" >
                             </div>
                             <div class="mb-3">
-                                <label for="recipient-name" class="col-form-label">Nombre:</label>
-                                <input type="text" class="form-control" id="recipient-name">
+                                <label for="Nombre" class="col-form-label">Nombre:</label>
+                                <input type="text" class="form-control" id="Nombre" autofocus required [(ngModel)]="mateiraP.nombre" name="Nombre">
                             </div>
                             <div class="mb-3">
-                                <label for="recipient-name" class="col-form-label">Precio:</label>
-                                <input type="text" class="form-control" id="recipient-name">
-                            </div>
-                            <div class="mb-3">
-                                <label for="recipient-name" class="col-form-label">Unidad de Medida:</label>
-                                <input type="text" class="form-control" id="recipient-name">
-                            </div>
-                            <div class="mb-3">
-                                <label for="recipient-name" class="col-form-label">Cantidad:</label>
-                                <input type="text" class="form-control" id="recipient-name">
-                            </div>
-                            <div class="mb-3">
-                                <label for="recipient-name" class="col-form-label">Fecha de ingreso:</label>
-                                <input type="date" class="form-control" id="recipient-name">
-                            </div>
-                            <div class="mb-3">
-                                <label for="recipient-name" class="col-form-label">fecha de caducidad:</label>
-                                <input type="date" class="form-control" id="recipient-name">
+                                <label for="Precio" class="col-form-label">Precio:</label>
+                                <input type="text" class="form-control" id="Precio" autofocus required [(ngModel)]="mateiraP.precio" name="Precio">
                             </div>
                             <div class="form-group">
-                                <label for="inputState">State</label>
-                                <select id="inputState" class="form-control">
-                                  <option >...</option>
-                                  <option selected>Kg</option>
-                                  <option selected>Lt</option>
-                                  <option selected>oz</option>
+                                <label for="UnidadM">Unidad de Medida</label>
+                                <select id="UnidadM" name="UnidadM" class="form-control" [(ngModel)]="mateiraP.unidad_medida" required>
+
+                                    <option selected value="kg">Kg</option>
+                                    <option selected value="lt">Lt</option>
+                                    <option selected value="oz">oz</option>
+                                    <option selected >...</option>
+
                                 </select>
-                              </div>
-    
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="button" class="btn btn-success">Guardar</button>
+                            </div>
+                            <div class="mb-3">
+                                <label for="Cantidad" class="col-form-label">Cantidad:</label>
+                                <input type="text" class="form-control" id="Cantidad" autofocus required [(ngModel)]="mateiraP.cantidad" name="Cantidad">
+                            </div>
+                            <!--   -->
+                            <div class="form-row row g-3">
+                                <div class="form-group col-md-6">
+                                    <label for="FechaI" class="col-form-label">Fecha de ingreso:</label>
+                                    <input type="date" class="form-control" id="FechaI" autofocus required [(ngModel)]="mateiraP.fecha_ingreso" name="FechaI">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="FechaC" class="col-form-label">Fecha de caducidad:</label>
+                                    <input type="date" class="form-control" id="FechaC" autofocus required [(ngModel)]="mateiraP.fecha_caducidad" name="FechaC">
+                                </div>
+                            </div>
+                            <!--  -->
+
+
+                            <div class="mb-3">
+                                <label for="Imagen" class="col-form-label">Imagen</label>
+                                <input type="url" class="form-control" id="Imagen" autofocus required [(ngModel)]="mateiraP.imagen" name="Imagen">
+                            </div>
+
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button type="button" class="btn btn-success"  data-bs-dismiss="modal" (click)="saveNewMP()" onclick="location.reload()">Guardar</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        
+        </form>
+
         <script>const exampleModal = document.getElementById('exampleModal')
             exampleModal.addEventListener('show.bs.modal', event => {
                 // Button that triggered the modal
@@ -108,11 +119,11 @@
                 // Update the modal's content.
                 const modalTitle = exampleModal.querySelector('.modal-title')
                 const modalBodyInput = exampleModal.querySelector('.modal-body input')
-        
+
                 modalTitle.textContent = `New message to ${recipient}`
                 modalBodyInput.value = recipient
             })</script>
-    
+
     </div>
 </div>
 <div class="d-grid gap-2">

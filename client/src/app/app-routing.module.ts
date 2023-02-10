@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+
 import { InicioComponent} from './components/inicio/inicio.component'
 import { MateriaPrimaComponent } from './components/materia-prima/materia-prima.component';
 //definicion de rutas 
@@ -24,6 +25,10 @@ const routes: Routes = [
     path:'materia-prima',
     component: MateriaPrimaComponent
   },
+  {
+    path: 'materia-prima/:id',
+    component: MateriaPrimaComponent,
+  }
 ];
 
 @NgModule({

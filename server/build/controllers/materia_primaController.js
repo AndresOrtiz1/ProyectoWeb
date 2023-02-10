@@ -48,7 +48,7 @@ class Materia_primaController {
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             yield database_1.default.query('INSERT INTO materia_prima set ? ', [req.body]);
-            res.json({ message: 'nuevo material ingresaso. ' });
+            res.json({ message: 'nuevo material ingresaso . ' });
         });
     }
     update(req, res) {
