@@ -24,10 +24,10 @@ npm run dev
 //en nueva terminal 
 //activa el comando para transformar los archivos .ts en .js e inicia el servidor en el puerto 3000
 
-npm i @types/express -D 
-//instalar los modulos para usar express 
-
 --dentro de la carpeta client 
+
+npm install
+//para la respectiva lectura de los modulos 
 
 ng serve 
 // inciar el servidor de angular en el puerto 4000 para poder observar los cambios que se realizan en el cliente 
