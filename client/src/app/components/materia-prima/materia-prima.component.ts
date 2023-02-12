@@ -1,0 +1,104 @@
+import { Component, HostBinding, IterableDiffers, OnInit } from '@angular/core';
+import { MateriaPrima } from 'src/app/models/materia_prima.models';
+import { ActivatedRoute, Router } from '@angular/router'
+
+
+import { MateriaPrimaServicesService } from '../../services/materia-prima.services.service'
+
+
+@Component({
+  selector: 'app-materia-prima',
+  templateUrl: './materia-prima.component.html',
+  styleUrls: ['./materia-prima.component.css']
+})
+export class MateriaPrimaComponent implements OnInit {
+
+  @HostBinding('class') classes = 'modal-body';
+  API_URI = 'http://localhost:3000/api';
+
+  mateiraP: MateriaPrima = {
+    id: 0,
+    codigo: '',
+    nombre: '',
+    precio: '',
+    unidad_medida: '',
+    cantidad: '',
+    fecha_ingreso: '',
+    fecha_caducidad: '',
+    imagen: ''
+  }
+
+  materias_primasArr: any = [];
+  edit : boolean = true;
+  constructor(private materiaPrimaServicesService: MateriaPrimaServicesService, private router: Router , private activatedRoute : ActivatedRoute) {
+
+  }
+  
+  ngOnInit() {
+    this.getMP();
+  }
+
+  saveNewMP() {
+     
+    delete this.mateiraP.id;
+    
+
+
+    this.materiaPrimaServicesService.saveMateria_prima(this.mateiraP).subscribe({
+      next: (v: any) => [this.mateiraP = v,this.edit = false ],
+      error: (e: any) => console.error(e),
+      complete: () => ( this.getMP())
+    })
+  }
+
+  getMP() {
+    this.materiaPrimaServicesService.getMateria_prima_list().subscribe({
+      next: (v: any) => this.materias_primasArr = v,
+      error: (e: any) => console.error(e),
+      complete: () => console.info('complete')
+      
+    })
+  }
+
+  deleteMP(id: any) {
+    this.materiaPrimaServicesService.deleteMateria_pirma(id).subscribe({
+      next: (v: any) => [console.log(v),console.log(`se esta eliminando el elemento ${id}`)],
+      error: (e: any) => console.error(e),
+      complete: () => this.getMP(),
+
+    })
+
+  }
+  get_MP(id : string) {
+    this.materiaPrimaServicesService.getMateria_pirma(id).subscribe({
+      next: (v: any) => [[this.mateiraP] = v, this.edit = true, console.log(id)],
+      error: (e: any) => console.error(e),
+      complete: () => console.log('get materia prima complete'+id)
+    })
+
+
+  }
+
+  updateMP(id: any){
+    this.materiaPrimaServicesService.updateMateria_prima(id,this.mateiraP).subscribe({
+      next: (v: any) => [this.mateiraP, console.log(v), console.log([this.mateiraP], this.mateiraP), console.log(id)],
+      error: (e: any) => console.error(e),
+      complete: () => [this.getMP()]      
+    })
+     
+     
+  }
+
+  reset(){
+    this.mateiraP.id=0;
+    this.mateiraP.codigo = '';
+    this.mateiraP.nombre = '';
+    this.mateiraP.precio = '';
+    this.mateiraP.unidad_medida = '';
+    this.mateiraP.cantidad = '';
+    this.mateiraP.fecha_ingreso = '';
+    this.mateiraP.fecha_caducidad = '';
+    this.mateiraP.imagen = ''; 
+  }
+  
+}

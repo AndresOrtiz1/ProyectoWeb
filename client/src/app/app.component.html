@@ -6,10 +6,17 @@
 <!-- * * * * * * * * * Delete the template below * * * * * * * * * * -->
 <!-- * * * * * * * to get started with your project! * * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<app-login *ngIf="!verPagina()"></app-login>
+<div *ngIf="verPagina()">
 <app-navigation></app-navigation>
-<app-cards></app-cards>
-<app-footer></app-footer>
+<!-- <app-cards></app-cards> -->
 
+<!-- espacio de renderizado de los ocmponentes referrenciados en el menu -->
+<div class="container p-4" >
+    <router-outlet></router-outlet>
+</div>
+<app-footer></app-footer>
+</div>
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * The content above * * * * * * * * * * * -->
 <!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
@@ -18,4 +25,4 @@
 <!-- * * * * * * * * * * End of Placeholder * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
-<router-outlet></router-outlet>
+
