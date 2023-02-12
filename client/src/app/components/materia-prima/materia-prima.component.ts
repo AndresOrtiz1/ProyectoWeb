@@ -60,9 +60,9 @@ export class MateriaPrimaComponent implements OnInit {
     })
   }
 
-  deleteMP(id: string) {
+  deleteMP(id: any) {
     this.materiaPrimaServicesService.deleteMateria_pirma(id).subscribe({
-      next: (v: any) => [console.log(v),console.log(`se esta eliminando el juego ${id}`)],
+      next: (v: any) => [console.log(v),console.log(`se esta eliminando el elemento ${id}`)],
       error: (e: any) => console.error(e),
       complete: () => this.getMP(),
 
@@ -102,3 +102,4 @@ export class MateriaPrimaComponent implements OnInit {
   }
   
 }
+
