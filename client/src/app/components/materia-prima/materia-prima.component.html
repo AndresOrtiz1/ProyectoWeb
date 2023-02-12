@@ -23,8 +23,33 @@
                             <button type="button" class="btn btn-success me-md-2" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal" data-bs-whatever="@mdo"
                                 (click)="get_MP(materia_prima.id)">Editar</button>
-                            <button class="btn btn-danger me-md-2" type="button"
-                                (click)="deleteMP(materia_prima.id)">Eliminar</button>
+                              
+
+                                <button type="button" class="btn btn-danger me-md-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                    Eliminar
+                                  </button>
+
+                            <!-- verificar eliminacion-->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Eliminar</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            ¿Esta usted seguro que desea eliminar este elemento?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button class="btn btn-danger me-md-2" type="button"
+                                (click)="deleteMP(materia_prima.id)" data-bs-dismiss="modal">Eliminar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+
                         </div>
                     </div>
                 </div>
@@ -33,11 +58,15 @@
     </div>
 </div>
 
+
+
+
+
 <!-- BOTOM DE A;ADIR ELEMENTO  -->
 
 <div class="d-grid gap-2">
     <button style="width: 90%;margin: auto;" type="button" class="btn btn-success btn-lg" data-bs-toggle="modal"
-        data-bs-target="#exampleModal2" data-bs-whatever="@mdo">Añadir Producto</button>
+        data-bs-target="#exampleModal2" data-bs-whatever="@mdo" (click)="reset()">Añadir Producto</button>
 </div>
 
 <!-- FORULARIO DE EDITAR DATOS DEL ELEMENTO -->
@@ -71,10 +100,10 @@
                         <select id="UnidadM" name="UnidadM" class="form-select" [(ngModel)]="mateiraP.unidad_medida"
                             required>
 
-                            <option selected value="kg">Kg</option>
+                            <option value="kg">Kg</option>
                             <option selected value="lt">Lt</option>
                             <option selected value="oz">oz</option>
-                            <option selected>...</option>
+                           
 
                         </select>
                     </div>
@@ -105,7 +134,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="  reset() "  >Cerrar</button>
                     <button type="button" class="btn btn-success" data-bs-dismiss="modal"
-                        (click)="  updateMP(mateiraP.id)" (click)="reset() "  >Guardar</button>
+                        (click)="updateMP(mateiraP.id)" (click)="reset()">Guardar</button>
                 </div>
             </div>
         </div>
@@ -157,7 +186,7 @@
                             <option selected value="kg">Kg</option>
                             <option selected value="lt">Lt</option>
                             <option selected value="oz">oz</option>
-                            <option selected>...</option>
+                            
 
                         </select>
                     </div>
