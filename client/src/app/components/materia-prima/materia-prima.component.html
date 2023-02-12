@@ -23,8 +23,13 @@
                             <button type="button" class="btn btn-success me-md-2" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal" data-bs-whatever="@mdo"
                                 (click)="get_MP(materia_prima.id)">Editar</button>
-                            <button class="btn btn-danger me-md-2" type="button"
-                                (click)="deleteMP(materia_prima.id)">Eliminar</button>
+                          <!-- <button class="btn btn-danger me-md-2" type="button"
+                                (click)="deleteMP(materia_prima.id)">Eliminar</button>--> 
+
+                                <button type="button" class="btn btn-danger me-md-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="get_MP(materia_prima.id)">
+                                    Eliminar
+                                  </button>
+
                         </div>
                     </div>
                 </div>
@@ -33,12 +38,37 @@
     </div>
 </div>
 
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Eliminar</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ¿Estas seguro de eliminar este elemento?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button class="btn btn-danger me-md-2" type="button"
+          (click)="deleteMP(mateiraP.id)" data-bs-dismiss="modal">Eliminar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
 <!-- BOTOM DE A;ADIR ELEMENTO  -->
 
 <div class="d-grid gap-2">
     <button style="width: 90%;margin: auto;" type="button" class="btn btn-success btn-lg" data-bs-toggle="modal"
         data-bs-target="#exampleModal2" data-bs-whatever="@mdo" (click)="reset()" >Añadir Producto</button>
 </div>
+
+
+
+
 
 <!-- FORULARIO DE EDITAR DATOS DEL ELEMENTO -->
 
