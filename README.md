@@ -27,7 +27,7 @@ npm run dev
 --dentro de la carpeta client 
 
 npm install
-//para la respectiva lectura de los modulos 
+//para la respectiva lectura de los modulos en la parte del cliente 
 
 ng serve 
 // inciar el servidor de angular en el puerto 4000 para poder observar los cambios que se realizan en el cliente 
