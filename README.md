@@ -9,7 +9,10 @@ cambiar el password dentro de la carpeta keys.js en la carpeta server para conec
 
 
 Ejecutar el proyecto los siguentes comandos dentro de las carpetas indicadas para el correcto funcionamiento del proyecto
-
+cd client
+//para meterse a la carpeta client
+cd server
+//para meterse a la carpeta server
 --dentro de la carpeta server 
 al iniciar la creacion de las rutas en la rest API 
 
@@ -27,7 +30,9 @@ npm run dev
 --dentro de la carpeta client 
 
 npm install
-//para la respectiva lectura de los modulos en la parte del cliente 
+//para instalar los modulos de node que se necesita para el proyecto en angular
 
 ng serve 
 // inciar el servidor de angular en el puerto 4000 para poder observar los cambios que se realizan en el cliente 
+ng serve --host 0.0.0.0
+//para lanzar la pagina como servidor local y acceder desde cualquier lado
