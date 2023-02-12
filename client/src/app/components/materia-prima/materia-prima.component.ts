@@ -30,23 +30,24 @@ export class MateriaPrimaComponent implements OnInit {
 
   materias_primasArr: any = [];
   edit : boolean = true;
-  constructor(private materiaPrimaServicesService: MateriaPrimaServicesService, private route: Router , private activatedRoute : ActivatedRoute) {
+  constructor(private materiaPrimaServicesService: MateriaPrimaServicesService, private router: Router , private activatedRoute : ActivatedRoute) {
 
   }
   
   ngOnInit() {
     this.getMP();
-    
-
   }
 
   saveNewMP() {
-    
+     
     delete this.mateiraP.id;
+    
+
+
     this.materiaPrimaServicesService.saveMateria_prima(this.mateiraP).subscribe({
       next: (v: any) => [this.mateiraP = v,this.edit = false ],
       error: (e: any) => console.error(e),
-      complete: () => (this.route.navigate(['/materia-prima']), this.getMP())
+      complete: () => ( this.getMP())
     })
   }
 
@@ -79,10 +80,25 @@ export class MateriaPrimaComponent implements OnInit {
   }
 
   updateMP(id: any){
-     console.log([this.mateiraP]);
-     console.log((id));
-    //  this.materiaPrimaServicesService.updateMateria_prima(id,this.materiaPrimaServicesService)
+    this.materiaPrimaServicesService.updateMateria_prima(id,this.mateiraP).subscribe({
+      next: (v: any) => [this.mateiraP, console.log(v), console.log([this.mateiraP], this.mateiraP), console.log(id)],
+      error: (e: any) => console.error(e),
+      complete: () => [this.getMP()]      
+    })
      
      
   }
+
+  reset(){
+    this.mateiraP.id=0;
+    this.mateiraP.codigo = '';
+    this.mateiraP.nombre = '';
+    this.mateiraP.precio = '';
+    this.mateiraP.unidad_medida = '';
+    this.mateiraP.cantidad = '';
+    this.mateiraP.fecha_ingreso = '';
+    this.mateiraP.fecha_caducidad = '';
+    this.mateiraP.imagen = ''; 
+  }
+  
 }
