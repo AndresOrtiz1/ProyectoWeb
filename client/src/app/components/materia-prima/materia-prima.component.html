@@ -26,7 +26,7 @@
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                             <button class="btn btn-success me-md-2" type="button">Aumentar</button>
                             <button class="btn btn-danger me-md-2" type="button">Disminuir</button>
-                            <button type="button" class="btn btn-outline-primary me-md-2" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo" (click)="editMP(materia_prima.id)">Editar</button>
+                            <button type="button" class="btn btn-outline-primary me-md-2" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo" (click)="get_MP(materia_prima.id)">Editar</button>
                             <button class="btn btn-danger me-md-2" type="button" (click)="deleteMP(materia_prima.id)">Eliminar</button>
                         </div>
                     </div>
@@ -87,9 +87,10 @@
                         <input type="url" class="form-control" id="Imagen" autofocus required [(ngModel)]="mateiraP.imagen" name="Imagen">
                     </div>
                 </div>
+                <!-- onclick="location.reload()" -->
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-success"  data-bs-dismiss="modal" (click)="saveNewMP()" onclick="location.reload()">Guardar</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>   
+                    <button type="button" class="btn btn-success"  data-bs-dismiss="modal" (click)="edit ? updateMP(mateiraP.id) : saveNewMP()" >Guardar</button>
                 </div>
             </div>
         </div>

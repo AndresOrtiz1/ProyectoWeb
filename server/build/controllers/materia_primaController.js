@@ -39,7 +39,8 @@ class Materia_primaController {
             const { id } = req.params;
             const [materia] = yield database_1.default.query('SELECT * FROM materia_prima WHERE  id = ?', [id]);
             console.log(materia);
-            res.json({ text: 'econtrado' });
+            // res.json({text:'econtrado'});
+            res.json(materia);
         });
     }
     // public getOne(req: Request, res: Response){

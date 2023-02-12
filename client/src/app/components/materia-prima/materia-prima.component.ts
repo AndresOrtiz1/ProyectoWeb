@@ -1,9 +1,10 @@
-import { Component, HostBinding, OnInit } from '@angular/core';
+import { Component, HostBinding, IterableDiffers, OnInit } from '@angular/core';
 import { MateriaPrima } from 'src/app/models/materia_prima.models';
 import { ActivatedRoute, Router } from '@angular/router'
 
 
 import { MateriaPrimaServicesService } from '../../services/materia-prima.services.service'
+
 
 @Component({
   selector: 'app-materia-prima',
@@ -28,10 +29,11 @@ export class MateriaPrimaComponent implements OnInit {
   }
 
   materias_primasArr: any = [];
+  edit : boolean = true;
   constructor(private materiaPrimaServicesService: MateriaPrimaServicesService, private route: Router , private activatedRoute : ActivatedRoute) {
 
   }
-
+  
   ngOnInit() {
     this.getMP();
     
@@ -39,9 +41,10 @@ export class MateriaPrimaComponent implements OnInit {
   }
 
   saveNewMP() {
+    
     delete this.mateiraP.id;
     this.materiaPrimaServicesService.saveMateria_prima(this.mateiraP).subscribe({
-      next: (v: any) => this.mateiraP = v,
+      next: (v: any) => [this.mateiraP = v,this.edit = false ],
       error: (e: any) => console.error(e),
       complete: () => (this.route.navigate(['/materia-prima']), this.getMP())
     })
@@ -52,6 +55,7 @@ export class MateriaPrimaComponent implements OnInit {
       next: (v: any) => this.materias_primasArr = v,
       error: (e: any) => console.error(e),
       complete: () => console.info('complete')
+      
     })
   }
 
@@ -64,28 +68,21 @@ export class MateriaPrimaComponent implements OnInit {
     })
 
   }
-  
-  //edicion de elementos dentro del mimsmo componente pendiente
-  editMP(id: string) {
-    
-    console.log(id);
-    const params = this.activatedRoute.snapshot.params;
-    console.log(params)
+  get_MP(id : string) {
+    this.materiaPrimaServicesService.getMateria_pirma(id).subscribe({
+      next: (v: any) => [[this.mateiraP] = v, this.edit = true, console.log(id)],
+      error: (e: any) => console.error(e),
+      complete: () => console.log('get materia prima complete'+id)
+    })
 
-    // this.materiaPrimaServicesService.getMateria_pirma(id).subscribe({
-    //   next: (v: any) => [ this.mateiraP = v, console.log(v), console.log([this.mateiraP])],
-    //   error: (e: any) => console.error(e),
-    //   complete: () => this.getMP(),
-
-
-    //   // next: (v: any) => [this.mateiraP = v, console.log(id), console.log(v)],
-    //   // error: (e: any) => console.error(e),
-    //   // complete: () => console.log(this.mateiraP),
-
-    // })
 
   }
 
-
-
+  updateMP(id: any){
+     console.log([this.mateiraP]);
+     console.log((id));
+    //  this.materiaPrimaServicesService.updateMateria_prima(id,this.materiaPrimaServicesService)
+     
+     
+  }
 }
