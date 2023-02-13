@@ -9,10 +9,9 @@ import { NavigationComponent } from './components/navigation/navigation.componen
 import { CardsComponent } from './components/cards/cards.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { MateriaPrimaComponent } from './components/materia-prima/materia-prima.component';
-import { InicioComponent } from './components/inicio/inicio.component';
+import { LoginComponent } from './components/login/login.component'
 
 import {MateriaPrimaServicesService} from './services/materia-prima.services.service';
-import { LoginComponent } from './components/login/login.component'
 
 @NgModule({
   declarations: [
@@ -21,7 +20,6 @@ import { LoginComponent } from './components/login/login.component'
     CardsComponent,
     FooterComponent,
     MateriaPrimaComponent,
-    InicioComponent,
     LoginComponent
   ],
   imports: [

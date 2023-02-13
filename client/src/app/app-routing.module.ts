@@ -2,20 +2,22 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 
-import { InicioComponent} from './components/inicio/inicio.component'
+import { LoginComponent} from './components/login/login.component'
 import { MateriaPrimaComponent } from './components/materia-prima/materia-prima.component';
 //definicion de rutas 
 const routes: Routes = [
-   
+  //rutas para para la navegacion 
+  //ruta inicial
   {
     path: '',
-    redirectTo: '/Inicio',
+    redirectTo: '/Login',
     pathMatch: 'full'
   },
   {
-    path:'Inicio',
-    component: MateriaPrimaComponent
+    path:'Login',
+    component: LoginComponent
   },
+  //ruta para materias primas
   {
     path: 'http://localhost:4200/materia-prima',
     redirectTo: '/materia-prima',
@@ -25,10 +27,7 @@ const routes: Routes = [
     path:'materia-prima',
     component: MateriaPrimaComponent
   },
-  {
-    path: 'materia-prima/:id',
-    component: MateriaPrimaComponent,
-  }
+  
 ];
 
 @NgModule({
