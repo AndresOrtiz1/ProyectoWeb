@@ -5,6 +5,7 @@ import cors from 'cors';
 import indexRoutes from './routes/indexRoutes';
 import inventoryRoutes from './routes/inventoryRoutes';
 import materia_primaRoutes from './routes/materia_primaRoutes';
+import proveedoresRoutes from './routes/proveedoresRoutes';
 class Server{
 
     public app: express.Application;
@@ -27,6 +28,7 @@ class Server{
         this.app.use('/', indexRoutes);
         this.app.use('/api/inventario', inventoryRoutes);    
         this.app.use('/api/materia-prima', materia_primaRoutes);    
+        this.app.use('/api/proveedores', proveedoresRoutes);
     }
 
     start(): void{

@@ -12,6 +12,7 @@ import { MateriaPrimaComponent } from './components/materia-prima/materia-prima.
 import { LoginComponent } from './components/login/login.component'
 
 import {MateriaPrimaServicesService} from './services/materia-prima.services.service';
+import { ProveedoresComponent } from './components/proveedores/proveedores.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {MateriaPrimaServicesService} from './services/materia-prima.services.ser
     CardsComponent,
     FooterComponent,
     MateriaPrimaComponent,
-    LoginComponent
+    LoginComponent,
+    ProveedoresComponent
   ],
   imports: [
     BrowserModule,
