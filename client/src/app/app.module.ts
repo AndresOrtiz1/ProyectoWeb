@@ -12,7 +12,7 @@ import { MateriaPrimaComponent } from './components/materia-prima/materia-prima.
 import { LoginComponent } from './components/login/login.component'
 
 import {MateriaPrimaServicesService} from './services/materia-prima.services.service';
-import { ProveedoresComponent } from './components/proveedores/proveedores.component';
+import { ProveedoresComponent } from './components/proveedores/proveedores.component'; 
 
 @NgModule({
   declarations: [
@@ -22,7 +22,9 @@ import { ProveedoresComponent } from './components/proveedores/proveedores.compo
     FooterComponent,
     MateriaPrimaComponent,
     LoginComponent,
-    ProveedoresComponent
+    ProveedoresComponent,
+    
+       
   ],
   imports: [
     BrowserModule,
@@ -30,10 +32,12 @@ import { ProveedoresComponent } from './components/proveedores/proveedores.compo
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule
+    
   ],
   //exportar los metodos para poder pedir datos
   providers: [
-    MateriaPrimaServicesService
+    MateriaPrimaServicesService,
+  
   ],
   bootstrap: [AppComponent]
 })

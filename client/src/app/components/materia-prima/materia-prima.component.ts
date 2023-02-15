@@ -29,8 +29,7 @@ export class MateriaPrimaComponent implements OnInit {
     imagen: ''
   }
 
-  materias_primasArr: any = [];
-  edit : boolean = true;
+  materias_primasArr: any = []; 
   valfomr !: FormGroup;
 
   constructor(
@@ -39,10 +38,13 @@ export class MateriaPrimaComponent implements OnInit {
   ){
     this.validFomr();
   }
+  ngOnInit() {
+    this.getMP(); 
+  }
 
-  private validFomr(){
+  validFomr(){
     this.valfomr = this.formBuldier.group({
-      codigo:[this.mateiraP.codigo, [Validators.required, Validators.pattern('^([A-Z]{2})([0-9]{3})$')]],
+      codigo:[this.mateiraP.codigo, [Validators.required , Validators.pattern('^([A-Z]{2})([0-9]{3})$')]],
       nombre:[this.mateiraP.nombre,[Validators.required, Validators.pattern('^([A-Za-z ]{2,25})$')]],
       precio:[this.mateiraP.precio,[Validators.required, Validators.pattern('^([0-9]{1,4}\.[0-9]{1,2})$')]],
       unidad_medida:[this.mateiraP.unidad_medida ,[Validators.required ]],
@@ -53,15 +55,15 @@ export class MateriaPrimaComponent implements OnInit {
     })
 
   }
+  
+  get codigo() {return this.valfomr.get('codigo');}
 
-  ngOnInit() {
-    this.getMP();
-  }
+  
   // metodos del componetne CRUD
   saveNewMP() {
     delete this.mateiraP.id;
     this.materiaPrimaServicesService.saveMateria_prima(this.mateiraP).subscribe({
-      next: (v: any) => [this.mateiraP = v,this.edit = false ],
+      next: (v: any) => [this.mateiraP = v, this.getMP()],
       error: (e: any) => console.error(e),
       complete: () => ( this.getMP())
     })
@@ -86,7 +88,7 @@ export class MateriaPrimaComponent implements OnInit {
   }
   get_MP(id : string) {
     this.materiaPrimaServicesService.getMateria_pirma(id).subscribe({
-      next: (v: any) => [[this.mateiraP] = v, this.edit = true, console.log(id)],
+      next: (v: any) => [[this.mateiraP] = v, console.log(id)],
       error: (e: any) => console.error(e),
       complete: () => console.log('get materia prima complete'+id)
     })
