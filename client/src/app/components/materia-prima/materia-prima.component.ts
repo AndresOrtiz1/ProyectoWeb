@@ -1,6 +1,7 @@
 import { Component, HostBinding, OnInit } from '@angular/core';
 import { MateriaPrima } from 'src/app/models/materia_prima.models';
-import { ActivatedRoute, Router } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router';
+import {FormGroup,FormControl,FormBuilder,Validators} from '@angular/forms';
 
 
 import { MateriaPrimaServicesService } from '../../services/materia-prima.services.service'
@@ -30,13 +31,29 @@ export class MateriaPrimaComponent implements OnInit {
 
   materias_primasArr: any = [];
   edit : boolean = true;
+  valfomr !: FormGroup;
+
   constructor(
     private materiaPrimaServicesService: MateriaPrimaServicesService,
-    private router: Router,
-    private activatedRoute :ActivatedRoute
+    private formBuldier : FormBuilder,
   ){
+    this.validFomr();
   }
-  
+
+  private validFomr(){
+    this.valfomr = this.formBuldier.group({
+      codigo:[this.mateiraP.codigo, [Validators.required, Validators.pattern('^([A-Z]{2})([0-9]{3})$')]],
+      nombre:[this.mateiraP.nombre,[Validators.required, Validators.pattern('^([A-Za-z ]{2,25})$')]],
+      precio:[this.mateiraP.precio,[Validators.required, Validators.pattern('^([0-9]{1,4}\.[0-9]{1,2})$')]],
+      unidad_medida:[this.mateiraP.unidad_medida ,[Validators.required ]],
+      cantidad:[this.mateiraP.cantidad,[Validators.required, Validators.pattern(' ^([0-9]{1,4})$')]],
+      fecha_ingreso:[this.mateiraP.fecha_ingreso,[Validators.required ]],
+      fecha_caducidad:[this.mateiraP.fecha_caducidad,[Validators.required ]],
+      imagen:[this.mateiraP.imagen,[Validators.required, Validators.pattern('^(https?:\/\/[\w\-]+(\.[\w\-]+)+[/#?]?.*)$')]],
+    })
+
+  }
+
   ngOnInit() {
     this.getMP();
   }
