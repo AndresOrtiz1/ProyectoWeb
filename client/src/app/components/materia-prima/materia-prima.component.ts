@@ -1,4 +1,4 @@
-import { Component, HostBinding, IterableDiffers, OnInit } from '@angular/core';
+import { Component, HostBinding, OnInit } from '@angular/core';
 import { MateriaPrima } from 'src/app/models/materia_prima.models';
 import { ActivatedRoute, Router } from '@angular/router'
 
@@ -30,20 +30,19 @@ export class MateriaPrimaComponent implements OnInit {
 
   materias_primasArr: any = [];
   edit : boolean = true;
-  constructor(private materiaPrimaServicesService: MateriaPrimaServicesService, private router: Router , private activatedRoute : ActivatedRoute) {
-
+  constructor(
+    private materiaPrimaServicesService: MateriaPrimaServicesService,
+    private router: Router,
+    private activatedRoute :ActivatedRoute
+  ){
   }
   
   ngOnInit() {
     this.getMP();
   }
-
+  // metodos del componetne CRUD
   saveNewMP() {
-     
     delete this.mateiraP.id;
-    
-
-
     this.materiaPrimaServicesService.saveMateria_prima(this.mateiraP).subscribe({
       next: (v: any) => [this.mateiraP = v,this.edit = false ],
       error: (e: any) => console.error(e),
@@ -56,7 +55,6 @@ export class MateriaPrimaComponent implements OnInit {
       next: (v: any) => this.materias_primasArr = v,
       error: (e: any) => console.error(e),
       complete: () => console.info('complete')
-      
     })
   }
 
@@ -75,8 +73,6 @@ export class MateriaPrimaComponent implements OnInit {
       error: (e: any) => console.error(e),
       complete: () => console.log('get materia prima complete'+id)
     })
-
-
   }
 
   updateMP(id: any){
@@ -85,8 +81,6 @@ export class MateriaPrimaComponent implements OnInit {
       error: (e: any) => console.error(e),
       complete: () => [this.getMP()]      
     })
-     
-     
   }
 
   reset(){
@@ -100,5 +94,8 @@ export class MateriaPrimaComponent implements OnInit {
     this.mateiraP.fecha_caducidad = '';
     this.mateiraP.imagen = ''; 
   }
-  
+  //validaciones
+
+
+
 }
