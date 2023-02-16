@@ -26,6 +26,7 @@ CREATE TABLE `materia_prima` (
   `imagen` longtext NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3
+
 -- base de datos de proveedores
 CREATE TABLE proveedores (
   id INT(11) NOT NULL AUTO_INCREMENT,

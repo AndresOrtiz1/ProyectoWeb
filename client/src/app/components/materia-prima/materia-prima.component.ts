@@ -1,6 +1,7 @@
-import { Component, HostBinding, IterableDiffers, OnInit } from '@angular/core';
+import { Component, HostBinding, OnInit } from '@angular/core';
 import { MateriaPrima } from 'src/app/models/materia_prima.models';
-import { ActivatedRoute, Router } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router';
+import {FormGroup,FormControl,FormBuilder,Validators} from '@angular/forms';
 
 
 import { MateriaPrimaServicesService } from '../../services/materia-prima.services.service'
@@ -28,24 +29,41 @@ export class MateriaPrimaComponent implements OnInit {
     imagen: ''
   }
 
-  materias_primasArr: any = [];
-  edit : boolean = true;
-  constructor(private materiaPrimaServicesService: MateriaPrimaServicesService, private router: Router , private activatedRoute : ActivatedRoute) {
+  materias_primasArr: any = []; 
+  valfomr !: FormGroup;
+
+  constructor(
+    private materiaPrimaServicesService: MateriaPrimaServicesService,
+    private formBuldier : FormBuilder,
+  ){
+    this.validFomr();
+  }
+  ngOnInit() {
+    this.getMP(); 
+  }
+
+  validFomr(){
+    this.valfomr = this.formBuldier.group({
+      codigo:[this.mateiraP.codigo, [Validators.required , Validators.pattern('^([A-Z]{2})([0-9]{3})$')]],
+      nombre:[this.mateiraP.nombre,[Validators.required, Validators.pattern('^([A-Za-z ]{2,25})$')]],
+      precio:[this.mateiraP.precio,[Validators.required, Validators.pattern('^([0-9]{1,4}\.[0-9]{1,2})$')]],
+      unidad_medida:[this.mateiraP.unidad_medida ,[Validators.required ]],
+      cantidad:[this.mateiraP.cantidad,[Validators.required, Validators.pattern(' ^([0-9]{1,4})$')]],
+      fecha_ingreso:[this.mateiraP.fecha_ingreso,[Validators.required ]],
+      fecha_caducidad:[this.mateiraP.fecha_caducidad,[Validators.required ]],
+      imagen:[this.mateiraP.imagen,[Validators.required, Validators.pattern('^(https?:\/\/[\w\-]+(\.[\w\-]+)+[/#?]?.*)$')]],
+    })
 
   }
   
-  ngOnInit() {
-    this.getMP();
-  }
+  get codigo() {return this.valfomr.get('codigo');}
 
+  
+  // metodos del componetne CRUD
   saveNewMP() {
-     
     delete this.mateiraP.id;
-    
-
-
     this.materiaPrimaServicesService.saveMateria_prima(this.mateiraP).subscribe({
-      next: (v: any) => [this.mateiraP = v,this.edit = false ],
+      next: (v: any) => [this.mateiraP = v, this.getMP()],
       error: (e: any) => console.error(e),
       complete: () => ( this.getMP())
     })
@@ -56,7 +74,6 @@ export class MateriaPrimaComponent implements OnInit {
       next: (v: any) => this.materias_primasArr = v,
       error: (e: any) => console.error(e),
       complete: () => console.info('complete')
-      
     })
   }
 
@@ -71,12 +88,10 @@ export class MateriaPrimaComponent implements OnInit {
   }
   get_MP(id : string) {
     this.materiaPrimaServicesService.getMateria_pirma(id).subscribe({
-      next: (v: any) => [[this.mateiraP] = v, this.edit = true, console.log(id)],
+      next: (v: any) => [[this.mateiraP] = v, console.log(id)],
       error: (e: any) => console.error(e),
       complete: () => console.log('get materia prima complete'+id)
     })
-
-
   }
 
   updateMP(id: any){
@@ -85,8 +100,6 @@ export class MateriaPrimaComponent implements OnInit {
       error: (e: any) => console.error(e),
       complete: () => [this.getMP()]      
     })
-     
-     
   }
 
   reset(){
@@ -100,5 +113,8 @@ export class MateriaPrimaComponent implements OnInit {
     this.mateiraP.fecha_caducidad = '';
     this.mateiraP.imagen = ''; 
   }
-  
+  //validaciones
+
+
+
 }
