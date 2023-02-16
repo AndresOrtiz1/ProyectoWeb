@@ -1,1 +1,214 @@
-<p>proveedores works!</p>
+
+<!-- CONTENEDOR DE LOS ELEMENTOS QUE CON TIENE LA BASE DE DATOS -->
+<h2 style="margin: auto; width: 95%;text-align: center;">Proveedores</h2> <br>
+<div class="row-md-3" *ngFor="let proveedores of proveedoresArr">
+    
+    <div class="row-md-1">
+        <div class="card mb-3" style="margin: auto; width: 95%;">
+            <div class="row g-0">
+                <div class="col-md-10">
+                    <div class="card-body">
+                        <h5 class="card-title">{{proveedores.NombreApellido}}</h5>
+                        <p class="card-text"> Cedula: {{proveedores.Cedula}} </p>
+                        <p class="card-text">Celular: {{proveedores.NumeroCelular}}</p>
+                        <p class="card-text">Correo Electronico: {{proveedores.CorreoElectronico}} USD</p>
+                        <p class="card-text">Direccion: {{proveedores.Direccion}}</p>
+                        <p class="card-text">Nombre de la Empresa: {{proveedores.NombreEmpresa}}</p>
+                        <p class="card-text">Telefono de la Empresa: {{proveedores.TelefonoEmpresa}}</p>
+                        <p class="card-text">Direccion de la Empresa: {{proveedores.DireccionEmpresa}}</p>
+                        <p class="card-text">Correo de la Empresa: {{proveedores.CorreoEmpresa}}</p>
+                        
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end"> 
+                            <button type="button" class="btn btn-success me-md-2" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal" data-bs-whatever="@mdo"
+                                (click)="get_MP(proveedores.id)">Editar</button>
+                          <!-- <button class="btn btn-danger me-md-2" type="button"
+                                (click)="deleteMP(materia_prima.id)">Eliminar</button>--> 
+
+                                <button type="button" class="btn btn-danger me-md-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="get_MP(proveedores.id)">
+                                    Eliminar
+                                  </button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Eliminar</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ¿Estas seguro de eliminar este proveedor?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button class="btn btn-danger me-md-2" type="button"
+          (click)="deleteMP(provee.id)" data-bs-dismiss="modal">Eliminar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<!-- BOTOM DE A;ADIR ELEMENTO  -->
+
+<div class="d-grid gap-2">
+    <button style="width: 90%;margin: auto;" type="button" class="btn btn-success btn-lg" data-bs-toggle="modal"
+        data-bs-target="#exampleModal2" data-bs-whatever="@mdo" (click)="reset()" >Añadir Proveedor</button>
+</div>
+
+
+
+
+
+<!-- FORULARIO DE EDITAR DATOS DEL ELEMENTO -->
+
+<form>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">EDITAR PROVEEDOR</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="Cedula" class="col-form-label">Cedula:</label>
+                        <input type="text" class="form-control" id="Cedula" autofocus required
+                            [(ngModel)]="provee.Cedula" name="Cedula">
+                    </div>
+                    <div class="mb-3">
+                        <label for="NombreApellido" class="col-form-label">Nombre y Apellido:</label>
+                        <input type="text" class="form-control" id="NombreApellido" autofocus required
+                            [(ngModel)]="provee.NombreApellido" name="NombreApellido">
+                    </div>
+                    <div class="mb-3">
+                        <label for="Precio" class="col-form-label">Precio:</label>
+                        <input type="text" class="form-control" id="Precio" autofocus required
+                            [(ngModel)]="mateiraP.precio" name="Precio">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="Cantidad" class="col-form-label">Cantidad:</label>
+                        <input type="text" class="form-control" id="Cantidad" autofocus required
+                            [(ngModel)]="mateiraP.cantidad" name="Cantidad">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="Imagen" class="col-form-label">Imagen</label>
+                        <input type="url" class="form-control" id="Imagen" autofocus required
+                            [(ngModel)]="mateiraP.imagen" name="Imagen">
+                    </div>
+                </div>
+                <!-- onclick="location.reload()" -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="  reset() "  >Cerrar</button>
+                    <button type="button" class="btn btn-success" data-bs-dismiss="modal"
+                        (click)="updateMP(mateiraP.id)" (click)="reset()">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script>const exampleModal = document.getElementById('exampleModal')
+    exampleModal.addEventListener('show.bs.modal', event => {
+        const button = event.relatedTarget
+        const recipient = button.getAttribute('data-bs-whatever')
+        const modalTitle = exampleModal.querySelector('.modal-title')
+        const modalBodyInput = exampleModal.querySelector('.modal-body input')
+        modalTitle.textContent = `New message to ${recipient}`
+        modalBodyInput.value = recipient
+    })
+</script>
+
+
+<!-- FORMULARIO DE AÑADIR PRODUCTO -->
+<form>
+    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Añadir Materia Prima</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="Codigo" class="col-form-label">Codigo:</label>
+                        <input type="text" class="form-control" id="Codigo" autofocus required
+                            [(ngModel)]="mateiraP.codigo" name="Codigo">
+                    </div>
+                    <div class="mb-3">
+                        <label for="Nombre" class="col-form-label">Nombre:</label>
+                        <input type="text" class="form-control" id="Nombre" autofocus required
+                            [(ngModel)]="mateiraP.nombre" name="Nombre">
+                    </div>
+                    <div class="mb-3">
+                        <label for="Precio" class="col-form-label">Precio:</label>
+                        <input type="text" class="form-control" id="Precio" autofocus required
+                            [(ngModel)]="mateiraP.precio" name="Precio">
+                    </div>
+                    <div class="form-group">
+                        <label for="UnidadM">Unidad de Medida</label>
+                        <select id="UnidadM" name="UnidadM" class="form-select" [(ngModel)]="mateiraP.unidad_medida"
+                            required>
+
+                            <option selected value="kg">Kg</option>
+                            <option selected value="lt">Lt</option>
+                            <option selected value="oz">oz</option>
+                            <option selected>...</option>
+
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="Cantidad" class="col-form-label">Cantidad:</label>
+                        <input type="text" class="form-control" id="Cantidad" autofocus required
+                            [(ngModel)]="mateiraP.cantidad" name="Cantidad">
+                    </div>
+                    <div class="form-row row g-3">
+                        <div class="form-group col-md-6">
+                            <label for="FechaI" class="col-form-label">Fecha de ingreso:</label>
+                            <input type="date" class="form-control" id="FechaI" autofocus required
+                                [(ngModel)]="mateiraP.fecha_ingreso" name="FechaI">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="FechaC" class="col-form-label">Fecha de caducidad:</label>
+                            <input type="date" class="form-control" id="FechaC" autofocus required
+                                [(ngModel)]="mateiraP.fecha_caducidad" name="FechaC">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="Imagen" class="col-form-label">Imagen</label>
+                        <input type="url" class="form-control" id="Imagen" autofocus required
+                            [(ngModel)]="mateiraP.imagen" name="Imagen">
+                    </div>
+                </div>
+                <!-- onclick="location.reload()" -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"  >Cerrar</button>
+                    <button type="button" class="btn btn-success" data-bs-dismiss="modal"
+                        (click)="  saveNewMP()">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script>const exampleModal2 = document.getElementById('exampleModal2')
+    exampleModal2.addEventListener('show.bs.modal', event => {
+        const button = event.relatedTarget
+        const recipient = button.getAttribute('data-bs-whatever')
+        const modalTitle = exampleModal2.querySelector('.modal-title')
+        const modalBodyInput = exampleModal2.querySelector('.modal-body input')
+        modalTitle.textContent = `New message to ${recipient}`
+        modalBodyInput.value = recipient
+    })
+</script>

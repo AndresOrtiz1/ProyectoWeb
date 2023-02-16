@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { LoginComponent} from './components/login/login.component'
 import { MateriaPrimaComponent } from './components/materia-prima/materia-prima.component';
+import { ProveedoresComponent } from './components/proveedores/proveedores.component';
 //definicion de rutas 
 const routes: Routes = [
   //rutas para para la navegacion 
@@ -27,7 +28,17 @@ const routes: Routes = [
     path:'materia-prima',
     component: MateriaPrimaComponent
   },
-  
+
+  //ruta para proveedores
+  {
+    path: 'http://localhost:4200/proveedores',
+    redirectTo: '/proveedores',
+    pathMatch: 'full'
+  },
+  {
+    path:'proveedores',
+    component: ProveedoresComponent
+  },
 ];
 
 @NgModule({
