@@ -1,42 +1,48 @@
 <!-- CONTENEDOR DE LOS ELEMENTOS QUE CON TIENE LA BASE DE DATOS -->
 <h2 style="margin: auto; width: 95%;text-align: center;">Materia Prima</h2> <br>
-<div class="row-md-3" *ngFor="let materia_prima of materias_primasArr">
+<table class="table text-center">
+    <thead>
+        <tr class="bg-dark-subtle">
+            <th>Id</th>
+            <th>Codigo</th>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Cantidad</th>
+            <th>Unidad de Medida</th>
+            <th>Fecha de ingreso</th>
+            <th>Fecha de caducidad</th>
+            <th>Opciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let materia_prima of materias_primasArr">
+            <td>{{ materia_prima.id }}</td>
+            <td>{{ materia_prima.codigo }}</td>
+            <td>{{ materia_prima.nombre }}</td>
+            <td>{{ materia_prima.precio }}</td>
+            <td>{{ materia_prima.cantidad }}</td>
+            <td>{{ materia_prima.unidad_medida }}</td>
+            <td>{{ materia_prima.fecha_ingreso }}</td>
+            <td>{{ materia_prima.fecha_caducidad }}</td>
+            <td>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <button type="button" class="btn btn-success me-md-2" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal" data-bs-whatever="@mdo"
+                        (click)="get_MP(materia_prima.id)">Editar</button>
+                    <!-- <button class="btn btn-danger me-md-2" type="button"
+                    (click)="deleteMP(materia_prima.id)">Eliminar</button>-->
 
-    <div class="row-md-1">
-        <div class="card mb-3" style="margin: auto; width: 95%;">
-            <div class="row g-0">
-                <div class="col-md-2">
-                    <img src="{{materia_prima.imagen}}" class="img-fluid rounded-start" alt="..." width="200">
+                    <button type="button" class="btn btn-danger me-md-2" data-bs-toggle="modal"
+                        data-bs-target="#staticBackdrop" (click)="get_MP(materia_prima.id)">
+                        Eliminar
+                    </button>
+
                 </div>
-                <div class="col-md-10">
-                    <div class="card-body">
-                        <h5 class="card-title">{{materia_prima.nombre}}</h5>
-                        <p class="card-text"> Codigo: {{materia_prima.codigo}} </p>
-                        <p class="card-text">Precio: {{materia_prima.precio}} USD</p>
-                        <p class="card-text">Cantidad: {{materia_prima.cantidad}} - {{materia_prima.unidad_medida}} </p>
 
-                        <p class="card-text"><small class="text-muted">Fecha de ingreso :
-                                {{materia_prima.fecha_ingreso}} &nbsp;&nbsp;&nbsp;&nbsp; Fecha de caducidad
-                                :{{materia_prima.fecha_caducidad}}</small></p>
-                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <button type="button" class="btn btn-success me-md-2" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal" data-bs-whatever="@mdo"
-                                (click)="get_MP(materia_prima.id)">Editar</button>
-                            <!-- <button class="btn btn-danger me-md-2" type="button"
-                                (click)="deleteMP(materia_prima.id)">Eliminar</button>-->
-
-                            <button type="button" class="btn btn-danger me-md-2" data-bs-toggle="modal"
-                                data-bs-target="#staticBackdrop" (click)="get_MP(materia_prima.id)">
-                                Eliminar
-                            </button>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+            </td>
+        </tr>
+    </tbody>
+</table>
 
 
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
