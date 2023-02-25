@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent} from './components/login/login.component'
 import { MateriaPrimaComponent } from './components/materia-prima/materia-prima.component';
 import { ProveedoresComponent } from './components/proveedores/proveedores.component';
+import {ClientesComponent} from './components/clientes/clientes.component'
 //definicion de rutas 
 const routes: Routes = [
   //rutas para para la navegacion 
@@ -38,6 +39,15 @@ const routes: Routes = [
   {
     path:'proveedores',
     component: ProveedoresComponent
+  },
+  {
+    path: 'http://localhost:4200/clientes',
+    redirectTo: '/clientes',
+    pathMatch: 'full'
+  },
+  {
+    path:'clientes',
+    component: ClientesComponent
   },
 ];
 

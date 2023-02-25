@@ -6,7 +6,7 @@ import indexRoutes from './routes/indexRoutes';
 import inventoryRoutes from './routes/inventoryRoutes';
 import materia_primaRoutes from './routes/materia_primaRoutes';
 import proveedoresRoutes from './routes/proveedoresRoutes';
-import clientesRoutes from './routes/proveedoresRoutes';
+import clientesRoutes from './routes/clientesRoutes';
 class Server{
 
     public app: express.Application;

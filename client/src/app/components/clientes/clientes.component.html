@@ -49,7 +49,7 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
           <button class="btn btn-danger me-md-2" type="button"
-          (click)="deleteMP(provee.id)" data-bs-dismiss="modal">Eliminar</button>
+          (click)="deleteMP(clientesArr.id)" data-bs-dismiss="modal">Eliminar</button>
         </div>
       </div>
     </div>
@@ -91,37 +91,37 @@
                     <div class="mb-3">
                         <label for="Apellidos" class="col-form-label">Apellidos:</label>
                         <input type="text" class="form-control" id="Precio" autofocus required
-                            [(ngModel)]="clientes.apellidosCliente" name="Apellidos">
+                            [(ngModel)]="cliente.apellidosCliente" name="Apellidos">
                     </div>
                     
                     <div class="mb-3">
                         <label for="Correo" class="col-form-label">Correo:</label>
                         <input type="text" class="form-control" id="Correo" autofocus required
-                            [(ngModel)]="clientes.correoCliente" name="Correo">
+                            [(ngModel)]="cliente.correoCliente" name="Correo">
                     </div>
                     
                     <div class="mb-3">
                         <label for="Edad" class="col-form-label">Edad:</label>
                         <input type="text" class="form-control" id="Edad" autofocus required
-                            [(ngModel)]="clientes.edadCliente" name="Edad">        
+                            [(ngModel)]="cliente.edadCliente" name="Edad">        
                     </div>
                     <div class="mb-3">
                         <label for="Direccion" class="col-form-label">Dirección:</label>
                         <input type="text" class="form-control" id="Direccion" autofocus required
-                            [(ngModel)]="clientes.direccionCliente" name="Direccion">
+                            [(ngModel)]="cliente.direccionCliente" name="Direccion">
                     </div>
                     <div class="mb-3">
                         <label for="Telefono" class="col-form-label">Telefono:</label>
                         <input type="text" class="form-control" id="telefono" autofocus required
-                            [(ngModel)]="clientes.telefonoCliente" name="Telefono">
+                            [(ngModel)]="cliente.telefonoCliente" name="Telefono">
                     </div>
                     
                 </div>
-                <!-- onclick="location.reload()" -->
-                <div class="modal-footer">
+                
+                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="  reset() "  >Cerrar</button>
                     <button type="button" class="btn btn-success" data-bs-dismiss="modal"
-                        (click)="updateMP(mateiraP.id)" (click)="reset()">Guardar</button>
+                        (click)="updateMP(cliente.id)" (click)="reset()">Guardar</button>
                 </div>
             </div>
         </div>
