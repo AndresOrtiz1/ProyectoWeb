@@ -1,4 +1,3 @@
-
 <!-- sCONTENEDOR DE LOS ELEMENTOS QUE CON TIENE LA BASE DE DATOS -->
 <h2 style="margin: auto; width: 95%;text-align: center;">Proveedores</h2> <br>
 <div class="row-md-3" *ngFor="let proveedores of proveedoresArr">
@@ -82,7 +81,7 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="Cedula" class="col-form-label">Cedula:</label>
-                        <input type="text" class="form-control" id="Cedula" autofocus required
+                        <input type="number" class="form-control" id="Cedula" autofocus required
                             [(ngModel)]="provee.Cedula" name="Cedula">
                     </div>
                     <div class="mb-3">
@@ -91,28 +90,54 @@
                             [(ngModel)]="provee.NombreApellido" name="NombreApellido">
                     </div>
                     <div class="mb-3">
-                        <label for="Precio" class="col-form-label">Precio:</label>
-                        <input type="text" class="form-control" id="Precio" autofocus required
-                            [(ngModel)]="mateiraP.precio" name="Precio">
+                        <label for="NumeroCelular" class="col-form-label">Numero Celular:</label>
+                        <input type="number" class="form-control" id="NumeroCelular" autofocus required
+                            [(ngModel)]="provee.NumeroCelular" name="NumeroCelular">
                     </div>
                     
                     <div class="mb-3">
-                        <label for="Cantidad" class="col-form-label">Cantidad:</label>
-                        <input type="text" class="form-control" id="Cantidad" autofocus required
-                            [(ngModel)]="mateiraP.cantidad" name="Cantidad">
+                        <label for="CorreoElectronico" class="col-form-label">Correo Electronico:</label>
+                        <input type="email" class="form-control" id="CorreoElectronico" autofocus required
+                            [(ngModel)]="provee.CorreoElectronico" name="CorreoElectronico">
                     </div>
                     
                     <div class="mb-3">
-                        <label for="Imagen" class="col-form-label">Imagen</label>
-                        <input type="url" class="form-control" id="Imagen" autofocus required
-                            [(ngModel)]="mateiraP.imagen" name="Imagen">
+                        <label for="Direccion" class="col-form-label">Direccion:</label>
+                        <input type="text" class="form-control" id="Direccion" autofocus required
+                            [(ngModel)]="provee.Direccion" name="Direccion">
                     </div>
+
+                    <div class="mb-3">
+                        <label for="NombreEmpresa" class="col-form-label">Nombre de la Empresa:</label>
+                        <input type="text" class="form-control" id="NombreEmpresa" autofocus required
+                            [(ngModel)]="provee.NombreEmpresa" name="Direccion">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="TelefonoEmpresa" class="col-form-label">Telefono de la Empresa:</label>
+                        <input type="number" class="form-control" id="TelefonoEmpresa" autofocus required
+                            [(ngModel)]="provee.TelefonoEmpresa" name="Direccion">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="DireccionEmpresa" class="col-form-label">Direccion de la Empresa:</label>
+                        <input type="text" class="form-control" id="DireccionEmpresa" autofocus required
+                            [(ngModel)]="provee.DireccionEmpresa" name="DireccionEmpresa">
+                    </div>
+                    
+
+                    <div class="mb-3">
+                        <label for="CorreoEmpresa" class="col-form-label">Correo de la Empresa:</label>
+                        <input type="email" class="form-control" id="CorreoEmpresa" autofocus required
+                            [(ngModel)]="provee.CorreoEmpresa" name="CorreoEmpresa">
+                    </div>
+                    
                 </div>
                 <!-- onclick="location.reload()" -->
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="  reset() "  >Cerrar</button>
                     <button type="button" class="btn btn-success" data-bs-dismiss="modal"
-                        (click)="updateMP(mateiraP.id)" (click)="reset()">Guardar</button>
+                        (click)="updateMP(provee.id)" (click)="reset()">Guardar</button>
                 </div>
             </div>
         </div>
@@ -137,58 +162,60 @@
         <div class="modal-dialog modal-dialog-centered modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Añadir Materia Prima</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Añadir Proveedor</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label for="Codigo" class="col-form-label">Codigo:</label>
-                        <input type="text" class="form-control" id="Codigo" autofocus required
-                            [(ngModel)]="mateiraP.codigo" name="Codigo">
+                        <label for="Cedula" class="col-form-label">Cedula:</label>
+                        <input type="number" class="form-control" id="Cedula" autofocus required
+                            [(ngModel)]="provee.Cedula" name="Cedula">
                     </div>
                     <div class="mb-3">
-                        <label for="Nombre" class="col-form-label">Nombre:</label>
+                        <label for="NombreApellido" class="col-form-label">Nombre y Apellido:</label>
                         <input type="text" class="form-control" id="Nombre" autofocus required
-                            [(ngModel)]="mateiraP.nombre" name="Nombre">
+                            [(ngModel)]="provee.NombreApellido" name="NombreApellido">
                     </div>
                     <div class="mb-3">
-                        <label for="Precio" class="col-form-label">Precio:</label>
-                        <input type="text" class="form-control" id="Precio" autofocus required
-                            [(ngModel)]="mateiraP.precio" name="Precio">
+                        <label for="NumeroCelular" class="col-form-label">Numero Celular:</label>
+                        <input type="number" class="form-control" id="Precio" autofocus required
+                            [(ngModel)]="provee.NumeroCelular" name="NumeroCelular">
                     </div>
-                    <div class="form-group">
-                        <label for="UnidadM">Unidad de Medida</label>
-                        <select id="UnidadM" name="UnidadM" class="form-select" [(ngModel)]="mateiraP.unidad_medida"
-                            required>
+                    
+                    <div class="mb-3">
+                        <label for="CorreoElectronico" class="col-form-label">Correo Electronico:</label>
+                        <input type="email" class="form-control" id="CorreoElectronico" autofocus required
+                            [(ngModel)]="provee.CorreoElectronico" name="CorreoElectronico">
+                    </div>
 
-                            <option selected value="kg">Kg</option>
-                            <option selected value="lt">Lt</option>
-                            <option selected value="oz">oz</option>
-                            <option selected>...</option>
+                    <div class="mb-3">
+                        <label for="Direccion" class="col-form-label">Direccion:</label>
+                        <input type="text" class="form-control" id="Direccion" autofocus required
+                            [(ngModel)]="provee.Direccion" name="Direccion">
+                    </div>
 
-                        </select>
-                    </div>
                     <div class="mb-3">
-                        <label for="Cantidad" class="col-form-label">Cantidad:</label>
-                        <input type="text" class="form-control" id="Cantidad" autofocus required
-                            [(ngModel)]="mateiraP.cantidad" name="Cantidad">
+                        <label for="NombreEmpresa" class="col-form-label">Nombre de la Empresa:</label>
+                        <input type="text" class="form-control" id="NombreEmpresa" autofocus required
+                            [(ngModel)]="provee.NombreEmpresa" name="NombreEmpresa">
                     </div>
-                    <div class="form-row row g-3">
-                        <div class="form-group col-md-6">
-                            <label for="FechaI" class="col-form-label">Fecha de ingreso:</label>
-                            <input type="date" class="form-control" id="FechaI" autofocus required
-                                [(ngModel)]="mateiraP.fecha_ingreso" name="FechaI">
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="FechaC" class="col-form-label">Fecha de caducidad:</label>
-                            <input type="date" class="form-control" id="FechaC" autofocus required
-                                [(ngModel)]="mateiraP.fecha_caducidad" name="FechaC">
-                        </div>
-                    </div>
+
                     <div class="mb-3">
-                        <label for="Imagen" class="col-form-label">Imagen</label>
-                        <input type="url" class="form-control" id="Imagen" autofocus required
-                            [(ngModel)]="mateiraP.imagen" name="Imagen">
+                        <label for="TelefonoEmpresa" class="col-form-label">Telefono de la Empresa</label>
+                        <input type="number" class="form-control" id="TelefonoEmpresa" autofocus required
+                            [(ngModel)]="provee.TelefonoEmpresa" name="TelefonoEmpresa">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="DireccionEmpresa" class="col-form-label">Direccion de la Empresa:</label>
+                        <input type="text" class="form-control" id="DireccionEmpresa" autofocus required
+                            [(ngModel)]="provee.DireccionEmpresa" name="DireccionEmpresa">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="CorreoEmpresa" class="col-form-label">Correo de la Empresa:</label>
+                        <input type="email" class="form-control" id="CorreoEmpresa" autofocus required
+                            [(ngModel)]="provee.CorreoEmpresa" name="CorreoEmpresa">
                     </div>
                 </div>
                 <!-- onclick="location.reload()" -->
@@ -212,3 +239,4 @@
         modalBodyInput.value = recipient
     })
 </script>
+
