@@ -12,7 +12,8 @@ import { MateriaPrimaComponent } from './components/materia-prima/materia-prima.
 import { LoginComponent } from './components/login/login.component'
 
 import {MateriaPrimaServicesService} from './services/materia-prima.services.service';
-import { ProveedoresComponent } from './components/proveedores/proveedores.component'; 
+import { ProveedoresComponent } from './components/proveedores/proveedores.component';
+import { ClientesComponent } from './components/clientes/clientes.component'; 
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { ProveedoresComponent } from './components/proveedores/proveedores.compo
     MateriaPrimaComponent,
     LoginComponent,
     ProveedoresComponent,
+    ClientesComponent,
     
        
   ],

@@ -1,0 +1,155 @@
+<!-- sCONTENEDOR DE LOS ELEMENTOS QUE CON TIENE LA BASE DE DATOS -->
+<h2 style="margin: auto; width: 95%;text-align: center;">Clientes</h2> <br>
+<div class="row-md-3" *ngFor="let clientes of clientesArr">
+    
+    <div class="row-md-1">
+        <div class="card mb-3" style="margin: auto; width: 95%;">
+            <div class="row g-0">
+                <div class="col-md-10">
+                    <div class="card-body">
+                        <h5 class="card-title">Nombres: {{clientes.nombresCliente}}</h5>
+                        <p class="card-text"> Apellidos: {{clientes.apellidosCliente}} </p>
+                        <p class="card-text">Cédula: {{clientes.cedulaCliente}}</p>
+                        <p class="card-text">Correo Electronico: {{clientes.correoCliente}} USD</p>
+                        <p class="card-text">Edad: {{clientes.edadCliente}}</p>
+                        <p class="card-text">Direccion: {{cliente.direccionCliente}}</p>
+                        <p class="card-text">Telefono: {{cliente.telefonoCliente}}</p>
+                        
+                        
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end"> 
+                            <button type="button" class="btn btn-success me-md-2" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal" data-bs-whatever="@mdo"
+                                (click)="get_MP(clientes.id)">Editar</button>
+                          <!-- <button class="btn btn-danger me-md-2" type="button"
+                                (click)="deleteMP(materia_prima.id)">Eliminar</button>--> 
+
+                                <button type="button" class="btn btn-danger me-md-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="get_MP(clientes.id)">
+                                    Eliminar
+                                  </button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Eliminar</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ¿Estas seguro de eliminar este Cliente?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button class="btn btn-danger me-md-2" type="button"
+          (click)="deleteMP(provee.id)" data-bs-dismiss="modal">Eliminar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<!-- BOTOM DE A;ADIR ELEMENTO  -->
+
+<div class="d-grid gap-2">
+    <button style="width: 90%;margin: auto;" type="button" class="btn btn-success btn-lg" data-bs-toggle="modal"
+        data-bs-target="#exampleModal2" data-bs-whatever="@mdo" (click)="reset()" >Añadir Cliente</button>
+</div>
+
+
+
+
+
+<!-- FORMULARIO DE EDITAR DATOS DEL ELEMENTO -->
+
+<form>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">EDITAR CLIENTE</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="Cedula" class="col-form-label">Cedula:</label>
+                        <input type="text" class="form-control" id="Cedula" autofocus required
+                            [(ngModel)]="cliente.cedulaCliente" name="Cedula">
+                    </div>
+                    <div class="mb-3">
+                        <label for="Nombres" class="col-form-label">Nombres:</label>
+                        <input type="text" class="form-control" id="Nombres" autofocus required
+                            [(ngModel)]="cliente.nombresCliente" name="Nombres">
+                    </div>
+                    <div class="mb-3">
+                        <label for="Apellidos" class="col-form-label">Apellidos:</label>
+                        <input type="text" class="form-control" id="Precio" autofocus required
+                            [(ngModel)]="clientes.apellidosCliente" name="Apellidos">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="Correo" class="col-form-label">Correo:</label>
+                        <input type="text" class="form-control" id="Correo" autofocus required
+                            [(ngModel)]="clientes.correoCliente" name="Correo">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="Edad" class="col-form-label">Edad:</label>
+                        <input type="text" class="form-control" id="Edad" autofocus required
+                            [(ngModel)]="clientes.edadCliente" name="Edad">        
+                    </div>
+                    <div class="mb-3">
+                        <label for="Direccion" class="col-form-label">Dirección:</label>
+                        <input type="text" class="form-control" id="Direccion" autofocus required
+                            [(ngModel)]="clientes.direccionCliente" name="Direccion">
+                    </div>
+                    <div class="mb-3">
+                        <label for="Telefono" class="col-form-label">Telefono:</label>
+                        <input type="text" class="form-control" id="telefono" autofocus required
+                            [(ngModel)]="clientes.telefonoCliente" name="Telefono">
+                    </div>
+                    
+                </div>
+                <!-- onclick="location.reload()" -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="  reset() "  >Cerrar</button>
+                    <button type="button" class="btn btn-success" data-bs-dismiss="modal"
+                        (click)="updateMP(mateiraP.id)" (click)="reset()">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script>const exampleModal = document.getElementById('exampleModal')
+    exampleModal.addEventListener('show.bs.modal', event => {
+        const button = event.relatedTarget
+        const recipient = button.getAttribute('data-bs-whatever')
+        const modalTitle = exampleModal.querySelector('.modal-title')
+        const modalBodyInput = exampleModal.querySelector('.modal-body input')
+        modalTitle.textContent = `New message to ${recipient}`
+        modalBodyInput.value = recipient
+    })
+</script>
+
+
+
+
+<script>const exampleModal2 = document.getElementById('exampleModal2')
+    exampleModal2.addEventListener('show.bs.modal', event => {
+        const button = event.relatedTarget
+        const recipient = button.getAttribute('data-bs-whatever')
+        const modalTitle = exampleModal2.querySelector('.modal-title')
+        const modalBodyInput = exampleModal2.querySelector('.modal-body input')
+        modalTitle.textContent = `New message to ${recipient}`
+        modalBodyInput.value = recipient
+    })
+</script>
+

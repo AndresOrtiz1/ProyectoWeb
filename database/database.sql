@@ -41,3 +41,17 @@ CREATE TABLE proveedores (
   CorreoEmpresa varchar(50) NOT NULL,
   PRIMARY KEY (id)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb3
+--base de datos clientes
+CREATE TABLE `productos` (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  nombresCliente varchar(255) NOT NULL,
+  apellidosCliente varchar(255) NOT NULL,
+  cedulaCliente int(11) NOT NULL,
+  correoCliente varchar(255) NOT NULL,
+  edadCliente int(11) NOT NULL,
+  direccionCliente varchar(255) NOT NULL,
+  telefonoCliente int(11) NOT NULL,
+  
+  
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;

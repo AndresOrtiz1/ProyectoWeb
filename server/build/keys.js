@@ -4,7 +4,7 @@ exports.default = {
     database: {
         host: 'localhost',
         user: 'root',
-        password: 'Clave1mysql',
+        password: 'Samf2997Punk',
         database: 'inventarios_productos_db' //tu base de datos
     }
 };

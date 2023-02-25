@@ -1,0 +1,24 @@
+.alert-danger{
+    color: #731021;
+    background: #fecfd4;
+    border-color:#fdbcc3 ;
+    margin-bottom: 3px;
+    border-radius: 5px;
+    padding-left: 5px;
+}
+.container-error-message{
+    padding: 2px;
+    font-size: 12px;
+}
+
+.alert-valid{
+    color: #fff;
+    background: #25a55b;
+    border-color:#25a55b ;
+    margin-bottom: 3px;
+    border-radius: 5px;
+    padding-left: 5px;
+}
+.container-valid-message{
+    padding: 2px;
+}
