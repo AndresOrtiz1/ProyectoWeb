@@ -5,6 +5,7 @@ import { FormGroup } from '@angular/forms';
 
 
 import { MateriaPrimaServicesService } from '../../services/materia-prima.services.service'
+import { window } from 'rxjs';
 
 
 @Component({
@@ -349,4 +350,6 @@ export class MateriaPrimaComponent implements OnInit {
     }
   }
 
+  /// inpresion de reportes 
+   
 }
