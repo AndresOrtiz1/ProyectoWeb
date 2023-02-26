@@ -148,16 +148,16 @@
                     </div>
                     <div class="mb-3">
                         <label for="Nombres" class="col-form-label">Nombres:</label>
-                        <input type="text" class="form-control" id="Nombres" required [(ngModel)]="cliente.nombresCliente"
-                            name="Nombres" (blur)="cliente.nombresCliente && validarNombreClienteAlertaED(cliente.nombresCliente) "
+                        <input type="text" class="form-control" id="Nombres" required [(ngModel)]="clientes.nombresCliente"
+                            name="Nombres" (blur)="clientes.nombresCliente && validarNombreClienteAlertaED(clientes.nombresCliente) "
                             placeholder="Juan Andres">
                         <div class="errNcED"> Ingrese un Nombre válido </div>
                         <div class="valNcED">Nombre válido</div>
                     </div>
                     <div class="mb-3">
                         <label for="Apellidos" class="col-form-label">Apellidos:</label>
-                        <input type="text" class="form-control" id="Apellidos" required [(ngModel)]="cliente.apellidosCliente"
-                            name="Apellidos" (blur)="cliente.apellidosCliente && validarApellidoClienteAlertaED(cliente.apellidosCliente) "
+                        <input type="text" class="form-control" id="Apellidos" required [(ngModel)]="clientes.apellidosCliente"
+                            name="Apellidos" (blur)="clientes.apellidosCliente && validarApellidoClienteAlertaED(clientes.apellidosCliente) "
                             placeholder="Montalvo Perez">
                         <div class="errApED"> Apellido no válido</div>
                         <div class="valApED"> Apellido Válido</div>
@@ -165,8 +165,8 @@
                    
                     <div class="mb-3">
                         <label for="Correo" class="col-form-label">Correo:</label>
-                        <input type="text" class="form-control" id="Correo" required [(ngModel)]="cliente.correoCliente"
-                            name="Correo" (blur)="cliente.correoCliente && validarCorreoClienteAlertaED(cliente.correoCliente) "
+                        <input type="text" class="form-control" id="Correo" required [(ngModel)]="clientes.correoCliente"
+                            name="Correo" (blur)="clientes.correoCliente && validarCorreoClienteAlertaED(clientes.correoCliente) "
                             placeholder="example@gmail.com">
                         <div class="errCrrED"> Correo Incorrecto </div>
                         <div class="valCrrED">Correo Actualizado Correctamente</div>
@@ -174,8 +174,8 @@
                     </div>
                     <div class="mb-3">
                         <label for="Edad" class="col-form-label">Edad:</label>
-                        <input type="text" class="form-control" id="Edad" required [(ngModel)]="cliente.edadCliente"
-                            name="Edad" (blur)="cliente.edadCliente && validarEdadClienteAlertaED(cliente.edadCliente) "
+                        <input type="text" class="form-control" id="Edad" required [(ngModel)]="clientes.edadCliente"
+                            name="Edad" (blur)="clientes.edadCliente && validarEdadClienteAlertaED(clientes.edadCliente) "
                             placeholder="25">
                         <div class="errEddED"> Formato de edad Incorrecto </div>
                         <div class="valEddED">Edad Actualizada Correctamente</div>
@@ -183,8 +183,8 @@
                     </div>
                     <div class="mb-3">
                         <label for="Direccion" class="col-form-label">Direccion:</label>
-                        <input type="text" class="form-control" id="Direccion" required [(ngModel)]="cliente.direccionCliente"
-                            name="Direccion" (blur)="cliente.direccionCliente && validarDireccionClienteAlertaED(cliente.direccionCliente) "
+                        <input type="text" class="form-control" id="Direccion" required [(ngModel)]="clientes.direccionCliente"
+                            name="Direccion" (blur)="clientes.direccionCliente && validarDireccionClienteAlertaED(clientes.direccionCliente) "
                             placeholder="Calle Primaria y Calle Secundaria ">
                         <div class="errDirED"> Formato de Direccion Incorrecta </div>
                         <div class="valDirED">Direccion Actualizada Correctamente</div>
@@ -192,8 +192,8 @@
                     </div>
                     <div class="mb-3">
                         <label for="Telefono" class="col-form-label">Telefono:</label>
-                        <input type="text" class="form-control" id="Telefono" required [(ngModel)]="cliente.telefonoCliente"
-                            name="Telefono" (blur)="cliente.telefonoCliente && validarTelefonoClienteAlertaED(cliente.telefonoCliente) "
+                        <input type="text" class="form-control" id="Telefono" required [(ngModel)]="clientes.telefonoCliente"
+                            name="Telefono" (blur)="clientes.telefonoCliente && validarTelefonoClienteAlertaED(clientes.telefonoCliente) "
                             placeholder=" 0985265454 ">
                         <div class="errTelED"> Formato de telefono Incorrecta </div>
                         <div class="valTelED">Télefono Actualizado Correctamente</div>
@@ -203,7 +203,7 @@
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
                         (click)="  reset() ">Cerrar</button>
                     <button type="button" class="btn btn-success" data-bs-dismiss="modal"
-                        (click)="updateMP(mateiraP.id)" (click)="reset()">Guardar</button>
+                        (click)="updateMP(clientes.id)" (click)="reset()">Guardar</button>
                 </div>
             </div>
         </div>
@@ -236,8 +236,8 @@
 
                     <div class="mb-3">
                         <label for="Cedula" class="col-form-label">Cédula:</label>
-                        <input type="text" class="form-control" id="Cedula" required [(ngModel)]="cliente.cedulaCliente"
-                            name="Cedula" (blur)="cliente.cedulaCliente && validarCedulaClienteAlerta(cliente.cedulaCliente) "
+                        <input type="text" class="form-control" id="Cedula" required [(ngModel)]="clientes.cedulaCliente"
+                            name="Cedula" (blur)="clientes.cedulaCliente && validarCedulaClienteAlerta(clientes.cedulaCliente) "
                             placeholder="1758728469">
 
                         <div class="errCed"> Ingrese una cedula válida </div>
