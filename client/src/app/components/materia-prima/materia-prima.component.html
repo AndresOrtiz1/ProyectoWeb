@@ -64,7 +64,10 @@
 
 <div class="d-grid gap-2">
     <button style="width: 90%;margin: auto;" type="button" class="btn btn-success btn-lg" data-bs-toggle="modal"
-        data-bs-target="#exampleModal2" data-bs-whatever="@mdo" (click)="reset()" (click)="validFomr()">Añadir
+        data-bs-target="#exampleModal2" data-bs-whatever="@mdo" (click)="reset()">Añadir
+        Producto</button>
+    <button style="width: 90%;margin: auto;" type="button" class="btn btn-success btn-lg" data-bs-toggle="modal"
+        data-bs-target="#exampleModal2" data-bs-whatever="@mdo" (click)="reset()">Añadir
         Producto</button>
 </div>
 
@@ -86,51 +89,69 @@
                     <div class="mb-3">
                         <label for="Codigo" class="col-form-label">Codigo:</label>
                         <input type="text" class="form-control" id="Codigo" autofocus required
-                            [(ngModel)]="mateiraP.codigo" name="Codigo">
+                            [(ngModel)]="mateiraP.codigo" name="Codigo"
+                            (blur)="mateiraP.codigo && validarCodigoAlerta(mateiraP.codigo) " placeholder="AB123">
+
+                        <div class="errC"> Ingrese un codigo valido </div>
+                        <div class="valC">Codigo valido</div>
+
                     </div>
                     <div class="mb-3">
                         <label for="Nombre" class="col-form-label">Nombre:</label>
-                        <input type="text" class="form-control" id="Nombre" autofocus required
-                            [(ngModel)]="mateiraP.nombre" name="Nombre">
+                        <input type="text" class="form-control" id="Nombre" required [(ngModel)]="mateiraP.nombre"
+                            name="Nombre" (blur)="mateiraP.nombre && validarNombreAlerta(mateiraP.nombre) "
+                            placeholder="Nombre del elemento">
+                        <div class="errN"> Ingrese un Nombre valido </div>
+                        <div class="valN">Nombre valido</div>
                     </div>
                     <div class="mb-3">
                         <label for="Precio" class="col-form-label">Precio:</label>
-                        <input type="text" class="form-control" id="Precio" autofocus required
-                            [(ngModel)]="mateiraP.precio" name="Precio">
+                        <input type="text" class="form-control" id="Precio" required [(ngModel)]="mateiraP.precio"
+                            name="Precio" (blur)="mateiraP.precio && validarPrecioAlerta(mateiraP.precio) "
+                            placeholder="USD">
+                        <div class="errP"> Ingrese una cantidad de dinero en con decimales </div>
+                        <div class="valP">Formato correcto</div>
                     </div>
                     <div class="form-group">
                         <label for="UnidadM">Unidad de Medida</label>
                         <select id="UnidadM" name="UnidadM" class="form-select" [(ngModel)]="mateiraP.unidad_medida"
                             required>
-
-                            <option selected value="kg">Kg</option>
-                            <option selected value="lt">Lt</option>
-                            <option selected value="oz">oz</option>
                             <option selected>...</option>
+                            <option value="kg">Kg</option>
+                            <option value="lt">Lt</option>
+                            <option value="oz">oz</option>
+
 
                         </select>
                     </div>
                     <div class="mb-3">
                         <label for="Cantidad" class="col-form-label">Cantidad:</label>
-                        <input type="text" class="form-control" id="Cantidad" autofocus required
-                            [(ngModel)]="mateiraP.cantidad" name="Cantidad">
+                        <input type="text" class="form-control" id="Cantidad" required [(ngModel)]="mateiraP.cantidad"
+                            name="Cantidad" (blur)="mateiraP.cantidad&& validarCantidadAlerta(mateiraP.cantidad) "
+                            placeholder="Cantidad de elementos existentes">
+                        <div class="errCa"> Ingrese un numero entero </div>
+                        <div class="valCa">Cantidad correcta</div>
+
                     </div>
                     <div class="form-row row g-3">
                         <div class="form-group col-md-6">
                             <label for="FechaI" class="col-form-label">Fecha de ingreso:</label>
-                            <input type="date" class="form-control" id="FechaI" autofocus required
+                            <input type="date" class="form-control" id="FechaI" required
                                 [(ngModel)]="mateiraP.fecha_ingreso" name="FechaI">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="FechaC" class="col-form-label">Fecha de caducidad:</label>
-                            <input type="date" class="form-control" id="FechaC" autofocus required
+                            <input type="date" class="form-control" id="FechaC" required
                                 [(ngModel)]="mateiraP.fecha_caducidad" name="FechaC">
                         </div>
                     </div>
                     <div class="mb-3">
                         <label for="Imagen" class="col-form-label">Imagen</label>
-                        <input type="url" class="form-control" id="Imagen" autofocus required
-                            [(ngModel)]="mateiraP.imagen" name="Imagen">
+                        <input type="url" class="form-control" id="Imagen" required [(ngModel)]="mateiraP.imagen"
+                            name="Imagen" (blur)="mateiraP.imagen && validarImagenAlerta(mateiraP.imagen) "
+                            placeholder="https://...">
+                        <div class="errI"> Ingrese la url de la imagen del elemento </div>
+                        <div class="valI">URL valida</div>
                     </div>
                 </div>
                 <!-- onclick="location.reload()" -->
@@ -159,7 +180,7 @@
 
 <!-- FORMULARIO DE AÑADIR PRODUCTO -->
 
-<form [formGroup]="valfomr">
+<form>
     <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-xl">
             <div class="modal-content">
@@ -169,166 +190,97 @@
                 </div>
                 <div class="modal-body">
 
-                    <!-- form valid codigo -->
                     <div class="mb-3">
                         <label for="Codigo" class="col-form-label">Codigo:</label>
-                        <input type="text" class="form-control" formControlName="codigo" id="Codigo" autofocus required
-                            [(ngModel)]="mateiraP.codigo" name="Codigo">
+                        <input type="text" class="form-control" id="Codigo" required [(ngModel)]="mateiraP.codigo"
+                            name="Codigo" (blur)="mateiraP.codigo && validarCodigoAlerta(mateiraP.codigo) "
+                            placeholder="AB123">
+
+                        <div class="errC"> Ingrese un codigo valido </div>
+                        <div class="valC">Codigo valido</div>
+
                     </div>
-                    <!-- <div class="alert-valid " *ngIf="valfomr.valid">
-                        <div class="container-valid-message">
-                            Datos validos
-                        </div>
-                    </div>
-                    <div class="alert-danger " *ngIf="valfomr.invalid&& (valfomr.dirty || valfomr.touched)">
-                        <div class="container-error-message">
-                            El campo es requerido y se esperaban 2 letras Mayusculas y 3 numeros (AB012)
-                        </div>
-                    </div> -->
 
 
-                    <!-- form valid name -->
+
                     <div class="mb-3">
                         <label for="Nombre" class="col-form-label">Nombre:</label>
-                        <input type="text" class="form-control" formControlName="nombre" id="Nombre" autofocus required
-                            [(ngModel)]="mateiraP.nombre" name="Nombre">
-                    </div>
-                    <!-- <div class="alert-valid " *ngIf="valfomr.valid">
-                        <div class="container-valid-message">
-                            Datos validos
-                        </div>
-                    </div>
-                    <div class="alert-danger " *ngIf="valfomr.invalid&& (valfomr.dirty || valfomr.touched)">
-                        <div class="container-error-message">
-                            El campo es requerido y se esperaba un nombre del producto 
-                        </div>
-                    </div> -->
+                        <input type="text" class="form-control" id="Nombre" required [(ngModel)]="mateiraP.nombre"
+                            name="Nombre" (blur)="mateiraP.nombre && validarNombreAlerta(mateiraP.nombre) "
+                            placeholder="Nombre del elemento">
+                        <div class="errN"> Ingrese un Nombre valido </div>
+                        <div class="valN">Nombre valido</div>
 
-                    <!-- form valid price -->
+                    </div>
+
                     <div class="mb-3">
                         <label for="Precio" class="col-form-label">Precio:</label>
-                        <input type="text" class="form-control" formControlName="precio" id="Precio" autofocus required
-                            [(ngModel)]="mateiraP.precio" name="Precio">
-                    </div>
-                    <!-- <div class="alert-valid " *ngIf="valfomr.valid">
-                        <div class="container-valid-message">
-                            Datos validos
-                        </div>
-                    </div>
-                    <div class="alert-danger " *ngIf="valfomr.invalid&& (valfomr.dirty || valfomr.touched)">
-                        <div class="container-error-message">
-                            El campo es requerido y se esperaba un numero con decimales (10.23)
-                        </div>
-                    </div> -->
+                        <input type="text" class="form-control" id="Precio" required [(ngModel)]="mateiraP.precio"
+                            name="Precio" (blur)="mateiraP.precio && validarPrecioAlerta(mateiraP.precio) "
+                            placeholder="USD">
+                        <div class="errP"> Ingrese una cantidad de dinero en con decimales </div>
+                        <div class="valP">Formato correcto</div>
 
-                    <!-- form valid unitM -->
+                    </div>
+
                     <div class="form-group">
                         <label for="UnidadM">Unidad de Medida</label>
-                        <select formControlName="unidad_medida" id="UnidadM" name="UnidadM" class="form-select"
-                            [(ngModel)]="mateiraP.unidad_medida" required>
+                        <select id="UnidadM" name="UnidadM" class="form-select" [(ngModel)]="mateiraP.unidad_medida"
+                            required>
 
-                            <option selected value="kg">Kg</option>
-                            <option selected value="lt">Lt</option>
-                            <option selected value="oz">oz</option>
-                            <option selected>...</option>
+                            <option value="kg">Kg</option>
+                            <option value="lt">Lt</option>
+                            <option value="oz">oz</option>
+                            <option selected value="...">Seleccione la unidad en de medida</option>
 
                         </select>
                     </div>
-                    <!-- <div class="alert-valid " *ngIf="valfomr.valid">
-                        <div class="container-valid-message">
-                            Datos validos
-                        </div>
-                    </div>
-                    <div class="alert-danger " *ngIf="valfomr.invalid&& (valfomr.dirty || valfomr.touched)">
-                        <div class="container-error-message">
-                            El campo es requerido y se esperaba  
-                        </div>
-                    </div> -->
 
-                    <!-- form valid amount -->
                     <div class="mb-3">
                         <label for="Cantidad" class="col-form-label">Cantidad:</label>
-                        <input type="text" class="form-control" formControlName="cantidad" id="Cantidad" autofocus
-                            required [(ngModel)]="mateiraP.cantidad" name="Cantidad">
-                    </div>
-                    <!-- <div class="alert-valid " *ngIf="valfomr.valid">
-                        <div class="container-valid-message">
-                            Datos validos
-                        </div>
-                    </div>
-                    <div class="alert-danger " *ngIf="valfomr.invalid&& (valfomr.dirty || valfomr.touched)">
-                        <div class="container-error-message">
-                            El campo es requerido y se esperaba un numero entero (23)
-                        </div>
-                    </div> -->
+                        <input type="text" class="form-control" id="Cantidad" required [(ngModel)]="mateiraP.cantidad"
+                            name="Cantidad" (blur)="mateiraP.cantidad&& validarCantidadAlerta(mateiraP.cantidad) "
+                            placeholder="Cantidad de elementos existentes">
+                        <div class="errCa"> Ingrese un numero entero </div>
+                        <div class="valCa">Cantidad correcta</div>
 
-                    <!-- form valid date income -->
+                    </div>
+
                     <div class="form-row row g-3">
                         <div class="form-group col-md-6">
                             <label for="FechaI" class="col-form-label">Fecha de ingreso:</label>
-                            <input type="date" class="form-control" formControlName="fecha_ingreso" id="FechaI"
-                                autofocus required [(ngModel)]="mateiraP.fecha_ingreso" name="FechaI">
-
-                            <!-- <div class="alert-valid " *ngIf="valfomr.valid">
-                                <div class="container-valid-message">
-                                    Datos validos
-                                </div>
-                            </div>
-                            <div class="alert-danger " *ngIf="valfomr.invalid&& (valfomr.dirty || valfomr.touched)">
-                                <div class="container-error-message">
-                                    El campo es requerido
-                                </div>
-                            </div> -->
-
-
+                            <input type="date" class="form-control" id="FechaI" required
+                                [(ngModel)]="mateiraP.fecha_ingreso" name="FechaI">
                         </div>
 
 
-                        <!-- form valid date expiration -->
                         <div class="form-group col-md-6">
                             <label for="FechaC" class="col-form-label">Fecha de caducidad:</label>
-                            <input type="date" class="form-control" formControlName="fecha_caducidad" id="FechaC"
-                                autofocus required [(ngModel)]="mateiraP.fecha_caducidad" name="FechaC">
+                            <input type="date" class="form-control" id="FechaC" required
+                                [(ngModel)]="mateiraP.fecha_caducidad" name="FechaC">
 
-                            <!-- <div class="alert-valid " *ngIf="valfomr.valid">
-                                <div class="container-valid-message">
-                                    Datos validos
-                                </div>
-                            </div>
-                            <div class="alert-danger " *ngIf="valfomr.invalid&& (valfomr.dirty || valfomr.touched)">
-                                <div class="container-error-message">
-                                    El campo es requerido
-                                </div>
-                            </div> -->
+
                         </div>
 
                     </div>
 
-                    <!-- form valid date image -->
                     <div class="mb-3">
                         <label for="Imagen" class="col-form-label">Imagen</label>
-                        <input type="url" class="form-control" formControlName="imagen" id="Imagen" autofocus required
-                            [(ngModel)]="mateiraP.imagen" name="Imagen">
+                        <input type="url" class="form-control" id="Imagen" required [(ngModel)]="mateiraP.imagen"
+                            name="Imagen" (blur)="mateiraP.imagen && validarImagenAlerta(mateiraP.imagen) "
+                            placeholder="https://...">
+                        <div class="errI"> Ingrese la url de la imagen del elemento </div>
+                        <div class="valI">URL valida</div>
                     </div>
-                    <!-- <div class="alert-valid " *ngIf="valfomr.valid">
-                        <div class="container-valid-message">
-                            Datos validos
-                        </div>
-                    </div>
-                    <div class="alert-danger " *ngIf="valfomr.invalid&& (valfomr.dirty || valfomr.touched)">
-                        <div class="container-error-message">
-                            El campo es requerido y se esperaba una direccion url (http://... o https://...)
-                        </div>
-                    </div> -->
+
                 </div>
-                <!-- <div>
-                    Valido: {{valfomr.valid | json}}
-                </div> -->
+
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="  saveNewMP()"
-                         >Guardar</button> 
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                        (click)=" reset()">Cerrar</button>
+                    <button type="submit" class="btn btn-success" data-bs-dismiss="modal"
+                        (click)="  saveNewMP()">Guardar</button>
                 </div>
             </div>
         </div>
@@ -344,4 +296,7 @@
         modalTitle.textContent = `New message to ${recipient}`
         modalBodyInput.value = recipient
     })
+
+
+
 </script>
