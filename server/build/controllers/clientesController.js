@@ -37,7 +37,7 @@ class ClientesController {
     getOne(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            const [cliente] = yield database_1.default.query('SELECT * FROM materia_prima WHERE  id = ?', [id]);
+            const [cliente] = yield database_1.default.query('SELECT * FROM clientes WHERE  id = ?', [id]);
             console.log(cliente);
             // res.json({text:'econtrado'});
             res.json(cliente);

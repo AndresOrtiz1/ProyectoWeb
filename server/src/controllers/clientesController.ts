@@ -29,7 +29,7 @@ class ClientesController {
 
     public async getOne (req: Request, res: Response):  Promise<any> {
         const {id} = req.params;
-        const [cliente] = await pool.query('SELECT * FROM materia_prima WHERE  id = ?',[id]);
+        const [cliente] = await pool.query('SELECT * FROM clientes WHERE  id = ?',[id]);
         console.log(cliente);
         // res.json({text:'econtrado'});
         
