@@ -10,10 +10,10 @@
                         <h5 class="card-title">Nombres: {{clientes.nombresCliente}}</h5>
                         <p class="card-text"> Apellidos: {{clientes.apellidosCliente}} </p>
                         <p class="card-text">Cédula: {{clientes.cedulaCliente}}</p>
-                        <p class="card-text">Correo Electronico: {{clientes.correoCliente}} USD</p>
+                        <p class="card-text">Correo Electronico: {{clientes.correoCliente}}</p>
                         <p class="card-text">Edad: {{clientes.edadCliente}}</p>
-                        <p class="card-text">Direccion: {{cliente.direccionCliente}}</p>
-                        <p class="card-text">Telefono: {{cliente.telefonoCliente}}</p>
+                        <p class="card-text">Direccion: {{clientes.direccionCliente}}</p>
+                        <p class="card-text">Telefono: {{clientes.telefonoCliente}}</p>
 
 
 
@@ -50,7 +50,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button class="btn btn-danger me-md-2" type="button" (click)="deleteMP(clientesArr.id)"
+                <button class="btn btn-danger me-md-2" type="button" (click)="deleteMP(client.id)"
                     data-bs-dismiss="modal">Eliminar</button>
             </div>
         </div>
@@ -66,9 +66,7 @@
     
 </div>
 
-
-
-
+<!--corregir desde aqui-->
 
 <!-- FORMULARIO DE EDITAR DATOS DEL ELEMENTO -->
 
@@ -82,41 +80,41 @@
                 </div>
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label for="Cedula" class="col-form-label">Cedula:</label>
-                        <input type="text" class="form-control" id="Cedula" autofocus required
-                            [(ngModel)]="cliente.cedulaCliente" name="Cedula">
+                        <label for="cedulaCliente" class="col-form-label">Cedula:</label>
+                        <input type="text" class="form-control" id="cedulaCliente" autofocus required
+                            [(ngModel)]="client.cedulaCliente" name="cedulaCliente">
                     </div>
                     <div class="mb-3">
-                        <label for="Nombres" class="col-form-label">Nombres:</label>
-                        <input type="text" class="form-control" id="Nombres" autofocus required
-                            [(ngModel)]="cliente.nombresCliente" name="Nombres">
+                        <label for="nombresCliente" class="col-form-label">Nombres:</label>
+                        <input type="text" class="form-control" id="nombresCliente" autofocus required
+                            [(ngModel)]="client.nombresCliente" name="nombresCliente">
                     </div>
                     <div class="mb-3">
-                        <label for="Apellidos" class="col-form-label">Apellidos:</label>
-                        <input type="text" class="form-control" id="Precio" autofocus required
-                            [(ngModel)]="cliente.apellidosCliente" name="Apellidos">
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="Correo" class="col-form-label">Correo:</label>
-                        <input type="text" class="form-control" id="Correo" autofocus required
-                            [(ngModel)]="cliente.correoCliente" name="Correo">
+                        <label for="apellidosCliente" class="col-form-label">Apellidos:</label>
+                        <input type="text" class="form-control" id="apellidosCliente" autofocus required
+                            [(ngModel)]="client.apellidosCliente" name="apellidosCliente">
                     </div>
 
                     <div class="mb-3">
-                        <label for="Edad" class="col-form-label">Edad:</label>
-                        <input type="text" class="form-control" id="Edad" autofocus required
-                            [(ngModel)]="cliente.edadCliente" name="Edad">
+                        <label for="correoCliente" class="col-form-label">Correo:</label>
+                        <input type="text" class="form-control" id="correoCliente" autofocus required
+                            [(ngModel)]="client.correoCliente" name="correoCliente">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="edadCliente" class="col-form-label">Edad:</label>
+                        <input type="text" class="form-control" id="edadCliente" autofocus required
+                            [(ngModel)]="client.edadCliente" name="edadCliente">
                     </div>
                     <div class="mb-3">
-                        <label for="Direccion" class="col-form-label">Dirección:</label>
-                        <input type="text" class="form-control" id="Direccion" autofocus required
-                            [(ngModel)]="cliente.direccionCliente" name="Direccion">
+                        <label for="direccionCliente" class="col-form-label">Dirección:</label>
+                        <input type="text" class="form-control" id="direccionCliente" autofocus required
+                            [(ngModel)]="client.direccionCliente" name="direccionCliente">
                     </div>
                     <div class="mb-3">
-                        <label for="Telefono" class="col-form-label">Telefono:</label>
-                        <input type="text" class="form-control" id="telefono" autofocus required
-                            [(ngModel)]="cliente.telefonoCliente" name="Telefono">
+                        <label for="telefonoCliente" class="col-form-label">Telefono:</label>
+                        <input type="text" class="form-control" id="telefonoCliente" autofocus required
+                            [(ngModel)]="client.telefonoCliente" name="telefonoCliente">
                     </div>
 
                 </div>
@@ -124,7 +122,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
                         (click)="  reset() ">Cerrar</button>
-                    <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="updateMP(cliente.id)"
+                    <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="updateMP(client.id)"
                         (click)="reset()">Guardar</button>
                 </div>
             </div>
@@ -157,45 +155,45 @@
 
 
                     <div class="mb-3">
-                        <label for="Cedula" class="col-form-label">Cédula:</label>
-                        <input type="text" class="form-control" formControlName="Cedula" id="Cedula" autofocus required
-                            [(ngModel)]="cliente.cedulaCliente" name="Cedula">
+                        <label for="cedulaCliente" class="col-form-label">Cédula:</label>
+                        <input type="number" class="form-control" id="cedulaCliente" autofocus required
+                            [(ngModel)]="client.cedulaCliente" name="cedulaCliente">
                     </div>
 
                     <div class="mb-3">
-                        <label for="Nombres" class="col-form-label">Nombres:</label>
-                        <input type="text" class="form-control" formControlName="nombres" id="Nombres" autofocus
-                            required [(ngModel)]="cliente.nombresCliente" name="Nombres">
+                        <label for="nombresCliente" class="col-form-label">Nombres:</label>
+                        <input type="text" class="form-control" id="nombresCliente" autofocus
+                            required [(ngModel)]="client.nombresCliente" name="nombresCliente">
                     </div>
 
                     <div class="mb-3">
-                        <label for="Apellidos" class="col-form-label">Apellidos:</label>
-                        <input type="text" class="form-control" formControlName="apellidos" id="Apellidos" autofocus
-                            required [(ngModel)]="cliente.apellidosCliente" name="Apellidos">
+                        <label for="apellidosCliente" class="col-form-label">Apellidos:</label>
+                        <input type="text" class="form-control" id="apellidosCliente" autofocus
+                            required [(ngModel)]="client.apellidosCliente" name="apellidosCliente">
                     </div>
 
 
 
                     <div class="mb-3">
-                        <label for="Correo" class="col-form-label">Correo:</label>
-                        <input type="text" class="form-control" formControlName="correo" id="Correo" autofocus required
-                            [(ngModel)]="cliente.correoCliente" name="Correo">
+                        <label for="correoCliente" class="col-form-label">Correo:</label>
+                        <input type="text" class="form-control" id="correoCliente" autofocus required
+                            [(ngModel)]="client.correoCliente" name="correoCliente">
                     </div>
 
                     <div class="mb-3">
-                        <label for="Edad" class="col-form-label">Edad:</label>
-                        <input type="text" class="form-control" formControlName="edad" id="Edad" autofocus required
-                            [(ngModel)]="cliente.edadCliente" name="Edad">
+                        <label for="edadCliente" class="col-form-label">Edad:</label>
+                        <input type="text" class="form-control"  id="edadCliente" autofocus required
+                            [(ngModel)]="client.edadCliente" name="edadCliente">
                     </div>
                     <div class="mb-3">
-                        <label for="Direccion" class="col-form-label">Dirección:</label>
-                        <input type="text" class="form-control" formControlName="direccion" id="Direccion" autofocus
-                            required [(ngModel)]="cliente.direccionCliente" name="Direccion">
+                        <label for="direccionCliente" class="col-form-label">Dirección:</label>
+                        <input type="text" class="form-control"  id="direccionCliente" autofocus
+                            required [(ngModel)]="client.direccionCliente" name="direccionCliente">
                     </div>
                     <div class="mb-3">
-                        <label for="Telefono" class="col-form-label">Telefono:</label>
-                        <input type="text" class="form-control" formControlName="telefono" id="Telefono" autofocus
-                            required [(ngModel)]="cliente.telefonoCliente" name="Telefono">
+                        <label for="telefonoCliente" class="col-form-label">Telefono:</label>
+                        <input type="text" class="form-control"  id="telefonoCliente" autofocus
+                            required [(ngModel)]="client.telefonoCliente" name="telefonoCliente">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -222,3 +220,6 @@
     })
 </script>
 <!--prueba -->
+
+
+
