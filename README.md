@@ -13,6 +13,7 @@ cd client
 //para meterse a la carpeta client
 cd server
 //para meterse a la carpeta server
+
 --dentro de la carpeta server 
 al iniciar la creacion de las rutas en la rest API 
 
