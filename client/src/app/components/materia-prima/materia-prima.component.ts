@@ -1,12 +1,8 @@
 import { Component, HostBinding, OnInit } from '@angular/core';
-import { MateriaPrima } from 'src/app/models/materia_prima.models';
-import { ActivatedRoute, Router } from '@angular/router';
-import { FormGroup } from '@angular/forms';
-
+import { MateriaPrima } from 'src/app/models/materia_prima.models'; 
 
 import { MateriaPrimaServicesService } from '../../services/materia-prima.services.service'
-import { window } from 'rxjs';
-
+ 
 
 @Component({
   selector: 'app-materia-prima',
@@ -31,8 +27,7 @@ export class MateriaPrimaComponent implements OnInit {
   }
 
   materias_primasArr: any = [];
-  valfomr !: FormGroup;
-
+ 
   constructor(
     private materiaPrimaServicesService: MateriaPrimaServicesService,
 
@@ -45,8 +40,7 @@ export class MateriaPrimaComponent implements OnInit {
 
 
 
-  get codigo() { return this.valfomr.get('codigo'); }
-
+ 
 
   // metodos del componetne CRUD
   saveNewMP() {
