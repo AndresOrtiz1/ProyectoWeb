@@ -138,7 +138,74 @@
         modalBodyInput.value = recipient
     })
 </script>
+<!-- FORMULARIO DE AÑADIR PRODUCTO -->
 
+<form [formGroup]="valfomr">
+    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Añadir Cliente</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                   
+                    <div class="mb-3">
+                        <label for="Cedula" class="col-form-label">Cédula:</label>
+                        <input type="text" class="form-control" formControlName="Cedula" id="Cedula" autofocus required
+                            [(ngModel)]="cliente.cedulaCliente" name="Cedula">
+                    </div>
+                   
+                    <div class="mb-3">
+                        <label for="Nombres" class="col-form-label">Nombres:</label>
+                        <input type="text" class="form-control" formControlName="nombres" id="Nombres" autofocus required
+                            [(ngModel)]="cliente.nombresCliente" name="Nombres">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="Apellidos" class="col-form-label">Apellidos:</label>
+                        <input type="text" class="form-control" formControlName="apellidos" id="Apellidos" autofocus required
+                            [(ngModel)]="cliente.apellidosCliente" name="Apellidos">
+                    </div>
+                    
+                    
+                    
+                    <div class="mb-3">
+                        <label for="Correo" class="col-form-label">Correo:</label>
+                        <input type="text" class="form-control" formControlName="correo" id="Correo" autofocus
+                            required [(ngModel)]="cliente.correoCliente" name="Correo">
+                    </div>
+                  
+                    <div class="mb-3">
+                        <label for="Edad" class="col-form-label">Edad:</label>
+                        <input type="text" class="form-control" formControlName="edad" id="Edad" autofocus
+                            required [(ngModel)]="cliente.edadCliente" name="Edad">
+                    </div>
+                    <div class="mb-3">
+                        <label for="Direccion" class="col-form-label">Dirección:</label>
+                        <input type="text" class="form-control" formControlName="direccion" id="Direccion" autofocus
+                            required [(ngModel)]="cliente.direccionCliente" name="Direccion">
+                    </div>
+                    <div class="mb-3">
+                        <label for="Telefono" class="col-form-label">Telefono:</label>
+                        <input type="text" class="form-control" formControlName="telefono" id="Telefono" autofocus
+                            required [(ngModel)]="cliente.telefonoCliente" name="Telefono">
+                    </div>
+                  
+
+               
+               
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="  saveNewMP()"
+                         >Guardar</button> 
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
 
 
 
