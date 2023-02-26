@@ -27,10 +27,11 @@ export class MateriaPrimaComponent implements OnInit {
     // ingredientes: [this.ingredienteP],
 
   }
-  recetasArr: any = [];
+  recetasArr: Recetas[] = [];
+
   getREC() {
     this.recetasService.getRecetaslist().subscribe({
-      next: (v: any) => [[this.recetasArr] = v,console.log([this.recetasArr])],
+      next: (v: any) => { this.recetasArr = v; console.log(this.recetasArr) },
       error: (e: any) => console.error(e),
       complete: () => console.info('receta obtenida')
     })
