@@ -17,7 +17,7 @@ export class ClientesComponent implements OnInit {
   @HostBinding('class') classes = 'modal-body';
   
 
-  cliente: Clientes = {
+  clientes: Clientes = {
     id: 0,
     nombresCliente: '',
     apellidosCliente: '',
@@ -44,9 +44,9 @@ export class ClientesComponent implements OnInit {
   
   // metodos del componetne CRUD
   saveNewMP() {
-    delete this.cliente.id;
-    this.ClientesServicesService.saveClientes(this.cliente).subscribe({
-      next: (v: any) => [this.cliente = v,this.edit = false ],
+    delete this.clientes.id;
+    this.ClientesServicesService.saveClientes(this.clientes).subscribe({
+      next: (v: any) => [this.clientes = v,this.edit = false ],
       error: (e: any) => console.error(e),
       complete: () => ( this.getMP())
     })
@@ -71,29 +71,29 @@ export class ClientesComponent implements OnInit {
   }
   get_MP(id : string) {
     this.ClientesServicesService.getClientes(id).subscribe({
-      next: (v: any) => [[this.cliente] = v, this.edit = true, console.log(id)],
+      next: (v: any) => [[this.clientes] = v, this.edit = true, console.log(id)],
       error: (e: any) => console.error(e),
       complete: () => console.log('get cliente complete'+id)
     })
   }
 
   updateMP(id: any){
-    this.ClientesServicesService.updateClientes(id,this.cliente).subscribe({
-      next: (v: any) => [this.cliente, console.log(v), console.log([this.cliente], this.cliente), console.log(id)],
+    this.ClientesServicesService.updateClientes(id,this.clientes).subscribe({
+      next: (v: any) => [this.clientes, console.log(v), console.log([this.clientes], this.clientes), console.log(id)],
       error: (e: any) => console.error(e),
       complete: () => [this.getMP()]      
     })
   }
 
   reset(){
-    this.cliente.id= 0;
-    this.cliente.nombresCliente = '';
-    this.cliente.apellidosCliente = '';
-    this.cliente.cedulaCliente = '';
-    this.cliente.correoCliente = '';
-    this.cliente.edadCliente = '';
-    this.cliente.direccionCliente = '';
-    this.cliente.telefonoCliente = '';
+    this.clientes.id= 0;
+    this.clientes.nombresCliente = '';
+    this.clientes.apellidosCliente = '';
+    this.clientes.cedulaCliente = '';
+    this.clientes.correoCliente = '';
+    this.clientes.edadCliente = '';
+    this.clientes.direccionCliente = '';
+    this.clientes.telefonoCliente = '';
     
   }
   //validaciones
