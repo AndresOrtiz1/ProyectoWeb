@@ -1,7 +1,7 @@
 <!-- sCONTENEDOR DE LOS ELEMENTOS QUE CON TIENE LA BASE DE DATOS -->
 <h2 style="margin: auto; width: 95%;text-align: center;">Clientes</h2> <br>
 <div class="row-md-3" *ngFor="let clientes of clientesArr">
-    
+
     <div class="row-md-1">
         <div class="card mb-3" style="margin: auto; width: 95%;">
             <div class="row g-0">
@@ -14,19 +14,20 @@
                         <p class="card-text">Edad: {{clientes.edadCliente}}</p>
                         <p class="card-text">Direccion: {{cliente.direccionCliente}}</p>
                         <p class="card-text">Telefono: {{cliente.telefonoCliente}}</p>
-                        
-                        
 
-                        <div class="d-grid gap-2 d-md-flex justify-content-md-end"> 
+
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                             <button type="button" class="btn btn-success me-md-2" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal" data-bs-whatever="@mdo"
                                 (click)="get_MP(clientes.id)">Editar</button>
-                          <!-- <button class="btn btn-danger me-md-2" type="button"
-                                (click)="deleteMP(materia_prima.id)">Eliminar</button>--> 
+                            <!-- <button class="btn btn-danger me-md-2" type="button"
+                                (click)="deleteMP(materia_prima.id)">Eliminar</button>-->
 
-                                <button type="button" class="btn btn-danger me-md-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="get_MP(clientes.id)">
-                                    Eliminar
-                                  </button>
+                            <button type="button" class="btn btn-danger me-md-2" data-bs-toggle="modal"
+                                data-bs-target="#staticBackdrop" (click)="get_MP(clientes.id)">
+                                Eliminar
+                            </button>
 
                         </div>
                     </div>
@@ -36,31 +37,32 @@
     </div>
 </div>
 
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="staticBackdropLabel">Eliminar</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Eliminar</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ¿Estas seguro de eliminar este Cliente?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button class="btn btn-danger me-md-2" type="button" (click)="deleteMP(clientesArr.id)"
+                    data-bs-dismiss="modal">Eliminar</button>
+            </div>
         </div>
-        <div class="modal-body">
-          ¿Estas seguro de eliminar este Cliente?
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-          <button class="btn btn-danger me-md-2" type="button"
-          (click)="deleteMP(clientesArr.id)" data-bs-dismiss="modal">Eliminar</button>
-        </div>
-      </div>
     </div>
-  </div>
+</div>
 
 
 <!-- BOTOM DE A;ADIR ELEMENTO  -->
 
 <div class="d-grid gap-2">
     <button style="width: 90%;margin: auto;" type="button" class="btn btn-success btn-lg" data-bs-toggle="modal"
-        data-bs-target="#exampleModal2" data-bs-whatever="@mdo" (click)="reset()" >Añadir Cliente</button>
+        data-bs-target="#exampleModal2" data-bs-whatever="@mdo" (click)="reset()">Añadir Cliente</button>
 </div>
 
 
@@ -93,17 +95,17 @@
                         <input type="text" class="form-control" id="Precio" autofocus required
                             [(ngModel)]="cliente.apellidosCliente" name="Apellidos">
                     </div>
-                    
+
                     <div class="mb-3">
                         <label for="Correo" class="col-form-label">Correo:</label>
                         <input type="text" class="form-control" id="Correo" autofocus required
                             [(ngModel)]="cliente.correoCliente" name="Correo">
                     </div>
-                    
+
                     <div class="mb-3">
                         <label for="Edad" class="col-form-label">Edad:</label>
                         <input type="text" class="form-control" id="Edad" autofocus required
-                            [(ngModel)]="cliente.edadCliente" name="Edad">        
+                            [(ngModel)]="cliente.edadCliente" name="Edad">
                     </div>
                     <div class="mb-3">
                         <label for="Direccion" class="col-form-label">Dirección:</label>
@@ -115,13 +117,14 @@
                         <input type="text" class="form-control" id="telefono" autofocus required
                             [(ngModel)]="cliente.telefonoCliente" name="Telefono">
                     </div>
-                    
+
                 </div>
-                
-                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="  reset() "  >Cerrar</button>
-                    <button type="button" class="btn btn-success" data-bs-dismiss="modal"
-                        (click)="updateMP(cliente.id)" (click)="reset()">Guardar</button>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                        (click)="  reset() ">Cerrar</button>
+                    <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="updateMP(cliente.id)"
+                        (click)="reset()">Guardar</button>
                 </div>
             </div>
         </div>
@@ -138,9 +141,10 @@
         modalBodyInput.value = recipient
     })
 </script>
+
 <!-- FORMULARIO DE AÑADIR PRODUCTO -->
 
-<form [formGroup]="valfomr">
+<form>
     <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-xl">
             <div class="modal-content">
@@ -150,37 +154,37 @@
                 </div>
                 <div class="modal-body">
 
-                   
+
                     <div class="mb-3">
                         <label for="Cedula" class="col-form-label">Cédula:</label>
                         <input type="text" class="form-control" formControlName="Cedula" id="Cedula" autofocus required
                             [(ngModel)]="cliente.cedulaCliente" name="Cedula">
                     </div>
-                   
+
                     <div class="mb-3">
                         <label for="Nombres" class="col-form-label">Nombres:</label>
-                        <input type="text" class="form-control" formControlName="nombres" id="Nombres" autofocus required
-                            [(ngModel)]="cliente.nombresCliente" name="Nombres">
+                        <input type="text" class="form-control" formControlName="nombres" id="Nombres" autofocus
+                            required [(ngModel)]="cliente.nombresCliente" name="Nombres">
                     </div>
-                    
+
                     <div class="mb-3">
                         <label for="Apellidos" class="col-form-label">Apellidos:</label>
-                        <input type="text" class="form-control" formControlName="apellidos" id="Apellidos" autofocus required
-                            [(ngModel)]="cliente.apellidosCliente" name="Apellidos">
+                        <input type="text" class="form-control" formControlName="apellidos" id="Apellidos" autofocus
+                            required [(ngModel)]="cliente.apellidosCliente" name="Apellidos">
                     </div>
-                    
-                    
-                    
+
+
+
                     <div class="mb-3">
                         <label for="Correo" class="col-form-label">Correo:</label>
-                        <input type="text" class="form-control" formControlName="correo" id="Correo" autofocus
-                            required [(ngModel)]="cliente.correoCliente" name="Correo">
+                        <input type="text" class="form-control" formControlName="correo" id="Correo" autofocus required
+                            [(ngModel)]="cliente.correoCliente" name="Correo">
                     </div>
-                  
+
                     <div class="mb-3">
                         <label for="Edad" class="col-form-label">Edad:</label>
-                        <input type="text" class="form-control" formControlName="edad" id="Edad" autofocus
-                            required [(ngModel)]="cliente.edadCliente" name="Edad">
+                        <input type="text" class="form-control" formControlName="edad" id="Edad" autofocus required
+                            [(ngModel)]="cliente.edadCliente" name="Edad">
                     </div>
                     <div class="mb-3">
                         <label for="Direccion" class="col-form-label">Dirección:</label>
@@ -192,19 +196,16 @@
                         <input type="text" class="form-control" formControlName="telefono" id="Telefono" autofocus
                             required [(ngModel)]="cliente.telefonoCliente" name="Telefono">
                     </div>
-                  
-
-               
-               
-
+                </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="  saveNewMP()"
-                         >Guardar</button> 
+                    <button type="button" class="btn btn-success" data-bs-dismiss="modal"
+                        (click)="  saveNewMP()">Guardar</button>
                 </div>
             </div>
         </div>
     </div>
+
 </form>
 
 
@@ -219,4 +220,3 @@
         modalBodyInput.value = recipient
     })
 </script>
-
