@@ -7,14 +7,17 @@ import { ClientesService } from '../../services/clientes.service'
 @Component({
   selector: 'app-clientes',
   templateUrl: './clientes.component.html',
-  styleUrls: ['./clientes.component.css']
+  styleUrls: ['./clientes.component.css'],
+  template: `
+    <button (click)="imprimir()">Imprimir</button>
+  `
 })
 export class ClientesComponent implements OnInit {
 
   @HostBinding('class') classes = 'modal-body';
-  API_URI = 'http://localhost:3000/api';
+  
 
-  client: Clientes = {
+  clientes: Clientes = {
     id: 0,
     nombresCliente: '',
     apellidosCliente: '',
@@ -41,9 +44,9 @@ export class ClientesComponent implements OnInit {
   
   // metodos del componetne CRUD
   saveNewMP() {
-    delete this.client.id;
-    this.ClientesServicesService.saveClientes(this.client).subscribe({
-      next: (v: any) => [this.client = v,this.edit = false ],
+    delete this.clientes.id;
+    this.ClientesServicesService.saveClientes(this.clientes).subscribe({
+      next: (v: any) => [this.clientes = v,this.edit = false ],
       error: (e: any) => console.error(e),
       complete: () => ( this.getMP())
     })
@@ -68,33 +71,373 @@ export class ClientesComponent implements OnInit {
   }
   get_MP(id : string) {
     this.ClientesServicesService.getClientes(id).subscribe({
-      next: (v: any) => [[this.client] = v, this.edit = true, console.log(id)],
+      next: (v: any) => [[this.clientes] = v, this.edit = true, console.log(id)],
       error: (e: any) => console.error(e),
-      complete: () => console.log('get materia prima complete'+id)
+      complete: () => console.log('get cliente complete'+id)
     })
   }
 
   updateMP(id: any){
-    this.ClientesServicesService.updateClientes(id,this.client).subscribe({
-      next: (v: any) => [this.client, console.log(v), console.log([this.client], this.client), console.log(id)],
+    this.ClientesServicesService.updateClientes(id,this.clientes).subscribe({
+      next: (v: any) => [this.clientes, console.log(v), console.log([this.clientes], this.clientes), console.log(id)],
       error: (e: any) => console.error(e),
       complete: () => [this.getMP()]      
     })
   }
 
   reset(){
-    this.client.id= 0;
-    this.client.nombresCliente = '';
-    this.client.apellidosCliente = '';
-    this.client.cedulaCliente = '';
-    this.client.correoCliente = '';
-    this.client.edadCliente = '';
-    this.client.direccionCliente = '';
-    this.client.telefonoCliente = '';
+    this.clientes.id= 0;
+    this.clientes.nombresCliente = '';
+    this.clientes.apellidosCliente = '';
+    this.clientes.cedulaCliente = '';
+    this.clientes.correoCliente = '';
+    this.clientes.edadCliente = '';
+    this.clientes.direccionCliente = '';
+    this.clientes.telefonoCliente = '';
     
   }
   //validaciones
 
 
 
+// validar cedula 
+validarCedulaCliente(cedulaCliente: string): boolean {
+  // validacion de cedula conste de 10 numeros
+  return /^([0-9]{10})$/.test(cedulaCliente);
+}
+
+validarCedulaClienteAlerta(cedulaCliente: string): boolean {
+  // activaciond e los mensajes de error o aceptacion
+  if (!this.validarCedulaCliente(cedulaCliente)) {
+    const element = document.querySelector('.errCed') as HTMLElement;
+    element.style.display = "block";
+    const element2 = document.querySelector('.valCed') as HTMLElement;
+    element2.style.display = "none";
+
+    return false;
+  } else {
+    const element = document.querySelector('.errCed') as HTMLElement;
+    element.style.display = "none";
+    const element2 = document.querySelector('.valCed') as HTMLElement;
+    element2.style.display = "block";
+
+    return true;
+  }
+}
+
+// validar Nombre 
+validarNombreCliente(nombresCliente: string): boolean {
+  // solo tiene letras y no numeros
+  return /^([A-Za-z ]{2,25})$/.test(nombresCliente);
+}
+
+validarNombreClienteAlerta(nombresCliente: string): boolean {
+  // activaciond e los mensajes de error o aceptacion
+  if (!this.validarNombreCliente(nombresCliente)) {
+    const element = document.querySelector('.errNc') as HTMLElement;
+    element.style.display = "block";
+    const element2 = document.querySelector('.valNc') as HTMLElement;
+    element2.style.display = "none";
+
+    return false;
+  } else {
+    const element = document.querySelector('.errNc') as HTMLElement;
+    element.style.display = "none";
+    const element2 = document.querySelector('.valNc') as HTMLElement;
+    element2.style.display = "block";
+
+    return true;
+  }
+}
+
+validarApellidoCliente(apellidosCliente: string): boolean {
+  // los apellidos deben tener 2 letras  mayusculas y las demas minusculas
+  return /^([A-Za-z ]{2,25})$/.test(apellidosCliente);
+}
+
+validarApellidoClienteAlerta(apellidosCliente: string): boolean {
+  // activaciond e los mensajes de error o aceptacion
+  if (!this.validarApellidoCliente(apellidosCliente)) {
+    const element = document.querySelector('.errAp') as HTMLElement;
+    element.style.display = "block";
+    const element2 = document.querySelector('.valAp') as HTMLElement;
+    element2.style.display = "none";
+
+    return false;
+  } else {
+    const element = document.querySelector('.errAp') as HTMLElement;
+    element.style.display = "none";
+    const element2 = document.querySelector('.valAp') as HTMLElement;
+    element2.style.display = "block";
+
+    return true;
+  }
+}
+
+validarCorreoCliente(correoCliente: string): boolean {
+  // el codigo debe tener 2 letras  mayusculas y 3 numeros
+  return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3,4})+$/.test(correoCliente);
+}
+
+validarCorreoClienteAlerta(correoCliente: string): boolean {
+  // activaciond e los mensajes de error o aceptacion
+  if (!this.validarCorreoCliente(correoCliente)) {
+    const element = document.querySelector('.errCrr') as HTMLElement;
+    element.style.display = "block";
+    const element2 = document.querySelector('.valCrr') as HTMLElement;
+    element2.style.display = "none";
+
+    return false;
+  } else {
+    const element = document.querySelector('.errCrr') as HTMLElement;
+    element.style.display = "none";
+    const element2 = document.querySelector('.valCrr') as HTMLElement;
+    element2.style.display = "block";
+
+    return true;
+  }
+}
+validarEdadCliente(edadCliente: string): boolean {
+  
+  return /^([0-9]{3})$/.test(edadCliente);
+}
+
+validarEdadClienteAlerta(edadCliente: string): boolean {
+  // activaciond e los mensajes de error o aceptacion
+  if (!this.validarEdadCliente(edadCliente)) {
+    const element = document.querySelector('.errEdd') as HTMLElement;
+    element.style.display = "block";
+    const element2 = document.querySelector('.valEdd') as HTMLElement;
+    element2.style.display = "none";
+
+    return false;
+  } else {
+    const element = document.querySelector('.errEdd') as HTMLElement;
+    element.style.display = "none";
+    const element2 = document.querySelector('.valEdd') as HTMLElement;
+    element2.style.display = "block";
+
+    return true;
+  }
+}
+validarDireccionCliente(direccionCliente: string): boolean {
+  
+  return /^([A-Za-z ]{2,50})$/.test(direccionCliente);
+}
+
+validarDireccionClienteAlerta(direccionCliente: string): boolean {
+  // activaciond e los mensajes de error o aceptacion
+  if (!this.validarDireccionCliente(direccionCliente)) {
+    const element = document.querySelector('.errDir') as HTMLElement;
+    element.style.display = "block";
+    const element2 = document.querySelector('.valDir') as HTMLElement;
+    element2.style.display = "none";
+
+    return false;
+  } else {
+    const element = document.querySelector('.errDir') as HTMLElement;
+    element.style.display = "none";
+    const element2 = document.querySelector('.valDir') as HTMLElement;
+    element2.style.display = "block";
+
+    return true;
+  }
+}
+validarTelefonoCliente(telefonoCliente: string): boolean {
+  
+  return /^([0-9]{10})$/.test(telefonoCliente);
+}
+
+validarTelefonoClienteAlerta(telefonoCliente: string): boolean {
+  // activaciond e los mensajes de error o aceptacion
+  if (!this.validarTelefonoCliente(telefonoCliente)) {
+    const element = document.querySelector('.errTel') as HTMLElement;
+    element.style.display = "block";
+    const element2 = document.querySelector('.valTel') as HTMLElement;
+    element2.style.display = "none";
+
+    return false;
+  } else {
+    const element = document.querySelector('.errTel') as HTMLElement;
+    element.style.display = "none";
+    const element2 = document.querySelector('.valTel') as HTMLElement;
+    element2.style.display = "block";
+
+    return true;
+  }
+}
+
+
+/// validacion EDIT    -------------------------------------------------
+
+// validar cedula 
+validarCedulaClienteED(cedulaCliente: string): boolean {
+  // validacion de cedula conste de 10 numeros
+  return /^([0-9]{10})$/.test(cedulaCliente);
+}
+
+validarCedulaClienteAlertaED(cedulaCliente: string): boolean {
+  // activaciond e los mensajes de error o aceptacion
+  if (!this.validarCedulaClienteED(cedulaCliente)) {
+    const element = document.querySelector('.errCedED') as HTMLElement;
+    element.style.display = "block";
+    const element2 = document.querySelector('.valCedED') as HTMLElement;
+    element2.style.display = "none";
+
+    return false;
+  } else {
+    const element = document.querySelector('.errCedED') as HTMLElement;
+    element.style.display = "none";
+    const element2 = document.querySelector('.valCedED') as HTMLElement;
+    element2.style.display = "block";
+
+    return true;
+  }
+}
+//EDICION VALIDACIONES
+// validar Nombre 
+validarNombreClienteED(nombresCliente: string): boolean {
+  // solo tiene letras y no numeros
+  return /^([A-Za-z ]{2,25})$/.test(nombresCliente);
+}
+
+validarNombreClienteAlertaED(nombresCliente: string): boolean {
+  // activaciond e los mensajes de error o aceptacion
+  if (!this.validarNombreClienteED(nombresCliente)) {
+    const element = document.querySelector('.errNcED') as HTMLElement;
+    element.style.display = "block";
+    const element2 = document.querySelector('.valNcED') as HTMLElement;
+    element2.style.display = "none";
+
+    return false;
+  } else {
+    const element = document.querySelector('.errNcED') as HTMLElement;
+    element.style.display = "none";
+    const element2 = document.querySelector('.valNcED') as HTMLElement;
+    element2.style.display = "block";
+
+    return true;
+  }
+}
+
+validarApellidoClienteED(apellidosCliente: string): boolean {
+  // los apellidos deben tener 2 letras  mayusculas y las demas minusculas
+  return /^([A-Za-z ]{2,25})$/.test(apellidosCliente);
+}
+
+validarApellidoClienteAlertaED(apellidosCliente: string): boolean {
+  // activaciond e los mensajes de error o aceptacion
+  if (!this.validarApellidoClienteED(apellidosCliente)) {
+    const element = document.querySelector('.errApED') as HTMLElement;
+    element.style.display = "block";
+    const element2 = document.querySelector('.valApED') as HTMLElement;
+    element2.style.display = "none";
+
+    return false;
+  } else {
+    const element = document.querySelector('.errApED') as HTMLElement;
+    element.style.display = "none";
+    const element2 = document.querySelector('.valApED') as HTMLElement;
+    element2.style.display = "block";
+
+    return true;
+  }
+}
+
+validarCorreoClienteED(correoCliente: string): boolean {
+  // el codigo debe tener 2 letras  mayusculas y 3 numeros
+  return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3,4})+$/.test(correoCliente);
+}
+
+validarCorreoClienteAlertaED(correoCliente: string): boolean {
+  // activaciond e los mensajes de error o aceptacion
+  if (!this.validarCorreoClienteED(correoCliente)) {
+    const element = document.querySelector('.errCrrED') as HTMLElement;
+    element.style.display = "block";
+    const element2 = document.querySelector('.valCrrED') as HTMLElement;
+    element2.style.display = "none";
+
+    return false;
+  } else {
+    const element = document.querySelector('.errCrrED') as HTMLElement;
+    element.style.display = "none";
+    const element2 = document.querySelector('.valCrrED') as HTMLElement;
+    element2.style.display = "block";
+
+    return true;
+  }
+}
+validarEdadClienteED(edadCliente: string): boolean {
+  
+  return /^([0-9]{3})$/.test(edadCliente);
+}
+
+validarEdadClienteAlertaED(edadCliente: string): boolean {
+  // activaciond e los mensajes de error o aceptacion
+  if (!this.validarEdadClienteED(edadCliente)) {
+    const element = document.querySelector('.errEddED') as HTMLElement;
+    element.style.display = "block";
+    const element2 = document.querySelector('.valEddED') as HTMLElement;
+    element2.style.display = "none";
+
+    return false;
+  } else {
+    const element = document.querySelector('.errEddED') as HTMLElement;
+    element.style.display = "none";
+    const element2 = document.querySelector('.valEddED') as HTMLElement;
+    element2.style.display = "block";
+
+    return true;
+  }
+}
+validarDireccionClienteED(direccionCliente: string): boolean {
+  
+  return /^([A-Za-z ]{2,50})$/.test(direccionCliente);
+}
+
+validarDireccionClienteAlertaED(direccionCliente: string): boolean {
+  // activaciond e los mensajes de error o aceptacion
+  if (!this.validarDireccionClienteED(direccionCliente)) {
+    const element = document.querySelector('.errDirED') as HTMLElement;
+    element.style.display = "block";
+    const element2 = document.querySelector('.valDirED') as HTMLElement;
+    element2.style.display = "none";
+
+    return false;
+  } else {
+    const element = document.querySelector('.errDirED') as HTMLElement;
+    element.style.display = "none";
+    const element2 = document.querySelector('.valDirED') as HTMLElement;
+    element2.style.display = "block";
+
+    return true;
+  }
+}
+validarTelefonoClienteED(telefonoCliente: string): boolean {
+  
+  return /^([0-9]{10})$/.test(telefonoCliente);
+}
+
+validarTelefonoClienteAlertaED(telefonoCliente: string): boolean {
+  // activaciond e los mensajes de error o aceptacion
+  if (!this.validarTelefonoClienteED(telefonoCliente)) {
+    const element = document.querySelector('.errTelED') as HTMLElement;
+    element.style.display = "block";
+    const element2 = document.querySelector('.valTelED') as HTMLElement;
+    element2.style.display = "none";
+
+    return false;
+  } else {
+    const element = document.querySelector('.errTelED') as HTMLElement;
+    element.style.display = "none";
+    const element2 = document.querySelector('.valTelED') as HTMLElement;
+    element2.style.display = "block";
+
+    return true;
+  }
+}
+
+
+/// inpresion de reportes 
+ 
 }
