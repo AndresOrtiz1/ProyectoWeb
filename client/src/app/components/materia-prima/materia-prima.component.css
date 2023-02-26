@@ -1,45 +1,50 @@
 /* agregar elemento */
-.errC{
+.errC {
     display: none;
     color: red;
 }
-.valC{
+
+.valC {
     display: none;
     color: green;
 }
 
-.errN{
+.errN {
     display: none;
     color: red;
 }
-.valN{
+
+.valN {
     display: none;
     color: green;
 }
 
-.errP{
+.errP {
     display: none;
     color: red;
 }
-.valP{
+
+.valP {
     display: none;
     color: green;
 }
 
-.errCa{
+.errCa {
     display: none;
     color: red;
 }
-.valCa{
+
+.valCa {
     display: none;
     color: green;
 }
 
-.errI{
+.errI {
     display: none;
     color: red;
 }
-.valI{
+
+.valI {
     display: none;
     color: green;
 }
@@ -47,47 +52,87 @@
 /* editar elemento */
 
 
-.errCEd{
+.errCEd {
     display: none;
     color: red;
 }
-.valCEd{
+
+.valCEd {
     display: none;
     color: green;
 }
 
-.errNEd{
+.errNEd {
     display: none;
     color: red;
 }
-.valNEd{
+
+.valNEd {
     display: none;
     color: green;
 }
 
-.errPEd{
+.errPEd {
     display: none;
     color: red;
 }
-.valPEd{
+
+.valPEd {
     display: none;
     color: green;
 }
 
-.errCaEd{
+.errCaEd {
     display: none;
     color: red;
 }
-.valCaEd{
+
+.valCaEd {
     display: none;
     color: green;
 }
 
-.errIEd{
+.errIEd {
     display: none;
     color: red;
 }
-.valIEd{
+
+.valIEd {
     display: none;
     color: green;
+}
+
+.imprimirPDF {
+    display: none;
+}
+
+.hide-link {
+    display: none;
+}
+
+@import "../navigation/navigation.component.css";
+@import "../footer/footer.component.css";
+
+
+@media print {
+
+    /* Ocultar botones */
+    .imprimirPDF {
+        display: block;
+        position: relative;
+        top: 400;
+        z-index: 100;
+    }
+
+    .ocultarcontent {
+        display: none;
+    }
+
+    nav {
+        display: none;
+    }
+
+     
+
+
 }

@@ -7,13 +7,15 @@ import { MateriaPrimaServicesService } from '../../services/materia-prima.servic
 @Component({
   selector: 'app-materia-prima',
   templateUrl: './materia-prima.component.html',
-  styleUrls: ['./materia-prima.component.css']
+  styleUrls: ['./materia-prima.component.css'],
+  template: `
+    <button (click)="imprimir()">Imprimir</button>
+  `
 })
 export class MateriaPrimaComponent implements OnInit {
 
   @HostBinding('class') classes = 'modal-body';
-  API_URI = 'http://localhost:3000/api';
-
+ 
   mateiraP: MateriaPrima = {
     id: 0,
     codigo: '',
@@ -27,18 +29,25 @@ export class MateriaPrimaComponent implements OnInit {
   }
 
   materias_primasArr: any = [];
+  codigo!: number;
+  fechaActual: Date;
  
   constructor(
     private materiaPrimaServicesService: MateriaPrimaServicesService,
 
   ) {
-
+    this.fechaActual = new Date();
   }
   ngOnInit() {
+    this.codigo = Math.floor(10000 + Math.random() * 90000);
     this.getMP();
+    
   }
 
+  imprimir(): void {
 
+    window.print();
+  }
 
  
 
