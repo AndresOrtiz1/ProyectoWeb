@@ -30,6 +30,7 @@ CREATE TABLE materia_prima (
 -- base de datos de proveedores
 CREATE TABLE proveedores (
   id INT(11) NOT NULL AUTO_INCREMENT,
+  codigo varchar(255) NOT NULL,
   NombreApellido VARCHAR(255) NOT NULL,
   Cedula INT(10) NOT NULL,
   NumeroCelular VARCHAR(10) NOT NULL,

@@ -45,7 +45,6 @@ export class MateriaPrimaComponent implements OnInit {
   }
 
   imprimir(): void {
-
     window.print();
   }
 
