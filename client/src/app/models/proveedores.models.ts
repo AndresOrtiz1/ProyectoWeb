@@ -1,5 +1,6 @@
 export interface Proveedores {
     id?: number;
+    codigo?:string;
     NombreApellido?:string;
     Cedula?: string;
     NumeroCelular?: string;

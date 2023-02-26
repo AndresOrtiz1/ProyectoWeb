@@ -11,6 +11,7 @@ const inventoryRoutes_1 = __importDefault(require("./routes/inventoryRoutes"));
 const materia_primaRoutes_1 = __importDefault(require("./routes/materia_primaRoutes"));
 const proveedoresRoutes_1 = __importDefault(require("./routes/proveedoresRoutes"));
 const clientesRoutes_1 = __importDefault(require("./routes/clientesRoutes"));
+const recetasRoutes_1 = __importDefault(require("./routes/recetasRoutes"));
 class Server {
     constructor() {
         this.app = (0, express_1.default)();
@@ -30,6 +31,7 @@ class Server {
         this.app.use('/api/materia-prima', materia_primaRoutes_1.default);
         this.app.use('/api/proveedores', proveedoresRoutes_1.default);
         this.app.use('/api/clientes', clientesRoutes_1.default);
+        this.app.use('/api/recetas', recetasRoutes_1.default);
     }
     start() {
         this.app.listen(this.app.get('port'), () => {

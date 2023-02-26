@@ -1,8 +1,8 @@
 export interface Clientes {
     id?: number;
-    cedulaCliente?:string;
     nombresCliente?: string;
     apellidosCliente?: string;
+    cedulaCliente?:string;
     correoCliente?: string;
     edadCliente?: string;
     direccionCliente?: string;
