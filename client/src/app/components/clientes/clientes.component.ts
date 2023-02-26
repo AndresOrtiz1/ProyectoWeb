@@ -29,33 +29,19 @@ export class ClientesComponent implements OnInit {
   }
 
   clientesArr: any = []; 
-  valfomr !: FormGroup;
+  
 
   constructor(
     private ClientesServicesService: ClientesService,
     private formBuldier : FormBuilder,
   ){
-    this.validFomr();
+    
   }
   ngOnInit() {
     this.getMP(); 
   }
 
-  validFomr(){
-    this.valfomr = this.formBuldier.group({
-      cedulaCliente:[this.cliente.cedulaCliente, [Validators.required , Validators.pattern('^([A-Z]{2})([0-9]{3})$')]],
-      nombresCliente:[this.cliente.nombresCliente,[Validators.required, Validators.pattern('^([A-Za-z ]{2,25})$')]],
-      apellidosCliente:[this.cliente.apellidosCliente,[Validators.required, Validators.pattern('^([0-9]{1,4}\.[0-9]{1,2})$')]],
-      correoCliente:[this.cliente.correoCliente ,[Validators.required ]],
-      edadCliente:[this.cliente.edadCliente,[Validators.required, Validators.pattern(' ^([0-9]{1,4})$')]],
-      direccionCliente:[this.cliente.direccionCliente,[Validators.required ]],
-      telefonoCliente:[this.cliente.telefonoCliente,[Validators.required ]],
-      
-    })
 
-  }
-  
-  get codigo() {return this.valfomr.get('codigo');}
 
   
   // metodos del componetne CRUD
