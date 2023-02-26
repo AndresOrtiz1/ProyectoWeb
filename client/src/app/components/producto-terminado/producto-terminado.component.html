@@ -1,0 +1,301 @@
+<!-- CONTENEDOR DE LOS ELEMENTOS QUE CON TIENE LA BASE DE DATOS -->
+<h2 style="margin: auto; width: 95%;text-align: center;">Producto Terminado</h2> <br>
+<div class="row-md-3" *ngFor="let productoterminado of producArr">
+
+    <div class="row-md-1">
+        <div class="card mb-3" style="margin: auto; width: 95%;">
+            <div class="row g-0">
+                <div class="col-md-10">
+                    <div class="card-body">
+                        <h5 class="card-title">{{productoterminado.costo_termindo}}</h5>
+                        <p class="card-text">ID:: {{productoterminado.id_terminado}} </p>
+                        <p class="card-text">Cantidad:: {{productoterminado.cantidad_terminado}} </p>
+                        <p class="card-text">Receta: {{productoterminado.Receta}} USD</p>
+                  
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <button type="button" class="btn btn-success me-md-2" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal" data-bs-whatever="@mdo"
+                                (click)="get_MP(productoterminado.id_terminado)">Editar</button>
+                            <!-- <button class="btn btn-danger me-md-2" type="button"
+                                (click)="deleteMP(materia_prima.id)">Eliminar</button>-->
+
+                            <button type="button" class="btn btn-danger me-md-2" data-bs-toggle="modal"
+                                data-bs-target="#staticBackdrop" (click)="get_MP(productoterminado.id_terminado)">
+                                Eliminar
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Eliminar</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ¿Estas seguro de eliminar este elemento?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button class="btn btn-danger me-md-2" type="button" (click)="deleteMP(produc.id_terminado)"
+                    data-bs-dismiss="modal">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- BOTOM DE A;ADIR ELEMENTO  -->
+
+<div class="d-grid gap-2">
+    <button style="width: 90%;margin: auto;" type="button" class="btn btn-success btn-lg" data-bs-toggle="modal"
+        data-bs-target="#exampleModal2" data-bs-whatever="@mdo" (click)="reset()" >Añadir
+        Producto</button>
+</div>
+
+
+
+
+
+<!-- FORULARIO DE EDITAR DATOS DEL ELEMENTO -->
+
+<form>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">EDITAR PRODUCTO</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="ID" class="col-form-label">ID:</label>
+                        <input type="number" class="form-control" id="ID" autofocus required
+                            [(ngModel)]="produc.id_terminado" name="ID">
+                    </div>
+                    <div class="mb-3">
+                        <label for="Costo" class="col-form-label">Costo:</label>
+                        <input type="number" class="form-control" id="Costo" autofocus required
+                            [(ngModel)]="produc.costo_terminado" name="Costo">
+                    </div>
+                    <div class="mb-3">
+                        <label for="Cantidad" class="col-form-label">Catidad:</label>
+                        <input type="number" class="form-control" id="Cantidad" autofocus required
+                            [(ngModel)]="produc.cantidad_terminado" name="Cantidad">
+                    </div>
+                    <div class="form-group">
+                        <label for="Receta">Receta</label>
+                        <select id="Receta" name="Receta" class="form-select" [(ngModel)]="produc.receta"
+                            required>
+
+                            <option selected value="Pizza">Pizza</option>
+                            <option selected value="Pasta">Pasta</option>
+                            <option selected value="Lasagna">Lasagna</option>
+                            <option selected>...</option>
+
+                        </select>
+                    </div>
+  
+
+                </div>
+                <!-- onclick="location.reload()" -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                        (click)="  reset() ">Cerrar</button>
+                    <button type="button" class="btn btn-success" data-bs-dismiss="modal"
+                        (click)="updateMP(produc.id_terminado)" (click)="reset()">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script>const exampleModal = document.getElementById('exampleModal')
+    exampleModal.addEventListener('show.bs.modal', event => {
+        const button = event.relatedTarget
+        const recipient = button.getAttribute('data-bs-whatever')
+        const modalTitle = exampleModal.querySelector('.modal-title')
+        const modalBodyInput = exampleModal.querySelector('.modal-body input')
+        modalTitle.textContent = `New message to ${recipient}`
+        modalBodyInput.value = recipient
+    })
+</script>
+
+
+<!-- FORMULARIO DE AÑADIR PRODUCTO -->
+<form >
+    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Añadir Producto Terminado</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <!-- form valid codigo -->
+                    <div class="mb-3">
+                        <label for="ID" class="col-form-label">ID:</label>
+                        <input type="NUMBER" class="form-control" formControlName="id_terminado" id="ID" autofocus required
+                            [(ngModel)]="produc.id_terminado" name="Codigo">
+                    </div>
+                    <!-- <div class="alert-valid " *ngIf="valfomr.valid">
+                        <div class="container-valid-message">
+                            Datos validos
+                        </div>
+                    </div>
+                    <div class="alert-danger " *ngIf="valfomr.invalid&& (valfomr.dirty || valfomr.touched)">
+                        <div class="container-error-message">
+                            El campo es requerido y se esperaban 2 letras Mayusculas y 3 numeros (AB012)
+                        </div>
+                    </div> -->
+
+
+                    <!-- form valid name -->
+                    <div class="mb-3">
+                        <label for="Costo" class="col-form-label">Costo:</label>
+                        <input type="number" class="form-control" formControlName="costo_terminado" id="Costo" autofocus required
+                            [(ngModel)]="produc.costo_terminado" name="Costo">
+                    </div>
+                    <!-- <div class="alert-valid " *ngIf="valfomr.valid">
+                        <div class="container-valid-message">
+                            Datos validos
+                        </div>
+                    </div>
+                    <div class="alert-danger " *ngIf="valfomr.invalid&& (valfomr.dirty || valfomr.touched)">
+                        <div class="container-error-message">
+                            El campo es requerido y se esperaba un nombre del producto 
+                        </div>
+                    </div> -->
+
+                    <!-- form valid price -->
+                    <div class="mb-3">
+                        <label for="Cantidad" class="col-form-label">Cantidad:</label>
+                        <input type="number" class="form-control" formControlName="cantidad_terminado" id="Cantidad" autofocus required
+                            [(ngModel)]="produc.cantidad_terminado" name="Cantidad">
+                    </div>
+                    <!-- <div class="alert-valid " *ngIf="valfomr.valid">
+                        <div class="container-valid-message">
+                            Datos validos
+                        </div>
+                    </div>
+                    <div class="alert-danger " *ngIf="valfomr.invalid&& (valfomr.dirty || valfomr.touched)">
+                        <div class="container-error-message">
+                            El campo es requerido y se esperaba un numero con decimales (10.23)
+                        </div>
+                    </div> -->
+
+                    <!-- form valid unitM -->
+                    <div class="form-group">
+                        <label for="UnidadM">Receta</label>
+                        <select formControlName="receta" id="Receta" name="Receta" class="form-select"
+                            [(ngModel)]="produc.receta" required>
+
+                            <option selected value="Pizza">Pizza</option>
+                            <option selected value="Pasta">Pasta</option>
+                            <option selected value="Lasagna">Lasagna</option>
+                            <option selected>...</option>
+
+                        </select>
+                    </div>
+                    <!-- <div class="alert-valid " *ngIf="valfomr.valid">
+                        <div class="container-valid-message">
+                            Datos validos
+                        </div>
+                    </div>
+                    <div class="alert-danger " *ngIf="valfomr.invalid&& (valfomr.dirty || valfomr.touched)">
+                        <div class="container-error-message">
+                            El campo es requerido y se esperaba  
+                        </div>
+                    </div> -->
+
+                    <!-- form valid amount -->
+      
+                    <!-- <div class="alert-valid " *ngIf="valfomr.valid">
+                        <div class="container-valid-message">
+                            Datos validos
+                        </div>
+                    </div>
+                    <div class="alert-danger " *ngIf="valfomr.invalid&& (valfomr.dirty || valfomr.touched)">
+                        <div class="container-error-message">
+                            El campo es requerido y se esperaba un numero entero (23)
+                        </div>
+                    </div> -->
+
+                    <!-- form valid date income -->
+                   
+
+                            <!-- <div class="alert-valid " *ngIf="valfomr.valid">
+                                <div class="container-valid-message">
+                                    Datos validos
+                                </div>
+                            </div>
+                            <div class="alert-danger " *ngIf="valfomr.invalid&& (valfomr.dirty || valfomr.touched)">
+                                <div class="container-error-message">
+                                    El campo es requerido
+                                </div>
+                            </div> -->
+
+
+                        <!-- form valid date expiration -->
+                        
+
+                            <!-- <div class="alert-valid " *ngIf="valfomr.valid">
+                                <div class="container-valid-message">
+                                    Datos validos
+                                </div>
+                            </div>
+                            <div class="alert-danger " *ngIf="valfomr.invalid&& (valfomr.dirty || valfomr.touched)">
+                                <div class="container-error-message">
+                                    El campo es requerido
+                                </div>
+                            </div> -->
+
+                
+
+                    <!-- form valid date image -->
+ 
+                    <!-- <div class="alert-valid " *ngIf="valfomr.valid">
+                        <div class="container-valid-message">
+                            Datos validos
+                        </div>
+                    </div>
+                    <div class="alert-danger " *ngIf="valfomr.invalid&& (valfomr.dirty || valfomr.touched)">
+                        <div class="container-error-message">
+                            El campo es requerido y se esperaba una direccion url (http://... o https://...)
+                        </div>
+                    </div> -->
+                </div>
+                <!-- <div>
+                    Valido: {{valfomr.valid | json}}
+                </div> -->
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="  saveNewMP()"
+                         >Guardar</button> 
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script>const exampleModal2 = document.getElementById('exampleModal2')
+    exampleModal2.addEventListener('show.bs.modal', event => {
+        const button = event.relatedTarget
+        const recipient = button.getAttribute('data-bs-whatever')
+        const modalTitle = exampleModal2.querySelector('.modal-title')
+        const modalBodyInput = exampleModal2.querySelector('.modal-body input')
+        modalTitle.textContent = `New message to ${recipient}`
+        modalBodyInput.value = recipient
+    })
+</script>
