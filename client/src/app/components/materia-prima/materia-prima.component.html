@@ -6,6 +6,12 @@
     <h3></h3>
     <p>Numero de Documento: {{ codigo }}</p>
     <p>La fecha actual es: {{ fechaActual.toLocaleDateString('es-ES') }}</p>
+    
+</div>
+ <div class="row-md-3" *ngFor="let receta of recetasArr">
+    
+    <p>{{receta.id}}</p>
+    <p>{{receta.nombrereceta}}</p>
 </div>
 <div class="row-md-3 printable ocultarcontent" *ngFor="let materia_prima of materias_primasArr">
 
