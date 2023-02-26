@@ -1,7 +1,7 @@
 import { Component, HostBinding, OnInit } from '@angular/core';
 import { MateriaPrima } from 'src/app/models/materia_prima.models';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormGroup  } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 
 
 import { MateriaPrimaServicesService } from '../../services/materia-prima.services.service'
@@ -34,15 +34,15 @@ export class MateriaPrimaComponent implements OnInit {
 
   constructor(
     private materiaPrimaServicesService: MateriaPrimaServicesService,
-     
+
   ) {
-    
+
   }
   ngOnInit() {
     this.getMP();
   }
 
-  
+
 
   get codigo() { return this.valfomr.get('codigo'); }
 
@@ -225,5 +225,128 @@ export class MateriaPrimaComponent implements OnInit {
     }
   }
 
+  /// validacion EDIT    -------------------------------------------------
+
+  validarCodigoEd(codigo: string): boolean {
+    // el codigo debe tener 2 letras  mayusculas y 3 numeros
+    return /^([A-Z]{2})([0-9]{3})$/.test(codigo);
+  }
+
+  validarCodigoAlertaEd(codigo: string): boolean {
+    // activaciond e los mensajes de error o aceptacion
+    if (!this.validarCodigoEd(codigo)) {
+      const element = document.querySelector('.errCEd') as HTMLElement;
+      element.style.display = "block";
+      const element2 = document.querySelector('.valCEd') as HTMLElement;
+      element2.style.display = "none";
+
+      return false;
+    } else {
+      const element = document.querySelector('.errCEd') as HTMLElement;
+      element.style.display = "none";
+      const element2 = document.querySelector('.valCEd') as HTMLElement;
+      element2.style.display = "block";
+
+      return true;
+    }
+  }
+
+
+  // validar Nombre 
+  validarNombreEd(nombre: string): boolean {
+    // el codigo debe tener 2 letras  mayusculas y 3 numeros
+    return /^([A-Za-z ]{2,25})$/.test(nombre);
+  }
+
+  validarNombreAlertaEd(nombre: string): boolean {
+    // activaciond e los mensajes de error o aceptacion
+    if (!this.validarNombreEd(nombre)) {
+      const element = document.querySelector('.errNEd') as HTMLElement;
+      element.style.display = "block";
+      const element2 = document.querySelector('.valNEd') as HTMLElement;
+      element2.style.display = "none";
+
+      return false;
+    } else {
+      const element = document.querySelector('.errNEd') as HTMLElement;
+      element.style.display = "none";
+      const element2 = document.querySelector('.valNEd') as HTMLElement;
+      element2.style.display = "block";
+
+      return true;
+    }
+  }
+
+  validarPrecioEd(precio: string): boolean {
+    // el codigo debe tener 2 letras  mayusculas y 3 numeros
+    return /^([0-9]{1,4}\.[0-9]{1,2})$/.test(precio);
+  }
+
+  validarPrecioAlertaEd(precio: string): boolean {
+    // activaciond e los mensajes de error o aceptacion
+    if (!this.validarPrecio(precio)) {
+      const element = document.querySelector('.errPEd') as HTMLElement;
+      element.style.display = "block";
+      const element2 = document.querySelector('.valPEd') as HTMLElement;
+      element2.style.display = "none";
+
+      return false;
+    } else {
+      const element = document.querySelector('.errPEd') as HTMLElement;
+      element.style.display = "none";
+      const element2 = document.querySelector('.valPEd') as HTMLElement;
+      element2.style.display = "block";
+
+      return true;
+    }
+  }
+
+  validarCantidadEd(cantidad: string): boolean {
+    // el codigo debe tener 2 letras  mayusculas y 3 numeros
+    return /^([0-9]{1,4})$/.test(cantidad);
+  }
+
+  validarCantidadAlertaEd(cantidad: string): boolean {
+    // activaciond e los mensajes de error o aceptacion
+    if (!this.validarCantidad(cantidad)) {
+      const element = document.querySelector('.errCaEd') as HTMLElement;
+      element.style.display = "block";
+      const element2 = document.querySelector('.valCaEd') as HTMLElement;
+      element2.style.display = "none";
+
+      return false;
+    } else {
+      const element = document.querySelector('.errCaEd') as HTMLElement;
+      element.style.display = "none";
+      const element2 = document.querySelector('.valCaEd') as HTMLElement;
+      element2.style.display = "block";
+
+      return true;
+    }
+  }
+
+  validarImagenEd(imagen: string): boolean {
+    // el codigo debe tener 2 letras  mayusculas y 3 numeros
+    return /^(https?:\/\/[\w\-]+(\.[\w\-]+)+[/#?]?.*)$/.test(imagen);
+  }
+
+  validarImagenAlertaEd(imagen: string): boolean {
+    // activaciond e los mensajes de error o aceptacion
+    if (!this.validarImagen(imagen)) {
+      const element = document.querySelector('.errIEd') as HTMLElement;
+      element.style.display = "block";
+      const element2 = document.querySelector('.valIEd') as HTMLElement;
+      element2.style.display = "none";
+
+      return false;
+    } else {
+      const element = document.querySelector('.errIEd') as HTMLElement;
+      element.style.display = "none";
+      const element2 = document.querySelector('.valIEd') as HTMLElement;
+      element2.style.display = "block";
+
+      return true;
+    }
+  }
 
 }

@@ -66,9 +66,7 @@
     <button style="width: 90%;margin: auto;" type="button" class="btn btn-success btn-lg" data-bs-toggle="modal"
         data-bs-target="#exampleModal2" data-bs-whatever="@mdo" (click)="reset()">Añadir
         Producto</button>
-    <button style="width: 90%;margin: auto;" type="button" class="btn btn-success btn-lg" data-bs-toggle="modal"
-        data-bs-target="#exampleModal2" data-bs-whatever="@mdo" (click)="reset()">Añadir
-        Producto</button>
+    
 </div>
 
 
@@ -90,27 +88,27 @@
                         <label for="Codigo" class="col-form-label">Codigo:</label>
                         <input type="text" class="form-control" id="Codigo" autofocus required
                             [(ngModel)]="mateiraP.codigo" name="Codigo"
-                            (blur)="mateiraP.codigo && validarCodigoAlerta(mateiraP.codigo) " placeholder="AB123">
+                            (blur)="mateiraP.codigo && validarCodigoAlertaEd(mateiraP.codigo) " placeholder="AB123">
 
-                        <div class="errC"> Ingrese un codigo valido </div>
-                        <div class="valC">Codigo valido</div>
+                        <div class="errCEd"> Ingrese un codigo valido </div>
+                        <div class="valCEd">Codigo valido</div>
 
                     </div>
                     <div class="mb-3">
                         <label for="Nombre" class="col-form-label">Nombre:</label>
                         <input type="text" class="form-control" id="Nombre" required [(ngModel)]="mateiraP.nombre"
-                            name="Nombre" (blur)="mateiraP.nombre && validarNombreAlerta(mateiraP.nombre) "
+                            name="Nombre" (blur)="mateiraP.nombre && validarNombreAlertaEd(mateiraP.nombre) "
                             placeholder="Nombre del elemento">
-                        <div class="errN"> Ingrese un Nombre valido </div>
-                        <div class="valN">Nombre valido</div>
+                        <div class="errNEd"> Ingrese un Nombre valido </div>
+                        <div class="valNEd">Nombre valido</div>
                     </div>
                     <div class="mb-3">
                         <label for="Precio" class="col-form-label">Precio:</label>
                         <input type="text" class="form-control" id="Precio" required [(ngModel)]="mateiraP.precio"
-                            name="Precio" (blur)="mateiraP.precio && validarPrecioAlerta(mateiraP.precio) "
+                            name="Precio" (blur)="mateiraP.precio && validarPrecioAlertaEd(mateiraP.precio) "
                             placeholder="USD">
-                        <div class="errP"> Ingrese una cantidad de dinero en con decimales </div>
-                        <div class="valP">Formato correcto</div>
+                        <div class="errPEd"> Ingrese una cantidad de dinero en con decimales </div>
+                        <div class="valPEd">Formato correcto</div>
                     </div>
                     <div class="form-group">
                         <label for="UnidadM">Unidad de Medida</label>
@@ -127,10 +125,10 @@
                     <div class="mb-3">
                         <label for="Cantidad" class="col-form-label">Cantidad:</label>
                         <input type="text" class="form-control" id="Cantidad" required [(ngModel)]="mateiraP.cantidad"
-                            name="Cantidad" (blur)="mateiraP.cantidad&& validarCantidadAlerta(mateiraP.cantidad) "
+                            name="Cantidad" (blur)="mateiraP.cantidad&& validarCantidadAlertaEd(mateiraP.cantidad) "
                             placeholder="Cantidad de elementos existentes">
-                        <div class="errCa"> Ingrese un numero entero </div>
-                        <div class="valCa">Cantidad correcta</div>
+                        <div class="errCaEd"> Ingrese un numero entero </div>
+                        <div class="valCaEd">Cantidad correcta</div>
 
                     </div>
                     <div class="form-row row g-3">
@@ -148,14 +146,13 @@
                     <div class="mb-3">
                         <label for="Imagen" class="col-form-label">Imagen</label>
                         <input type="url" class="form-control" id="Imagen" required [(ngModel)]="mateiraP.imagen"
-                            name="Imagen" (blur)="mateiraP.imagen && validarImagenAlerta(mateiraP.imagen) "
+                            name="Imagen" (blur)="mateiraP.imagen && validarImagenAlertaEd(mateiraP.imagen) "
                             placeholder="https://...">
-                        <div class="errI"> Ingrese la url de la imagen del elemento </div>
-                        <div class="valI">URL valida</div>
+                        <div class="errIEd"> Ingrese la url de la imagen del elemento </div>
+                        <div class="valIEd">URL valida</div>
                     </div>
                 </div>
-                <!-- onclick="location.reload()" -->
-                <div class="modal-footer">
+                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
                         (click)="  reset() ">Cerrar</button>
                     <button type="button" class="btn btn-success" data-bs-dismiss="modal"

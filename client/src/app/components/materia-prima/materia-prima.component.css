@@ -1,3 +1,4 @@
+/* agregar elemento */
 .errC{
     display: none;
     color: red;
@@ -43,5 +44,50 @@
     color: green;
 }
 
+/* editar elemento */
 
- 
+
+.errCEd{
+    display: none;
+    color: red;
+}
+.valCEd{
+    display: none;
+    color: green;
+}
+
+.errNEd{
+    display: none;
+    color: red;
+}
+.valNEd{
+    display: none;
+    color: green;
+}
+
+.errPEd{
+    display: none;
+    color: red;
+}
+.valPEd{
+    display: none;
+    color: green;
+}
+
+.errCaEd{
+    display: none;
+    color: red;
+}
+.valCaEd{
+    display: none;
+    color: green;
+}
+
+.errIEd{
+    display: none;
+    color: red;
+}
+.valIEd{
+    display: none;
+    color: green;
+}
