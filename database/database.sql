@@ -45,9 +45,10 @@ CREATE TABLE proveedores (
 
 CREATE TABLE clientes (
   id int(11) NOT NULL AUTO_INCREMENT,
+  cedulaCliente varchar(255) NOT NULL,
   nombresCliente varchar(255) NOT NULL,
   apellidosCliente varchar(255) NOT NULL,
-  cedulaCliente varchar(255) NOT NULL,
+  
   correoCliente varchar(255) NOT NULL,
   edadCliente varchar(255) NOT NULL,
   direccionCliente varchar(255) NOT NULL,

@@ -1,22 +1,32 @@
-<!-- sCONTENEDOR DE LOS ELEMENTOS QUE CON TIENE LA BASE DE DATOS -->
-<h2 style="margin: auto; width: 95%;text-align: center;">Clientes</h2> <br>
-<div class="row-md-3" *ngFor="let clientes of clientesArr">
+<!-- CONTENEDOR DE LOS ELEMENTOS QUE CON TIENE LA BASE DE DATOS -->
+<h2 class="ocultarcontent" style=" margin: auto; width: 95%;text-align: center;">Clientes</h2> <br>
+ 
+<div class="row-md-3 imprimirPDF" >
+    <h3 class="text-center">Clientes - reporte</h3>
+    <h3></h3>
+    <p>Numero de Documento: {{ codigo }}</p>
+    <p>La fecha actual es: {{ fechaActual.toLocaleDateString('es-ES') }}</p>
+</div>
+<div class="row-md-3 printable ocultarcontent" *ngFor="let clientes of clientesArr">
 
     <div class="row-md-1">
         <div class="card mb-3" style="margin: auto; width: 95%;">
             <div class="row g-0">
+                <div class="col-md-2">
+                    <!--<img src="{{clientes.imagen}}" class="img-fluid rounded-start" alt="..." width="200">-->
+                </div>
                 <div class="col-md-10">
                     <div class="card-body">
-                        <h5 class="card-title">Nombres: {{clientes.nombresCliente}}</h5>
+                        <!--<h5 class="card-title">{{clientes.nombresCliente}}</h5>-->
+                        <p class="card-text"> Cedula: {{clientes.cedulaCliente}} </p>
+                        <p class="card-text"> Nombres: {{clientes.nombresCliente}} </p>
                         <p class="card-text"> Apellidos: {{clientes.apellidosCliente}} </p>
-                        <p class="card-text">Cédula: {{clientes.cedulaCliente}}</p>
-                        <p class="card-text">Correo Electronico: {{clientes.correoCliente}} USD</p>
-                        <p class="card-text">Edad: {{clientes.edadCliente}}</p>
-                        <p class="card-text">Direccion: {{cliente.direccionCliente}}</p>
-                        <p class="card-text">Telefono: {{cliente.telefonoCliente}}</p>
+                        <p class="card-text"> Correo: {{clientes.correoCliente}} </p>
+                        <p class="card-text"> Edad: {{clientes.edadCliente}} </p>
+                        <p class="card-text"> Direccion: {{clientes.direccionCliente}} </p>
+                        <p class="card-text"> Telefono: {{telefono.correoCliente}} </p>
 
-
-
+                       
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                             <button type="button" class="btn btn-success me-md-2" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal" data-bs-whatever="@mdo"
@@ -37,6 +47,40 @@
     </div>
 </div>
 
+<div class="container imprimirPDF">
+    <table class="table text-center  ">
+        <thead class="table-dark">
+            <tr>
+                <th>Id</th>
+                <th>Cédula</th>
+                <th>Nombres</th>
+                <th>Apellidos</th>
+                <th>Correo</th>
+                <th>Edad</th>
+                <th>Dirección</th>
+                <th>Télefono</th>
+                 
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let clientes of clientesArr">
+                <td>{{ clientes.id }}</td>
+                <td>{{ clientes.cedulaCliente }}</td>
+                <td>{{ clientes.nombresCliente }}</td>
+                <td>{{ clientes.apellidosCliente }}</td>
+                <td>{{ clientes.correoCliente }}</td>
+                <td>{{ clientes.edadCliente }}</td>
+                <td>{{ clientes.direccionCliente }}</td>
+                <td>{{ clientes.telefonoCliente }}</td>
+
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+
+
+
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -46,31 +90,42 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                ¿Estas seguro de eliminar este Cliente?
+                ¿Estas seguro de eliminar este elemento?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button class="btn btn-danger me-md-2" type="button" (click)="deleteMP(clientesArr.id)"
+                <button class="btn btn-danger me-md-2" type="button" (click)="deleteMP(clientes.id)"
                     data-bs-dismiss="modal">Eliminar</button>
             </div>
         </div>
     </div>
 </div>
+<script>
+
+</script>
 
 
-<!-- BOTOM DE AÑADIR ELEMENTO  -->
+<!-- BOTOM DE AÑADIR ELEMENTO E IMPRIMIR LA PAGINA -->
 
-<div class="d-grid gap-2">
-    <button style="width: 90%;margin: auto;" type="button" class="btn btn-success btn-lg" data-bs-toggle="modal"
-        data-bs-target="#exampleModal2" data-bs-whatever="@mdo" (click)="reset()">Añadir Cliente</button>
-    
+<div class="d-grid gap-3  ">
+
+    <div class="row">
+        <div class="col-sm-8"><button type="button" class="btn btn-success ocultarcontent " data-bs-toggle="modal"
+                data-bs-target="#exampleModal2" data-bs-whatever="@mdo" (click)="reset()">Añadir Cliente</button> &nbsp;
+            <button type="button" class="btn btn-info ocultarcontent " (click)="imprimir()" download="Clientes.pdf">Reporte Clientes</button>
+        </div>
+
+    </div>
+
 </div>
 
 
 
 
 
-<!-- FORMULARIO DE EDITAR DATOS DEL ELEMENTO -->
+
+
+<!-- FORULARIO DE EDITAR DATOS DEL ELEMENTO -->
 
 <form>
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -82,50 +137,73 @@
                 </div>
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label for="Cedula" class="col-form-label">Cedula:</label>
+                        <label for="Cedula" class="col-form-label">Cédula:</label>
                         <input type="text" class="form-control" id="Cedula" autofocus required
-                            [(ngModel)]="cliente.cedulaCliente" name="Cedula">
+                            [(ngModel)]="clientes.cedulaCliente" name="Cedula"
+                            (blur)="clientes.cedulaCliente && validarCedulaClienteAlertaED(clientes.cedulaCliente) " placeholder="1758963458">
+
+                        <div class="errCedED"> Ingrese una cédula válida </div>
+                        <div class="valCedED">Cédula válida</div>
+
                     </div>
                     <div class="mb-3">
                         <label for="Nombres" class="col-form-label">Nombres:</label>
-                        <input type="text" class="form-control" id="Nombres" autofocus required
-                            [(ngModel)]="cliente.nombresCliente" name="Nombres">
+                        <input type="text" class="form-control" id="Nombres" required [(ngModel)]="cliente.nombresCliente"
+                            name="Nombres" (blur)="cliente.nombresCliente && validarNombreClienteAlertaED(cliente.nombresCliente) "
+                            placeholder="Juan Andres">
+                        <div class="errNcED"> Ingrese un Nombre válido </div>
+                        <div class="valNcED">Nombre válido</div>
                     </div>
                     <div class="mb-3">
                         <label for="Apellidos" class="col-form-label">Apellidos:</label>
-                        <input type="text" class="form-control" id="Precio" autofocus required
-                            [(ngModel)]="cliente.apellidosCliente" name="Apellidos">
+                        <input type="text" class="form-control" id="Apellidos" required [(ngModel)]="cliente.apellidosCliente"
+                            name="Apellidos" (blur)="cliente.apellidosCliente && validarApellidoClienteAlertaED(cliente.apellidosCliente) "
+                            placeholder="Montalvo Perez">
+                        <div class="errApED"> Apellido no válido</div>
+                        <div class="valApED"> Apellido Válido</div>
                     </div>
-
+                   
                     <div class="mb-3">
                         <label for="Correo" class="col-form-label">Correo:</label>
-                        <input type="text" class="form-control" id="Correo" autofocus required
-                            [(ngModel)]="cliente.correoCliente" name="Correo">
-                    </div>
+                        <input type="text" class="form-control" id="Correo" required [(ngModel)]="cliente.correoCliente"
+                            name="Correo" (blur)="cliente.correoCliente && validarCorreoClienteAlertaED(cliente.correoCliente) "
+                            placeholder="example@gmail.com">
+                        <div class="errCrrED"> Correo Incorrecto </div>
+                        <div class="valCrrED">Correo Actualizado Correctamente</div>
 
+                    </div>
                     <div class="mb-3">
                         <label for="Edad" class="col-form-label">Edad:</label>
-                        <input type="text" class="form-control" id="Edad" autofocus required
-                            [(ngModel)]="cliente.edadCliente" name="Edad">
+                        <input type="text" class="form-control" id="Edad" required [(ngModel)]="cliente.edadCliente"
+                            name="Edad" (blur)="cliente.edadCliente && validarEdadClienteAlertaED(cliente.edadCliente) "
+                            placeholder="25">
+                        <div class="errEddED"> Formato de edad Incorrecto </div>
+                        <div class="valEddED">Edad Actualizada Correctamente</div>
+
                     </div>
                     <div class="mb-3">
-                        <label for="Direccion" class="col-form-label">Dirección:</label>
-                        <input type="text" class="form-control" id="Direccion" autofocus required
-                            [(ngModel)]="cliente.direccionCliente" name="Direccion">
+                        <label for="Direccion" class="col-form-label">Direccion:</label>
+                        <input type="text" class="form-control" id="Direccion" required [(ngModel)]="cliente.direccionCliente"
+                            name="Direccion" (blur)="cliente.direccionCliente && validarDireccionClienteAlertaED(cliente.direccionCliente) "
+                            placeholder="Calle Primaria y Calle Secundaria ">
+                        <div class="errDirED"> Formato de Direccion Incorrecta </div>
+                        <div class="valDirED">Direccion Actualizada Correctamente</div>
+
                     </div>
                     <div class="mb-3">
                         <label for="Telefono" class="col-form-label">Telefono:</label>
-                        <input type="text" class="form-control" id="telefono" autofocus required
-                            [(ngModel)]="cliente.telefonoCliente" name="Telefono">
+                        <input type="text" class="form-control" id="Telefono" required [(ngModel)]="cliente.telefonoCliente"
+                            name="Telefono" (blur)="cliente.telefonoCliente && validarTelefonoClienteAlertaED(cliente.telefonoCliente) "
+                            placeholder=" 0985265454 ">
+                        <div class="errTelED"> Formato de telefono Incorrecta </div>
+                        <div class="valTelED">Télefono Actualizado Correctamente</div>
+
                     </div>
-
-                </div>
-
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
                         (click)="  reset() ">Cerrar</button>
-                    <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="updateMP(cliente.id)"
-                        (click)="reset()">Guardar</button>
+                    <button type="button" class="btn btn-success" data-bs-dismiss="modal"
+                        (click)="updateMP(mateiraP.id)" (click)="reset()">Guardar</button>
                 </div>
             </div>
         </div>
@@ -143,6 +221,7 @@
     })
 </script>
 
+
 <!-- FORMULARIO DE AÑADIR PRODUCTO -->
 
 <form>
@@ -155,61 +234,88 @@
                 </div>
                 <div class="modal-body">
 
-
                     <div class="mb-3">
                         <label for="Cedula" class="col-form-label">Cédula:</label>
-                        <input type="text" class="form-control" formControlName="Cedula" id="Cedula" autofocus required
-                            [(ngModel)]="cliente.cedulaCliente" name="Cedula">
+                        <input type="text" class="form-control" id="Cedula" required [(ngModel)]="cliente.cedulaCliente"
+                            name="Cedula" (blur)="cliente.cedulaCliente && validarCedulaClienteAlerta(cliente.cedulaCliente) "
+                            placeholder="1758728469">
+
+                        <div class="errCed"> Ingrese una cedula válida </div>
+                        <div class="valCed">Cédula válida</div>
+
                     </div>
+
+
 
                     <div class="mb-3">
                         <label for="Nombres" class="col-form-label">Nombres:</label>
-                        <input type="text" class="form-control" formControlName="nombres" id="Nombres" autofocus
-                            required [(ngModel)]="cliente.nombresCliente" name="Nombres">
+                        <input type="text" class="form-control" id="Nombre" required [(ngModel)]="clientes.nombresCliente"
+                            name="Nombres" (blur)="clientes.nombresCliente && validarNombreClienteAlerta(clientes.nombresCliente) "
+                            placeholder="Juan Andres">
+                        <div class="errNc"> Ingrese un Nombre válido </div>
+                        <div class="valNc">Nombres válidos</div>
+
                     </div>
 
                     <div class="mb-3">
                         <label for="Apellidos" class="col-form-label">Apellidos:</label>
-                        <input type="text" class="form-control" formControlName="apellidos" id="Apellidos" autofocus
-                            required [(ngModel)]="cliente.apellidosCliente" name="Apellidos">
+                        <input type="text" class="form-control" id="Apellidos" required [(ngModel)]="clientes.apellidosCliente"
+                            name="Apellidos" (blur)="clientes.apellidosCliente && validarApellidoClienteAlerta(clientes.apellidosCliente) "
+                            placeholder="Montalvan Perez">
+                        <div class="errAp"> Apellidos no válidos </div>
+                        <div class="valAp"> Apellidos Ingresados Correctamente</div>
+
                     </div>
 
-
-
+                    
                     <div class="mb-3">
                         <label for="Correo" class="col-form-label">Correo:</label>
-                        <input type="text" class="form-control" formControlName="correo" id="Correo" autofocus required
-                            [(ngModel)]="cliente.correoCliente" name="Correo">
+                        <input type="text" class="form-control" id="Correo" required [(ngModel)]="clientes.correoCliente"
+                            name="Correo" (blur)="clientes.correoCliente && validarCorreoClienteAlerta(clientes.correoCliente) "
+                            placeholder="example@hotmail.es">
+                        <div class="errCrr"> Ingrese un correo electronico válido </div>
+                        <div class="valCrr">Correo electronico ingresado correctamente </div>
+
                     </div>
 
                     <div class="mb-3">
                         <label for="Edad" class="col-form-label">Edad:</label>
-                        <input type="text" class="form-control" formControlName="edad" id="Edad" autofocus required
-                            [(ngModel)]="cliente.edadCliente" name="Edad">
+                        <input type="text" class="form-control" id="Edad" required [(ngModel)]="clientes.edadCliente"
+                            name="Edad" (blur)="clientes.edadCliente && validarEdadClienteAlerta(clientes.edadCliente) "
+                            placeholder="18">
+                        <div class="errEdd"> Formato de Edad Incorrecto </div>
+                        <div class="valEdd"> Edad ingresada correctamente </div>
+
                     </div>
                     <div class="mb-3">
                         <label for="Direccion" class="col-form-label">Dirección:</label>
-                        <input type="text" class="form-control" formControlName="direccion" id="Direccion" autofocus
-                            required [(ngModel)]="cliente.direccionCliente" name="Direccion">
+                        <input type="text" class="form-control" id="Direccion" required [(ngModel)]="clientes.direccionCliente"
+                            name="Direccion" (blur)="clientes.direccionCliente && validarDireccionClienteAlerta(clientes.direccionCliente) "
+                            placeholder="Calle Primaria y Calle Secundaria">
+                        <div class="errDir"> Formato de Dirección no válido </div>
+                        <div class="valDir"> Dirección ingresada correctamente </div>
+
                     </div>
                     <div class="mb-3">
-                        <label for="Telefono" class="col-form-label">Telefono:</label>
-                        <input type="text" class="form-control" formControlName="telefono" id="Telefono" autofocus
-                            required [(ngModel)]="cliente.telefonoCliente" name="Telefono">
+                        <label for="Telefono" class="col-form-label">Télefono:</label>
+                        <input type="text" class="form-control" id="Telefono" required [(ngModel)]="clientes.telefonoCliente"
+                            name="Telefono" (blur)="clientes.telefonoCliente && validarTelefonoClienteAlerta(clientes.telefonoCliente) "
+                            placeholder="0968524785">
+                        <div class="errTel"> Formato de télefono no válido </div>
+                        <div class="valTel"> Télefono ingresado correctamente </div>
+
                     </div>
-                </div>
+
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-success" data-bs-dismiss="modal"
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                        (click)=" reset()">Cerrar</button>
+                    <button type="submit" class="btn btn-success" data-bs-dismiss="modal"
                         (click)="  saveNewMP()">Guardar</button>
                 </div>
             </div>
         </div>
     </div>
-
 </form>
-
-
 
 <script>const exampleModal2 = document.getElementById('exampleModal2')
     exampleModal2.addEventListener('show.bs.modal', event => {
@@ -221,4 +327,3 @@
         modalBodyInput.value = recipient
     })
 </script>
-<!--prueba -->
