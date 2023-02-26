@@ -1,0 +1,140 @@
+
+
+/* agregar elemento */
+.errC {
+    display: none;
+    color: red;
+}
+
+.valC {
+    display: none;
+    color: green;
+}
+
+.errN {
+    display: none;
+    color: red;
+}
+
+.valN {
+    display: none;
+    color: green;
+}
+
+.errP {
+    display: none;
+    color: red;
+}
+
+.valP {
+    display: none;
+    color: green;
+}
+
+.errCa {
+    display: none;
+    color: red;
+}
+
+.valCa {
+    display: none;
+    color: green;
+}
+
+.errI {
+    display: none;
+    color: red;
+}
+
+.valI {
+    display: none;
+    color: green;
+}
+
+/* editar elemento */
+
+
+.errCEd {
+    display: none;
+    color: red;
+}
+
+.valCEd {
+    display: none;
+    color: green;
+}
+
+.errNEd {
+    display: none;
+    color: red;
+}
+
+.valNEd {
+    display: none;
+    color: green;
+}
+
+.errPEd {
+    display: none;
+    color: red;
+}
+
+.valPEd {
+    display: none;
+    color: green;
+}
+
+.errCaEd {
+    display: none;
+    color: red;
+}
+
+.valCaEd {
+    display: none;
+    color: green;
+}
+
+.errIEd {
+    display: none;
+    color: red;
+}
+
+.valIEd {
+    display: none;
+    color: green;
+}
+
+.imprimirPDF {
+    display: none;
+}
+
+.hide-link {
+    display: none;
+}
+
+@import "../navigation/navigation.component.css";
+@import "../footer/footer.component.css";
+
+
+@media print {
+
+    /* Ocultar botones */
+    .imprimirPDF {
+        display: block;
+        position: relative;
+        top: 400;
+        z-index: 100;
+    }
+
+    .ocultarcontent {
+        display: none;
+    }
+
+    nav {
+        display: none;
+    }
+
+     
+
+
+}

@@ -5,14 +5,19 @@ import { ProveedoresService } from '../../services/proveedores.service'
 @Component({
   selector: 'app-proveedores',
   templateUrl: './proveedores.component.html',
-  styleUrls: ['./proveedores.component.css']
+  styleUrls: ['./proveedores.component.css'],
+  template: `
+    <button (click)="imprimir()">Imprimir</button>
+  `
 })
-export class ProveedoresComponent {
+export class ProveedoresComponent implements OnInit{
+  
   @HostBinding('class') classes = 'modal-body';
   API_URI = 'http://localhost:3000/api';
 
   provee: Proveedores= {
     id: 0,
+    codigo: '',
     NombreApellido:'',
     Cedula: '',
     NumeroCelular: '',
@@ -25,12 +30,22 @@ export class ProveedoresComponent {
   }
 
   proveedoresArr: any = [];
+  codigo!: number;
+  fechaActual: Date;
   edit : boolean = true;
-  constructor(private ProveedoresService: ProveedoresService, private router: Router , private activatedRoute : ActivatedRoute) {
+  constructor(
+    private ProveedoresService: ProveedoresService, private router: Router , private activatedRoute : ActivatedRoute) 
+    {
+    this.fechaActual = new Date();
   }
   
   ngOnInit() {
+    this.codigo = Math.floor(10000 + Math.random() * 90000);
     this.getMP();
+  }
+
+  imprimir(): void {
+    window.print();
   }
 
   saveNewMP() {
@@ -84,6 +99,7 @@ export class ProveedoresComponent {
 
   reset(){
     this.provee.id= 0;
+    this.provee.codigo = '';
     this.provee.NombreApellido='';
     this.provee.Cedula='';
     this.provee.NumeroCelular='';
@@ -96,3 +112,4 @@ export class ProveedoresComponent {
   }
  
 }
+
