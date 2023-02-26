@@ -43,13 +43,13 @@ export class ClientesComponent implements OnInit {
 
   validFomr(){
     this.valfomr = this.formBuldier.group({
-      codigo:[this.cliente.cedulaCliente, [Validators.required , Validators.pattern('^([A-Z]{2})([0-9]{3})$')]],
-      nombre:[this.cliente.nombresCliente,[Validators.required, Validators.pattern('^([A-Za-z ]{2,25})$')]],
-      precio:[this.cliente.apellidosCliente,[Validators.required, Validators.pattern('^([0-9]{1,4}\.[0-9]{1,2})$')]],
-      unidad_medida:[this.cliente.correoCliente ,[Validators.required ]],
-      cantidad:[this.cliente.edadCliente,[Validators.required, Validators.pattern(' ^([0-9]{1,4})$')]],
-      fecha_ingreso:[this.cliente.direccionCliente,[Validators.required ]],
-      fecha_caducidad:[this.cliente.telefonoCliente,[Validators.required ]],
+      cedulaCliente:[this.cliente.cedulaCliente, [Validators.required , Validators.pattern('^([A-Z]{2})([0-9]{3})$')]],
+      nombresCliente:[this.cliente.nombresCliente,[Validators.required, Validators.pattern('^([A-Za-z ]{2,25})$')]],
+      apellidosCliente:[this.cliente.apellidosCliente,[Validators.required, Validators.pattern('^([0-9]{1,4}\.[0-9]{1,2})$')]],
+      correoCliente:[this.cliente.correoCliente ,[Validators.required ]],
+      edadCliente:[this.cliente.edadCliente,[Validators.required, Validators.pattern(' ^([0-9]{1,4})$')]],
+      direccionCliente:[this.cliente.direccionCliente,[Validators.required ]],
+      telefonoCliente:[this.cliente.telefonoCliente,[Validators.required ]],
       
     })
 
