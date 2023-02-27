@@ -99,7 +99,7 @@ export class MateriaPrimaComponent implements OnInit {
 
   deleteMP(id: any) {
     this.materiaPrimaServicesService.deleteMateria_pirma(id).subscribe({
-      next: (v: any) => [console.log(v), console.log(`se esta eliminando el elemento ${id}`)],
+      next: (v: any) => [console.log(v), console.log(`se esta eliminando el elemento ${id}`)] ,
       error: (e: any) => console.error(e),
       complete: () => this.getMP(),
 

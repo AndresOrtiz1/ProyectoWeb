@@ -8,11 +8,7 @@
     <p>Fecha de emisión: {{ fechaActual.toLocaleDateString('es-ES') }}</p>
     
 </div>
- <div class="row-md-3" *ngFor="let receta of recetasArr">
-    
-    <p>{{receta.id}}</p>
-    <p>{{receta.nombrereceta}}</p>
-</div>
+
 <div class="row-md-3 printable ocultarcontent" *ngFor="let materia_prima of materias_primasArr">
 
     <div class="row-md-1">
@@ -110,18 +106,13 @@
 
 
 <!-- BOTOM DE AÑADIR ELEMENTO E IMPRIMIR LA PAGINA -->
-
-<div class="d-grid gap-3  ">
-
-    <div class="row">
-        <div class="col-sm-8"><button type="button" class="btn btn-success ocultarcontent " data-bs-toggle="modal"
-                data-bs-target="#exampleModal2" data-bs-whatever="@mdo" (click)="reset()">Añadir
-                Producto base</button> &nbsp;
-            <button type="button" class="btn btn-info ocultarcontent " (click)="imprimir()" download="Materia_Prima.pdf">Reporte</button>
-        </div>
-
-    </div>
-
+<div style="padding-bottom: 5px;" class="d-grid gap-">
+    <button type="button" class="btn btn-success ocultarcontent" data-bs-toggle="modal"
+        data-bs-target="#exampleModal2" data-bs-whatever="@mdo" (click)="reset()">Añadir Ingrediente</button>
+</div>
+<div class="d-grid gap-3">
+    
+    <button type="button" class="btn btn-secondary ocultarcontent " (click)="imprimir()" download="Materia_Prima.pdf">Imprimir</button>
 </div>
 
 
