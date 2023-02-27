@@ -11,10 +11,10 @@ class InventoryRoutes {
 
     config(): void {
         this.router.get('/', producto_terminadoController.list_producto_terminado );
-        this.router.get('/:id_terminado', producto_terminadoController.getOne );
+        this.router.get('/:id', producto_terminadoController.getOne );
         this.router.post('/',producto_terminadoController.create);
-        this.router.put('/:id_terminado',producto_terminadoController.update); 
-        this.router.delete('/:id_terminado',producto_terminadoController.delete);       
+        this.router.put('/:id',producto_terminadoController.update); 
+        this.router.delete('/:id',producto_terminadoController.delete);       
 
     }
 

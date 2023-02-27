@@ -12,10 +12,10 @@ class InventoryRoutes {
     }
     config() {
         this.router.get('/', producto_terminadoController_1.default.list_producto_terminado);
-        this.router.get('/:id_terminado', producto_terminadoController_1.default.getOne);
+        this.router.get('/:id', producto_terminadoController_1.default.getOne);
         this.router.post('/', producto_terminadoController_1.default.create);
-        this.router.put('/:id_terminado', producto_terminadoController_1.default.update);
-        this.router.delete('/:id_terminado', producto_terminadoController_1.default.delete);
+        this.router.put('/:id', producto_terminadoController_1.default.update);
+        this.router.delete('/:id', producto_terminadoController_1.default.delete);
     }
 }
 const inventoryRoutes = new InventoryRoutes();

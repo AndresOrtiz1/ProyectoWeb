@@ -72,20 +72,4 @@ const routes: Routes = [
 })
 export class AppRoutingModule { }
 
-// const routes: Routes = [
-//   {
-//     path: '',
-//     redirectTo: '/Inicio',
-//     pathMatch: 'full'
-//   },
-//   {
-//     path:'Inicio',
-//     component: InicioComponent
-//   }
-// ];
-
-// @NgModule({
-//   imports: [RouterModule.forRoot(routes)],
-//   exports: [RouterModule]
-// })
-// export class AppRoutingModule { }
+ 

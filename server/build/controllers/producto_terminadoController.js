@@ -23,7 +23,7 @@ class Producto_terminadoController {
     // }
     list_producto_terminado(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const [producto_terminado] = yield database_1.default.query(' SELECT * FROM producto_terminado  ');
+            const [producto_terminado] = yield database_1.default.query(' SELECT * FROM productos_terminados  ');
             res.json(producto_terminado);
         });
     }
@@ -36,8 +36,8 @@ class Producto_terminadoController {
     // }
     getOne(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { id_terminado } = req.params;
-            const [producto_terminado] = yield database_1.default.query('SELECT * FROM producto_terminado WHERE  id_terminado = ?', [id_terminado]);
+            const { id } = req.params;
+            const [producto_terminado] = yield database_1.default.query('SELECT * FROM productos_terminados WHERE  id = ?', [id]);
             console.log(producto_terminado);
             // res.json({text:'econtrado'});
             res.json(producto_terminado);
@@ -48,21 +48,21 @@ class Producto_terminadoController {
     // }
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            yield database_1.default.query('INSERT INTO producto_terminado set ? ', [req.body]);
+            yield database_1.default.query('INSERT INTO productos_terminados set ? ', [req.body]);
             res.json({ message: 'nuevo producto terminado ingresaso . ' });
         });
     }
     update(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { id_terminado } = req.params;
-            yield database_1.default.query('UPDATE producto_terminado set ? WHERE id_terminado = ?', [req.body, id_terminado]);
+            const { id } = req.params;
+            yield database_1.default.query('UPDATE productos_terminados set ? WHERE id = ?', [req.body, id]);
             res.json({ message: ' se actualizo el elemento' });
         });
     }
     delete(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { id_terminado } = req.params;
-            yield database_1.default.query('DELETE FROM producto_terminado WHERE id_terminado = ?', [id_terminado]);
+            const { id } = req.params;
+            yield database_1.default.query('DELETE FROM productos_terminados WHERE id = ?', [id]);
             res.json({ message: ' Se a eliminado un elemento' });
         });
     }
