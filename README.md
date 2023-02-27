@@ -20,7 +20,8 @@ al iniciar la creacion de las rutas en la rest API
 npm install -g typescript  
 //este es el modulo para poder ejecutar los comandos de typescript y los modulos 
 
-//instalar angular
+//instalar angular:
+
 npm install -g @angular/cli
 
 npm run build   
