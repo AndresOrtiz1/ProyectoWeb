@@ -1,6 +1,6 @@
 <!-- CONTENEDOR DE LOS ELEMENTOS QUE CON TIENE LA BASE DE DATOS -->
 <h2 class="ocultarcontent" style="margin: auto; width: 95%;text-align: center;">Producto Terminado</h2> <br>
-<div class="row-md-3 printable ocultarcontent" *ngFor="let productoterminado of producArr">
+
 
 <div class="row-md-3 imprimirPDF" >
     <h3 class="text-center">Ingredientes - reporte</h3>
@@ -8,6 +8,7 @@
     <p>Fecha de emisión: {{ fechaActual.toLocaleDateString('es-ES') }}</p>
     
 </div>
+<div class="row-md-3 printable ocultarcontent" *ngFor="let productoterminado of producArr">
     <div class="row-md-1">
         <div class="card mb-3" style="margin: auto; width: 95%;">
             <div class="row g-0">
@@ -52,10 +53,10 @@
         </thead>
         <tbody>
             <tr *ngFor="let productoterminado of producArr">
-                <td>{{ produc.id_terminado }}</td>
-                <td>{{ produc.receta }}</td>
-                <td>{{ produc.cantidad_terminado }}</td>
-                <td>{{ produc.costo_terminado }}</td>
+                <td>{{ productoterminado.id_terminado }}</td>
+                <td>{{ productoterminado.receta }}</td>
+                <td>{{ productoterminado.cantidad_terminado }}</td>
+                <td>{{ productoterminado.costo_terminado }}</td>
             </tr>
         </tbody>
     </table>
@@ -92,7 +93,7 @@
 </div>
 <div class="d-grid gap-3">
     
-    <button type="button" class="btn btn-secondary ocultarcontent " (click)="imprimir()" download="Materia_Prima.pdf">Reporte Ingredientes </button>
+    <button type="button" class="btn btn-secondary ocultarcontent " (click)="imprimir()" download="Producto_terminado.pdf">Reporte Ingredientes </button>
 </div>
 
 

@@ -13,7 +13,7 @@ class Producto_terminadoController {
     // }
 
     public async list_producto_terminado (req: Request, res: Response) {
-        const [producto_terminado] = await pool.query(' SELECT * FROM productos_terminados  ');
+        const [producto_terminado] = await pool.query(' SELECT * FROM producto_terminado  ');
         res.json(producto_terminado);
     }
 
@@ -29,7 +29,7 @@ class Producto_terminadoController {
 
     public async getOne (req: Request, res: Response):  Promise<any> {
         const {id} = req.params;
-        const [producto_terminado] = await pool.query('SELECT * FROM productos_terminados WHERE  id = ?',[id]);
+        const [producto_terminado] = await pool.query('SELECT * FROM producto_terminado WHERE  id = ?',[id]);
         console.log(producto_terminado);
         // res.json({text:'econtrado'});
         
@@ -42,21 +42,21 @@ class Producto_terminadoController {
     // }
     
     public async create (req: Request, res: Response): Promise<void> {
-        await pool.query('INSERT INTO productos_terminados set ? ', [req.body] )
+        await pool.query('INSERT INTO producto_terminado set ? ', [req.body] )
         res.json({message:'nuevo producto terminado ingresaso . '})
         
     }
     
     public async update (req: Request, res: Response): Promise<void> {
         const { id } = req.params;
-        await pool.query('UPDATE productos_terminados set ? WHERE id = ?',[req.body , id]);
+        await pool.query('UPDATE producto_terminado set ? WHERE id = ?',[req.body , id]);
         res.json({message: ' se actualizo el elemento'})
     }
     
     
     public async delete (req: Request, res: Response) {
         const { id } = req.params;
-        await pool.query('DELETE FROM productos_terminados WHERE id = ?',[id]);
+        await pool.query('DELETE FROM producto_terminado WHERE id = ?',[id]);
         res.json({message: ' Se a eliminado un elemento' })
     }
       
