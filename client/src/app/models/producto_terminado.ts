@@ -1,5 +1,6 @@
 export interface Producto_terminado {
-    id_terminado?: number;
+    id?: number;
+    codigo?:string;
     costo_terminado?:string;
     cantidad_terminado?: string;
     receta?: string;

@@ -47,10 +47,12 @@ CREATE TABLE clientes (
   PRIMARY KEY (id)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
--- tabla productos terminados 
-CREATE TABLE productos_terminados (
+-- tabla producto terminado
+CREATE TABLE producto_terminado (
   id int(11) NOT NULL AUTO_INCREMENT, 
-  cantidad varchar(255) NOT NULL,
+  codigo varchar(255) NOT NULL,
+  costo_terminado varchar(255) NOT NULL,
+  cantidad_terminado varchar(255) NOT NULL,
   receta varchar(255) NOT NULL,
   imagen longtext NOT NULL,
   PRIMARY KEY (id)
