@@ -1,5 +1,9 @@
 <!-- CONTENEDOR DE LOS ELEMENTOS QUE CON TIENE LA BASE DE DATOS -->
 <h2 style="margin: auto; width: 95%;text-align: center;">Producto Terminado</h2> <br>
+<!-- pendidente para  hacer el select respecto a la receta -->
+<!-- <select>
+    <option *ngFor="let receta of recetasArr" [value]="receta.nombrereceta">{{receta.nombrereceta}}</option>
+  </select> -->
 <div class="row-md-3" *ngFor="let productoterminado of producArr">
 
     <div class="row-md-1">
@@ -15,12 +19,12 @@
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                             <button type="button" class="btn btn-success me-md-2" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal" data-bs-whatever="@mdo"
-                                (click)="get_MP(productoterminado.id_terminado)">Editar</button>
+                                (click)="get_PT(productoterminado.id_terminado)">Editar</button>
                             <!-- <button class="btn btn-danger me-md-2" type="button"
                                 (click)="deleteMP(materia_prima.id)">Eliminar</button>-->
 
                             <button type="button" class="btn btn-danger me-md-2" data-bs-toggle="modal"
-                                data-bs-target="#staticBackdrop" (click)="get_MP(productoterminado.id_terminado)">
+                                data-bs-target="#staticBackdrop" (click)="get_PT(productoterminado.id_terminado)">
                                 Eliminar
                             </button>
 
@@ -46,7 +50,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button class="btn btn-danger me-md-2" type="button" (click)="deleteMP(produc.id_terminado)"
+                <button class="btn btn-danger me-md-2" type="button" (click)="deletePT(produc.id_terminado)"
                     data-bs-dismiss="modal">Eliminar</button>
             </div>
         </div>
@@ -77,19 +81,15 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="mb-3">
-                        <label for="ID" class="col-form-label">ID:</label>
-                        <input type="number" class="form-control" id="ID" autofocus required
-                            [(ngModel)]="produc.id_terminado" name="ID">
-                    </div>
+                     
                     <div class="mb-3">
                         <label for="Costo" class="col-form-label">Costo:</label>
-                        <input type="number" class="form-control" id="Costo" autofocus required
+                        <input type="text" class="form-control" id="Costo"  required
                             [(ngModel)]="produc.costo_terminado" name="Costo">
                     </div>
                     <div class="mb-3">
                         <label for="Cantidad" class="col-form-label">Catidad:</label>
-                        <input type="number" class="form-control" id="Cantidad" autofocus required
+                        <input type="text" class="form-control" id="Cantidad"  required
                             [(ngModel)]="produc.cantidad_terminado" name="Cantidad">
                     </div>
                     <div class="form-group">
@@ -104,6 +104,12 @@
 
                         </select>
                     </div>
+                    <div class="mb-3">
+                        <label for="Imagen" class="col-form-label">Imagen</label>
+                        <input type="url" class="form-control" id="Imagen" required [(ngModel)]="produc.imagen"
+                            placeholder="https://...">
+                         
+                    </div>
   
 
                 </div>
@@ -112,7 +118,7 @@
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
                         (click)="  reset() ">Cerrar</button>
                     <button type="button" class="btn btn-success" data-bs-dismiss="modal"
-                        (click)="updateMP(produc.id_terminado)" (click)="reset()">Guardar</button>
+                        (click)="updatePT(produc.id_terminado)" (click)="reset()">Guardar</button>
                 </div>
             </div>
         </div>
@@ -143,61 +149,23 @@
                 <div class="modal-body">
 
                     <!-- form valid codigo -->
-                    <div class="mb-3">
-                        <label for="ID" class="col-form-label">ID:</label>
-                        <input type="NUMBER" class="form-control" formControlName="id_terminado" id="ID" autofocus required
-                            [(ngModel)]="produc.id_terminado" name="Codigo">
-                    </div>
-                    <!-- <div class="alert-valid " *ngIf="valfomr.valid">
-                        <div class="container-valid-message">
-                            Datos validos
-                        </div>
-                    </div>
-                    <div class="alert-danger " *ngIf="valfomr.invalid&& (valfomr.dirty || valfomr.touched)">
-                        <div class="container-error-message">
-                            El campo es requerido y se esperaban 2 letras Mayusculas y 3 numeros (AB012)
-                        </div>
-                    </div> -->
-
-
-                    <!-- form valid name -->
+                     
+ 
                     <div class="mb-3">
                         <label for="Costo" class="col-form-label">Costo:</label>
-                        <input type="number" class="form-control" formControlName="costo_terminado" id="Costo" autofocus required
+                        <input type="text" class="form-control"  id="Costo"  required
                             [(ngModel)]="produc.costo_terminado" name="Costo">
                     </div>
-                    <!-- <div class="alert-valid " *ngIf="valfomr.valid">
-                        <div class="container-valid-message">
-                            Datos validos
-                        </div>
-                    </div>
-                    <div class="alert-danger " *ngIf="valfomr.invalid&& (valfomr.dirty || valfomr.touched)">
-                        <div class="container-error-message">
-                            El campo es requerido y se esperaba un nombre del producto 
-                        </div>
-                    </div> -->
-
-                    <!-- form valid price -->
+ 
                     <div class="mb-3">
                         <label for="Cantidad" class="col-form-label">Cantidad:</label>
-                        <input type="number" class="form-control" formControlName="cantidad_terminado" id="Cantidad" autofocus required
+                        <input type="text" class="form-control"  id="Cantidad"  required
                             [(ngModel)]="produc.cantidad_terminado" name="Cantidad">
                     </div>
-                    <!-- <div class="alert-valid " *ngIf="valfomr.valid">
-                        <div class="container-valid-message">
-                            Datos validos
-                        </div>
-                    </div>
-                    <div class="alert-danger " *ngIf="valfomr.invalid&& (valfomr.dirty || valfomr.touched)">
-                        <div class="container-error-message">
-                            El campo es requerido y se esperaba un numero con decimales (10.23)
-                        </div>
-                    </div> -->
-
-                    <!-- form valid unitM -->
+            
                     <div class="form-group">
                         <label for="UnidadM">Receta</label>
-                        <select formControlName="receta" id="Receta" name="Receta" class="form-select"
+                        <select  id="Receta" name="Receta" class="form-select"
                             [(ngModel)]="produc.receta" required>
 
                             <option selected value="Pizza">Pizza</option>
@@ -207,81 +175,19 @@
 
                         </select>
                     </div>
-                    <!-- <div class="alert-valid " *ngIf="valfomr.valid">
-                        <div class="container-valid-message">
-                            Datos validos
-                        </div>
+                    <div class="mb-3">
+                        <label for="Imagen" class="col-form-label">Imagen</label>
+                        <input type="url" class="form-control" id="Imagen" required [(ngModel)]="produc.imagen"
+                            placeholder="https://...">
+                         
                     </div>
-                    <div class="alert-danger " *ngIf="valfomr.invalid&& (valfomr.dirty || valfomr.touched)">
-                        <div class="container-error-message">
-                            El campo es requerido y se esperaba  
-                        </div>
-                    </div> -->
-
-                    <!-- form valid amount -->
-      
-                    <!-- <div class="alert-valid " *ngIf="valfomr.valid">
-                        <div class="container-valid-message">
-                            Datos validos
-                        </div>
-                    </div>
-                    <div class="alert-danger " *ngIf="valfomr.invalid&& (valfomr.dirty || valfomr.touched)">
-                        <div class="container-error-message">
-                            El campo es requerido y se esperaba un numero entero (23)
-                        </div>
-                    </div> -->
-
-                    <!-- form valid date income -->
-                   
-
-                            <!-- <div class="alert-valid " *ngIf="valfomr.valid">
-                                <div class="container-valid-message">
-                                    Datos validos
-                                </div>
-                            </div>
-                            <div class="alert-danger " *ngIf="valfomr.invalid&& (valfomr.dirty || valfomr.touched)">
-                                <div class="container-error-message">
-                                    El campo es requerido
-                                </div>
-                            </div> -->
-
-
-                        <!-- form valid date expiration -->
-                        
-
-                            <!-- <div class="alert-valid " *ngIf="valfomr.valid">
-                                <div class="container-valid-message">
-                                    Datos validos
-                                </div>
-                            </div>
-                            <div class="alert-danger " *ngIf="valfomr.invalid&& (valfomr.dirty || valfomr.touched)">
-                                <div class="container-error-message">
-                                    El campo es requerido
-                                </div>
-                            </div> -->
-
-                
-
-                    <!-- form valid date image -->
- 
-                    <!-- <div class="alert-valid " *ngIf="valfomr.valid">
-                        <div class="container-valid-message">
-                            Datos validos
-                        </div>
-                    </div>
-                    <div class="alert-danger " *ngIf="valfomr.invalid&& (valfomr.dirty || valfomr.touched)">
-                        <div class="container-error-message">
-                            El campo es requerido y se esperaba una direccion url (http://... o https://...)
-                        </div>
-                    </div> -->
+       
                 </div>
-                <!-- <div>
-                    Valido: {{valfomr.valid | json}}
-                </div> -->
+         
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="  saveNewMP()"
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="reset()">Cerrar</button>
+                    <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="reset()" (click)="  saveNewPT()"
                          >Guardar</button> 
                 </div>
             </div>

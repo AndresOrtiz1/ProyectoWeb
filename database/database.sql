@@ -33,11 +33,11 @@ CREATE TABLE proveedores (
   codigo varchar(255) NOT NULL,
   NombreApellido varchar(255) NOT NULL,
   Cedula varchar(255) NOT NULL,
-  NumeroCelular varchar(255)NOT NULL,
+  NumeroCelular varchar(255) NOT NULL,
   CorreoElectronico varchar(255) NOT NULL,
   Direccion varchar(255) NOT NULL,
   NombreEmpresa varchar(255) NOT NULL,
-  TelefonoEmpresa varchar(255)NOT NULL,
+  TelefonoEmpresa varchar(255) NOT NULL,
   DireccionEmpresa varchar(255) NOT NULL,
   CorreoEmpresa varchar(255) NOT NULL,
   PRIMARY KEY (id)
@@ -49,12 +49,18 @@ CREATE TABLE clientes (
   cedulaCliente varchar(255) NOT NULL,
   nombresCliente varchar(255) NOT NULL,
   apellidosCliente varchar(255) NOT NULL,
-  
   correoCliente varchar(255) NOT NULL,
   edadCliente varchar(255) NOT NULL,
   direccionCliente varchar(255) NOT NULL,
-  telefonoCliente varchar(255) NOT NULL,
-  
-  
+  telefonoCliente varchar(255) NOT NULL,  
+  PRIMARY KEY (id)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+-- tabla productos terminados 
+CREATE TABLE productos_terminados (
+  id int(11) NOT NULL AUTO_INCREMENT, 
+  cantidad varchar(255) NOT NULL,
+  receta varchar(255) NOT NULL,
+  imagen longtext NOT NULL,
   PRIMARY KEY (id)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;

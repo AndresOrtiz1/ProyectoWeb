@@ -1,13 +1,23 @@
 <!-- CONTENEDOR DE LOS ELEMENTOS QUE CON TIENE LA BASE DE DATOS -->
-<h2 class="ocultarcontent" style=" margin: auto; width: 95%;text-align: center;">Materia Prima</h2> <br>
+<h2 class="ocultarcontent" style=" margin: auto; width: 95%;text-align: center;"> Ingredientes</h2> <br>
  
 <div class="row-md-3 imprimirPDF" >
-    <h3 class="text-center">Materia prima - reporte</h3>
+    <h3 class="text-center">Ingredientes - reporte</h3>
     <h3></h3>
     <p>Numero de Documento: {{ codigo }}</p>
     <p>Fecha de emisión: {{ fechaActual.toLocaleDateString('es-ES') }}</p>
     
 </div>
+
+<!-- parte extra para la receta que deve ir en el producto final -->
+<!-- <div *ngFor=" let receta of recetasArr">
+     
+    <p>{{receta.nombrereceta}}</p>
+</div>
+
+<select>
+    <option *ngFor="let receta of recetasArr" [value]="receta.nombrereceta">{{receta.nombrereceta}}</option>
+  </select> -->
 
 <div class="row-md-3 printable ocultarcontent" *ngFor="let materia_prima of materias_primasArr">
 
@@ -112,7 +122,7 @@
 </div>
 <div class="d-grid gap-3">
     
-    <button type="button" class="btn btn-secondary ocultarcontent " (click)="imprimir()" download="Materia_Prima.pdf">Imprimir</button>
+    <button type="button" class="btn btn-secondary ocultarcontent " (click)="imprimir()" download="Materia_Prima.pdf">Reporte Ingredientes </button>
 </div>
 
 
@@ -165,10 +175,9 @@
                             <option value="kg">Kg</option>
                             <option value="lt">Lt</option>
                             <option value="oz">oz</option>
-
-
                         </select>
                     </div>
+                
                     <div class="mb-3">
                         <label for="Cantidad" class="col-form-label">Cantidad:</label>
                         <input type="text" class="form-control" id="Cantidad" required [(ngModel)]="mateiraP.cantidad"

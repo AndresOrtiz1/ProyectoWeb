@@ -3,4 +3,5 @@ export interface Producto_terminado {
     costo_terminado?:string;
     cantidad_terminado?: string;
     receta?: string;
+    imagen?: string;
 }

@@ -109,7 +109,7 @@
 </div>
 <div class="d-grid gap-3">
     
-    <button type="button" class="btn btn-secondary ocultarcontent " (click)="imprimir()" download="Materia_Prima.pdf">Imprimir</button>
+    <button type="button" class="btn btn-secondary ocultarcontent " (click)="imprimir()" download="Materia_Prima.pdf">Reporte de clientes</button>
 </div>
 
 
@@ -297,10 +297,8 @@
                         <label for="Direccion" class="col-form-label">Dirección:</label>
                         <input type="text" class="form-control" id="Direccion" required
                             [(ngModel)]="clientes.direccionCliente" name="Direccion"
-                            (blur)="clientes.direccionCliente && validarDireccionClienteAlerta(clientes.direccionCliente) "
-                            placeholder="Calle Primaria y Calle Secundaria">
-                        <div class="errDir"> Formato de Dirección no válido </div>
-                        <div class="valDir"> Dirección ingresada correctamente </div>
+                           
+                            placeholder="Calle Primaria y Calle Secundaria"> 
 
                     </div>
                     <div class="mb-3">

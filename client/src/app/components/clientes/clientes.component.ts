@@ -228,29 +228,31 @@ export class ClientesComponent implements OnInit {
       return true;
     }
   }
-  validarDireccionCliente(direccionCliente: string): boolean {
 
-    return /^([A-Za-z ]{2,50})$/.test(direccionCliente);
-  }
+  // validarDireccionCliente(direccionCliente: string): boolean {
 
-  validarDireccionClienteAlerta(direccionCliente: string): boolean {
-    // activaciond e los mensajes de error o aceptacion
-    if (!this.validarDireccionCliente(direccionCliente)) {
-      const element = document.querySelector('.errDir') as HTMLElement;
-      element.style.display = "block";
-      const element2 = document.querySelector('.valDir') as HTMLElement;
-      element2.style.display = "none";
+  //   return /^([A-Za-z ]{2,50})$/.test(direccionCliente);
+  // }
 
-      return false;
-    } else {
-      const element = document.querySelector('.errDir') as HTMLElement;
-      element.style.display = "none";
-      const element2 = document.querySelector('.valDir') as HTMLElement;
-      element2.style.display = "block";
+  // validarDireccionClienteAlerta(direccionCliente: string): boolean {
+  //   // activaciond e los mensajes de error o aceptacion
+  //   if (!this.validarDireccionCliente(direccionCliente)) {
+  //     const element = document.querySelector('.errDir') as HTMLElement;
+  //     element.style.display = "block";
+  //     const element2 = document.querySelector('.valDir') as HTMLElement;
+  //     element2.style.display = "none";
 
-      return true;
-    }
-  }
+  //     return false;
+  //   } else {
+  //     const element = document.querySelector('.errDir') as HTMLElement;
+  //     element.style.display = "none";
+  //     const element2 = document.querySelector('.valDir') as HTMLElement;
+  //     element2.style.display = "block";
+
+  //     return true;
+  //   }
+  // }
+
   validarTelefonoCliente(telefonoCliente: string): boolean {
 
     return /^([0-9]{10})$/.test(telefonoCliente);
@@ -354,7 +356,7 @@ export class ClientesComponent implements OnInit {
 
   validarCorreoClienteED(correoCliente: string): boolean {
     // el codigo debe tener 2 letras  mayusculas y 3 numeros
-    return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3,4})+$/.test(correoCliente);
+    return /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/.test(correoCliente);
   }
 
   validarCorreoClienteAlertaED(correoCliente: string): boolean {
