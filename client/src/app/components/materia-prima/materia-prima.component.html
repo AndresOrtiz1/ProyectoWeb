@@ -5,8 +5,10 @@
     <h3 class="text-center">Materia prima - reporte</h3>
     <h3></h3>
     <p>Numero de Documento: {{ codigo }}</p>
-    <p>La fecha actual es: {{ fechaActual.toLocaleDateString('es-ES') }}</p>
+    <p>Fecha de emisión: {{ fechaActual.toLocaleDateString('es-ES') }}</p>
+    
 </div>
+
 <div class="row-md-3 printable ocultarcontent" *ngFor="let materia_prima of materias_primasArr">
 
     <div class="row-md-1">
@@ -18,9 +20,9 @@
                 <div class="col-md-10">
                     <div class="card-body">
                         <h5 class="card-title">{{materia_prima.nombre}}</h5>
-                        <p class="card-text"> Codigo: {{materia_prima.codigo}} </p>
-                        <p class="card-text">Precio: {{materia_prima.precio}} USD</p>
-                        <p class="card-text">Cantidad: {{materia_prima.cantidad}} - {{materia_prima.unidad_medida}} </p>
+                        <p class="card-text"><b>Codigo:</b>  {{materia_prima.codigo}} </p>
+                        <p class="card-text"><b>Precio: </b>{{materia_prima.precio}} USD</p>
+                        <p class="card-text"><b>Cantidad:</b> {{materia_prima.cantidad}} - {{materia_prima.unidad_medida}} </p>
 
                         <p class="card-text"><small class="text-muted">Fecha de ingreso :
                                 {{materia_prima.fecha_ingreso}} &nbsp;&nbsp;&nbsp;&nbsp; Fecha de caducidad
@@ -104,18 +106,13 @@
 
 
 <!-- BOTOM DE AÑADIR ELEMENTO E IMPRIMIR LA PAGINA -->
-
-<div class="d-grid gap-3  ">
-
-    <div class="row">
-        <div class="col-sm-8"><button type="button" class="btn btn-success ocultarcontent " data-bs-toggle="modal"
-                data-bs-target="#exampleModal2" data-bs-whatever="@mdo" (click)="reset()">Añadir
-                Producto base</button> &nbsp;
-            <button type="button" class="btn btn-info ocultarcontent " (click)="imprimir()" download="Materia_Prima.pdf">Reporte</button>
-        </div>
-
-    </div>
-
+<div style="padding-bottom: 5px;" class="d-grid gap-">
+    <button type="button" class="btn btn-success ocultarcontent" data-bs-toggle="modal"
+        data-bs-target="#exampleModal2" data-bs-whatever="@mdo" (click)="reset()">Añadir Ingrediente</button>
+</div>
+<div class="d-grid gap-3">
+    
+    <button type="button" class="btn btn-secondary ocultarcontent " (click)="imprimir()" download="Materia_Prima.pdf">Imprimir</button>
 </div>
 
 

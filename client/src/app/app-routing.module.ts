@@ -6,6 +6,9 @@ import { LoginComponent} from './components/login/login.component'
 import { MateriaPrimaComponent } from './components/materia-prima/materia-prima.component';
 import { ProveedoresComponent } from './components/proveedores/proveedores.component';
 import {ClientesComponent} from './components/clientes/clientes.component'
+import { ProductoTerminadoComponent } from './components/producto-terminado/producto-terminado.component';
+
+
 //definicion de rutas 
 const routes: Routes = [
   //rutas para para la navegacion 
@@ -48,6 +51,18 @@ const routes: Routes = [
   {
     path:'clientes',
     component: ClientesComponent
+  },
+
+  
+  //ruta para producto-terminado
+  {
+    path: 'http://localhost:4200/producto-terminado',
+    redirectTo: '/producto-terminado',
+    pathMatch: 'full'
+  },
+  {
+    path:'producto-terminado',
+    component: ProductoTerminadoComponent
   },
 ];
 

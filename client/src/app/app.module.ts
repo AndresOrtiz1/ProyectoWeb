@@ -14,6 +14,9 @@ import { LoginComponent } from './components/login/login.component'
 import {MateriaPrimaServicesService} from './services/materia-prima.services.service';
 import { ProveedoresComponent } from './components/proveedores/proveedores.component';
 import { ClientesComponent } from './components/clientes/clientes.component'; 
+import { ProductoTerminadoComponent } from './components/producto-terminado/producto-terminado.component'; 
+
+
 
 @NgModule({
   declarations: [
@@ -25,6 +28,8 @@ import { ClientesComponent } from './components/clientes/clientes.component';
     LoginComponent,
     ProveedoresComponent,
     ClientesComponent,
+    ProductoTerminadoComponent,
+
     
        
   ],

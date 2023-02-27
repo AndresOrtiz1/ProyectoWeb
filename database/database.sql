@@ -29,26 +29,27 @@ CREATE TABLE materia_prima (
 
 -- base de datos de proveedores
 CREATE TABLE proveedores (
-  id INT(11) NOT NULL AUTO_INCREMENT,
+  id int(11) NOT NULL AUTO_INCREMENT,
   codigo varchar(255) NOT NULL,
-  NombreApellido VARCHAR(255) NOT NULL,
-  Cedula INT(10) NOT NULL,
-  NumeroCelular VARCHAR(25) NOT NULL,
-  CorreoElectronico VARCHAR(50) NOT NULL,
-  Direccion VARCHAR(255) NOT NULL,
-  NombreEmpresa VARCHAR(255) NOT NULL,
-  TelefonoEmpresa INT(10) NOT NULL,
-  DireccionEmpresa varchar(50) NOT NULL,
-  CorreoEmpresa varchar(50) NOT NULL,
+  NombreApellido varchar(255) NOT NULL,
+  Cedula varchar(255) NOT NULL,
+  NumeroCelular varchar(255)NOT NULL,
+  CorreoElectronico varchar(255) NOT NULL,
+  Direccion varchar(255) NOT NULL,
+  NombreEmpresa varchar(255) NOT NULL,
+  TelefonoEmpresa varchar(255)NOT NULL,
+  DireccionEmpresa varchar(255) NOT NULL,
+  CorreoEmpresa varchar(255) NOT NULL,
   PRIMARY KEY (id)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb3;
 --base de datos clientes
 
 CREATE TABLE clientes (
   id int(11) NOT NULL AUTO_INCREMENT,
+  cedulaCliente varchar(255) NOT NULL,
   nombresCliente varchar(255) NOT NULL,
   apellidosCliente varchar(255) NOT NULL,
-  cedulaCliente varchar(255) NOT NULL,
+  
   correoCliente varchar(255) NOT NULL,
   edadCliente varchar(255) NOT NULL,
   direccionCliente varchar(255) NOT NULL,

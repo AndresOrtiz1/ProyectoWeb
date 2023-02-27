@@ -15,15 +15,15 @@
                 <div class="col-md-10">
                     <div class="card-body">
                         <h5 class="card-title">{{proveedores.NombreApellido}}</h5>
-                        <p class="card-text">Codigo: {{proveedores.codigo}} </p>
-                        <p class="card-text">Cedula: {{proveedores.Cedula}} </p>
-                        <p class="card-text">Celular: {{proveedores.NumeroCelular}}</p>
-                        <p class="card-text">Correo Electronico: {{proveedores.CorreoElectronico}}</p>
-                        <p class="card-text">Direccion: {{proveedores.Direccion}}</p>
-                        <p class="card-text">Nombre de la Empresa: {{proveedores.NombreEmpresa}}</p>
-                        <p class="card-text">Telefono de la Empresa: {{proveedores.TelefonoEmpresa}}</p>
-                        <p class="card-text">Direccion de la Empresa: {{proveedores.DireccionEmpresa}}</p>
-                        <p class="card-text">Correo de la Empresa: {{proveedores.CorreoEmpresa}}</p>
+                        <p class="card-text"><b>Codigo: </b>{{proveedores.codigo}} </p>
+                        <p class="card-text"><b>Cedula:</b> {{proveedores.Cedula}} </p>
+                        <p class="card-text"><b>Celular: </b>{{proveedores.NumeroCelular}}</p>
+                        <p class="card-text"><b>Correo Electronico:</b> {{proveedores.CorreoElectronico}}</p>
+                        <p class="card-text"><b>Direccion:</b> {{proveedores.Direccion}}</p>
+                        <p class="card-text"><b>Nombre de la Empresa:</b> {{proveedores.NombreEmpresa}}</p>
+                        <p class="card-text"><b>Telefono de la Empresa:</b> {{proveedores.TelefonoEmpresa}}</p>
+                        <p class="card-text"><b>Direccion de la Empresa:</b> {{proveedores.DireccionEmpresa}}</p>
+                        <p class="card-text"><b>Correo de la Empresa:</b> {{proveedores.CorreoEmpresa}}</p>
                         
 
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end"> 
@@ -105,17 +105,13 @@
 
 
 <!-- BOTOM DE A;ADIR ELEMENTO  -->
-<div class="d-grid gap-3  ">
-
-    <div class="row">
-        <div class="col-sm-8"><button type="button" class="btn btn-success ocultarcontent " data-bs-toggle="modal"
-                data-bs-target="#exampleModal2" data-bs-whatever="@mdo" (click)="reset()">Añadir
-                Producto base</button> &nbsp;
-            <button type="button" class="btn btn-info ocultarcontent " (click)="imprimir()" download="Proveedores.pdf">Reporte</button>
-        </div>
-
-    </div>
-
+<div style="padding-bottom: 5px;" class="d-grid gap-">
+    <button type="button" class="btn btn-success ocultarcontent" data-bs-toggle="modal"
+        data-bs-target="#exampleModal2" data-bs-whatever="@mdo" (click)="reset()">Añadir Proveedor</button>
+</div>
+<div class="d-grid gap-3">
+    
+    <button type="button" class="btn btn-secondary ocultarcontent " (click)="imprimir()" download="Materia_Prima.pdf">Imprimir</button>
 </div>
 
 
