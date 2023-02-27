@@ -169,16 +169,16 @@ export class ProveedoresComponent implements OnInit{
   validarCedulaAlerta(Cedula: string): boolean {
     // activaciond e los mensajes de error o aceptacion
     if (!this.validarCedula(Cedula)) {
-      const element = document.querySelector('.errC') as HTMLElement;
+      const element = document.querySelector('.errCed') as HTMLElement;
       element.style.display = "block";
-      const element2 = document.querySelector('.valC') as HTMLElement;
+      const element2 = document.querySelector('.valCed') as HTMLElement;
       element2.style.display = "none";
 
       return false;
     } else {
-      const element = document.querySelector('.errC') as HTMLElement;
+      const element = document.querySelector('.errCed') as HTMLElement;
       element.style.display = "none";
-      const element2 = document.querySelector('.valC') as HTMLElement;
+      const element2 = document.querySelector('.valCed') as HTMLElement;
       element2.style.display = "block";
 
       return true;

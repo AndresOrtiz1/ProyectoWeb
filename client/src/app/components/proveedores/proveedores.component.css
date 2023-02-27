@@ -1,11 +1,10 @@
-
-
 /* agregar elemento */
 
 .errTem {
     display: none;
     color: red;
 }
+
 .valTem {
     display: none;
     color: green;
@@ -15,6 +14,7 @@
     display: none;
     color: red;
 }
+
 .valCem {
     display: none;
     color: green;
@@ -29,6 +29,7 @@
     display: none;
     color: green;
 }
+
 .errCorr {
     display: none;
     color: red;
@@ -38,6 +39,7 @@
     display: none;
     color: green;
 }
+
 .errC {
     display: none;
     color: red;
@@ -83,6 +85,16 @@
     color: red;
 }
 
+.errCed {
+    display: none;
+    color: red;
+}
+
+.valCed {
+    display: none;
+    color: green;
+}
+
 .valCa {
     display: none;
     color: green;
@@ -109,6 +121,7 @@
     display: none;
     color: green;
 }
+
 .errCemEd {
     display: none;
     color: red;
@@ -118,6 +131,7 @@
     display: none;
     color: green;
 }
+
 .errNemEd {
     display: none;
     color: red;
@@ -137,6 +151,7 @@
     display: none;
     color: green;
 }
+
 .errCEd {
     display: none;
     color: red;
@@ -146,6 +161,7 @@
     display: none;
     color: green;
 }
+
 .errCEdula {
     display: none;
     color: red;
@@ -165,6 +181,7 @@
     display: none;
     color: green;
 }
+
 .errNEd {
     display: none;
     color: red;
@@ -235,7 +252,7 @@
         display: none;
     }
 
-     
+
 
 
 }
