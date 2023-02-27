@@ -106,17 +106,13 @@
 
 
 <!-- BOTOM DE AÑADIR ELEMENTO E IMPRIMIR LA PAGINA -->
-
-<div class="d-grid gap-3  ">
-
-    <div class="row">
-        <div class="col-sm-8"><button type="button" class="btn btn-success ocultarcontent " data-bs-toggle="modal"
-                data-bs-target="#exampleModal2" data-bs-whatever="@mdo" (click)="reset()">Añadir Cliente</button> &nbsp;
-            <button type="button" class="btn btn-info ocultarcontent " (click)="imprimir()" download="Clientes.pdf">Reporte Clientes</button>
-        </div>
-
-    </div>
-
+<div style="padding-bottom: 5px;" class="d-grid gap-">
+    <button type="button" class="btn btn-success ocultarcontent" data-bs-toggle="modal"
+        data-bs-target="#exampleModal2" data-bs-whatever="@mdo" (click)="reset()">Añadir Ingrediente</button>
+</div>
+<div class="d-grid gap-3">
+    
+    <button type="button" class="btn btn-secondary ocultarcontent " (click)="imprimir()" download="Materia_Prima.pdf">Imprimir</button>
 </div>
 
 
