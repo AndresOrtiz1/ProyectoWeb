@@ -59,7 +59,8 @@ CREATE TABLE clientes (
 -- tabla productos terminados 
 CREATE TABLE productos_terminados (
   id int(11) NOT NULL AUTO_INCREMENT, 
-  cantidad varchar(255) NOT NULL,
+  costo_terminado varchar(255) NOT NULL,
+  cantidad_terminado varchar(255) NOT NULL,
   receta varchar(255) NOT NULL,
   imagen longtext NOT NULL,
   PRIMARY KEY (id)
