@@ -8,7 +8,10 @@ import { RecetasService } from '../../services/recetas.service'
 @Component({
   selector: 'app-producto-terminado',
   templateUrl: './producto-terminado.component.html',
-  styleUrls: ['./producto-terminado.component.css']
+  styleUrls: ['./producto-terminado.component.css'],
+  template: `
+  <button (click)="imprimir()">Imprimir</button>
+`
 })
 export class ProductoTerminadoComponent implements OnInit {
 
@@ -51,13 +54,18 @@ export class ProductoTerminadoComponent implements OnInit {
 
   producArr: any = [];
   edit : boolean = true;
+  fechaActual: Date;
   constructor(private ProductoTerminadoService: ProductoTerminadoService, private router: Router , private activatedRoute : ActivatedRoute, private recetasService: RecetasService,) {
-  }
+    this.fechaActual = new Date();}
   
   ngOnInit() {
     this.getMP();
   }
   
+  imprimir(): void {
+    window.print();
+  }
+
   saveNewMP() {
      
     delete this.produc.id_terminado;

@@ -1,7 +1,13 @@
 <!-- CONTENEDOR DE LOS ELEMENTOS QUE CON TIENE LA BASE DE DATOS -->
-<h2 style="margin: auto; width: 95%;text-align: center;">Producto Terminado</h2> <br>
-<div class="row-md-3" *ngFor="let productoterminado of producArr">
+<h2 class="ocultarcontent" style="margin: auto; width: 95%;text-align: center;">Producto Terminado</h2> <br>
+<div class="row-md-3 printable ocultarcontent" *ngFor="let productoterminado of producArr">
 
+<div class="row-md-3 imprimirPDF" >
+    <h3 class="text-center">Ingredientes - reporte</h3>
+    <h3></h3>
+    <p>Fecha de emisión: {{ fechaActual.toLocaleDateString('es-ES') }}</p>
+    
+</div>
     <div class="row-md-1">
         <div class="card mb-3" style="margin: auto; width: 95%;">
             <div class="row g-0">
@@ -13,7 +19,7 @@
                         <h5 class="card-title">{{productoterminado.receta}}</h5>
                         <p class="card-text">ID: {{productoterminado.id_terminado}} </p>
                         <p class="card-text">Cantidad: {{productoterminado.cantidad_terminado}} </p>
-                        <p class="card-text">Costo: {{productoterminado.costo_termindo}} </p>
+                        <p class="card-text">Costo: {{productoterminado.costo_terminado}} </p>
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                             <button type="button" class="btn btn-success me-md-2" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal" data-bs-whatever="@mdo"
@@ -32,6 +38,28 @@
             </div>
         </div>
     </div>
+</div>
+
+<div class="container imprimirPDF">
+    <table class="table text-center  ">
+        <thead class="table-dark">
+            <tr>
+                <th>Id</th>
+                <th>Receta</th>
+                <th>Cantidad</th>
+                <th>Costo</th>   
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let productoterminado of producArr">
+                <td>{{ produc.id_terminado }}</td>
+                <td>{{ produc.receta }}</td>
+                <td>{{ produc.cantidad_terminado }}</td>
+                <td>{{ produc.costo_terminado }}</td>
+            </tr>
+        </tbody>
+    </table>
+
 </div>
 
 
@@ -58,12 +86,14 @@
 
 <!-- BOTOM DE A;ADIR ELEMENTO  -->
 
-<div class="d-grid gap-2">
-    <button style="width: 90%;margin: auto;" type="button" class="btn btn-success btn-lg" data-bs-toggle="modal"
-        data-bs-target="#exampleModal2" data-bs-whatever="@mdo" (click)="reset()" >Añadir
-        Producto</button>
+<div style="padding-bottom: 5px;" class="d-grid gap-">
+    <button type="button" class="btn btn-success ocultarcontent" data-bs-toggle="modal"
+        data-bs-target="#exampleModal2" data-bs-whatever="@mdo" (click)="reset()">Añadir Receta</button>
 </div>
-
+<div class="d-grid gap-3">
+    
+    <button type="button" class="btn btn-secondary ocultarcontent " (click)="imprimir()" download="Materia_Prima.pdf">Reporte Ingredientes </button>
+</div>
 
 
 
