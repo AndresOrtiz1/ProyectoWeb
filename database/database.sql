@@ -33,7 +33,7 @@ CREATE TABLE proveedores (
   codigo varchar(255) NOT NULL,
   NombreApellido VARCHAR(255) NOT NULL,
   Cedula INT(10) NOT NULL,
-  NumeroCelular VARCHAR(10) NOT NULL,
+  NumeroCelular VARCHAR(25) NOT NULL,
   CorreoElectronico VARCHAR(50) NOT NULL,
   Direccion VARCHAR(255) NOT NULL,
   NombreEmpresa VARCHAR(255) NOT NULL,

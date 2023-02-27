@@ -1,6 +1,43 @@
 
 
 /* agregar elemento */
+
+.errTem {
+    display: none;
+    color: red;
+}
+.valTem {
+    display: none;
+    color: green;
+}
+
+.errCem {
+    display: none;
+    color: red;
+}
+.valCem {
+    display: none;
+    color: green;
+}
+
+.errNem {
+    display: none;
+    color: red;
+}
+
+.valNem {
+    display: none;
+    color: green;
+}
+.errCorr {
+    display: none;
+    color: red;
+}
+
+.valCorr {
+    display: none;
+    color: green;
+}
 .errC {
     display: none;
     color: red;
@@ -17,6 +54,16 @@
 }
 
 .valN {
+    display: none;
+    color: green;
+}
+
+.errCel {
+    display: none;
+    color: red;
+}
+
+.valCel {
     display: none;
     color: green;
 }
@@ -53,7 +100,43 @@
 
 /* editar elemento */
 
+.errTemEd {
+    display: none;
+    color: red;
+}
 
+.valTemEd {
+    display: none;
+    color: green;
+}
+.errCemEd {
+    display: none;
+    color: red;
+}
+
+.valCemEd {
+    display: none;
+    color: green;
+}
+.errNemEd {
+    display: none;
+    color: red;
+}
+
+.valNemEd {
+    display: none;
+    color: green;
+}
+
+.errCorrEd {
+    display: none;
+    color: red;
+}
+
+.valCorrEd {
+    display: none;
+    color: green;
+}
 .errCEd {
     display: none;
     color: red;
@@ -63,7 +146,25 @@
     display: none;
     color: green;
 }
+.errCEdula {
+    display: none;
+    color: red;
+}
 
+.valCEdula {
+    display: none;
+    color: green;
+}
+
+.errCelEd {
+    display: none;
+    color: red;
+}
+
+.valCelEd {
+    display: none;
+    color: green;
+}
 .errNEd {
     display: none;
     color: red;
