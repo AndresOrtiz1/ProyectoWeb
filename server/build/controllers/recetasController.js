@@ -12,83 +12,185 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.recetasController = void 0;
 const RECETAS = [
     {
-        id: 1,
-        nombrereceta: "ChisC_Mora_Azul",
-        ingredientes: [
+        "id": 1,
+        "nombrereceta": "Pizza",
+        "ingredientes": [
             {
-                producto: "mantequilla",
-                cantidad: 2,
+                "producto": "Harina",
+                "cantidad": 1
             },
             {
-                producto: "azucar",
-                cantidad: 1,
+                "producto": "tomate riñon",
+                "cantidad": 1
             },
             {
-                producto: "leche condensada",
-                cantidad: 2,
+                "producto": "Queso mozarella",
+                "cantidad": 1
             },
             {
-                producto: "galleta molida",
-                cantidad: 3,
+                "producto": "Jamón",
+                "cantidad": 2
             },
             {
-                producto: "mora azul",
-                cantidad: 4,
+                "producto": "pasta de tomate",
+                "cantidad": 1
             },
-        ],
+            {
+                "producto": "levadura",
+                "cantidad": 1
+            },
+            {
+                "producto": "aceite",
+                "cantidad": 1
+            }
+        ]
     },
     {
-        id: 2,
-        nombrereceta: "ChisC_Fresas",
-        ingredientes: [
+        "id": 2,
+        "nombrereceta": "Lasaña de Carne",
+        "ingredientes": [
             {
-                producto: "mantequilla",
-                cantidad: 2,
+                "producto": "Mantequilla",
+                "cantidad": 1
             },
             {
-                producto: "azucar",
-                cantidad: 1,
+                "producto": "Queso mozarella",
+                "cantidad": 1
             },
             {
-                producto: "leche condensada",
-                cantidad: 2,
+                "producto": "Apio",
+                "cantidad": 1
             },
             {
-                producto: "galleta molida",
-                cantidad: 3,
+                "producto": "Pimiento verde",
+                "cantidad": 1
             },
             {
-                producto: "fresas",
-                cantidad: 5,
+                "producto": "Pimiento rojo",
+                "cantidad": 1
             },
-        ],
+            {
+                "producto": "pasta de tomate",
+                "cantidad": 1
+            },
+            {
+                "producto": "Ajo",
+                "cantidad": 2
+            },
+            {
+                "producto": "Harina",
+                "cantidad": 1
+            },
+            {
+                "producto": "Leche evaporada",
+                "cantidad": 1
+            },
+            {
+                "producto": "Cebolla perla",
+                "cantidad": 1
+            },
+            {
+                "producto": "Salsa de tomate",
+                "cantidad": 1
+            },
+            {
+                "producto": "Carne de Res molida",
+                "cantidad": 3
+            },
+            {
+                "producto": "Pasta para Lasaña",
+                "cantidad": 1
+            }
+        ]
     },
     {
-        id: 3,
-        nombrereceta: "ChisC_Mracuya",
-        ingredientes: [
+        "id": 3,
+        "nombrereceta": "Lasaña de Pollo",
+        "ingredientes": [
             {
-                producto: "mantequilla",
-                cantidad: 2,
+                "producto": "Mantequilla",
+                "cantidad": 1
             },
             {
-                producto: "azucar",
-                cantidad: 1,
+                "producto": "Queso mozarella",
+                "cantidad": 1
             },
             {
-                producto: "leche condensada",
-                cantidad: 2,
+                "producto": "Apio",
+                "cantidad": 1
             },
             {
-                producto: "galleta molida",
-                cantidad: 3,
+                "producto": "Pimiento verde",
+                "cantidad": 1
             },
             {
-                producto: "maracuya",
-                cantidad: 2,
+                "producto": "Pimiento rojo",
+                "cantidad": 1
             },
-        ],
+            {
+                "producto": "pasta de tomate",
+                "cantidad": 1
+            },
+            {
+                "producto": "Ajo",
+                "cantidad": 2
+            },
+            {
+                "producto": "Harina",
+                "cantidad": 1
+            },
+            {
+                "producto": "Leche evaporada",
+                "cantidad": 1
+            },
+            {
+                "producto": "Cebolla perla",
+                "cantidad": 1
+            },
+            {
+                "producto": "Salsa de tomate",
+                "cantidad": 1
+            },
+            {
+                "producto": "Pollo",
+                "cantidad": 3
+            },
+            {
+                "producto": "Pasta para Lasaña",
+                "cantidad": 1
+            }
+        ]
     },
+    {
+        "id": 4,
+        "nombrereceta": "Pasta Boloñesa",
+        "ingredientes": [
+            {
+                "producto": "mantequilla",
+                "cantidad": 1
+            },
+            {
+                "producto": "aceite",
+                "cantidad": 1
+            },
+            {
+                "producto": "cebolla perla",
+                "cantidad": 1
+            },
+            {
+                "producto": "Carne de Res molida",
+                "cantidad": 3
+            },
+            {
+                "producto": "pasta de tomate",
+                "cantidad": 2
+            },
+            {
+                "producto": "spaghetti",
+                "cantidad": 1
+            }
+        ]
+    }
 ];
 class RecetasController {
     list_recetas(req, res) {
