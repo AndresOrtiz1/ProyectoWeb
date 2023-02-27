@@ -15,15 +15,15 @@
                 <div class="col-md-10">
                     <div class="card-body">
                         <h5 class="card-title">{{proveedores.NombreApellido}}</h5>
-                        <p class="card-text">Codigo: {{proveedores.codigo}} </p>
-                        <p class="card-text">Cedula: {{proveedores.Cedula}} </p>
-                        <p class="card-text">Celular: {{proveedores.NumeroCelular}}</p>
-                        <p class="card-text">Correo Electronico: {{proveedores.CorreoElectronico}}</p>
-                        <p class="card-text">Direccion: {{proveedores.Direccion}}</p>
-                        <p class="card-text">Nombre de la Empresa: {{proveedores.NombreEmpresa}}</p>
-                        <p class="card-text">Telefono de la Empresa: {{proveedores.TelefonoEmpresa}}</p>
-                        <p class="card-text">Direccion de la Empresa: {{proveedores.DireccionEmpresa}}</p>
-                        <p class="card-text">Correo de la Empresa: {{proveedores.CorreoEmpresa}}</p>
+                        <p class="card-text"><b>Codigo: </b>{{proveedores.codigo}} </p>
+                        <p class="card-text"><b>Cedula:</b> {{proveedores.Cedula}} </p>
+                        <p class="card-text"><b>Celular: </b>{{proveedores.NumeroCelular}}</p>
+                        <p class="card-text"><b>Correo Electronico:</b> {{proveedores.CorreoElectronico}}</p>
+                        <p class="card-text"><b>Direccion:</b> {{proveedores.Direccion}}</p>
+                        <p class="card-text"><b>Nombre de la Empresa:</b> {{proveedores.NombreEmpresa}}</p>
+                        <p class="card-text"><b>Telefono de la Empresa:</b> {{proveedores.TelefonoEmpresa}}</p>
+                        <p class="card-text"><b>Direccion de la Empresa:</b> {{proveedores.DireccionEmpresa}}</p>
+                        <p class="card-text"><b>Correo de la Empresa:</b> {{proveedores.CorreoEmpresa}}</p>
                         
 
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end"> 
@@ -131,29 +131,46 @@
                     <div class="mb-3">
                         <label for="Codigo" class="col-form-label">Codigo:</label>
                         <input type="text" class="form-control" id="Codigo" autofocus required
-                        [(ngModel)]="provee.codigo" name="Codigo">
+                        [(ngModel)]="provee.codigo" name="Codigo"
+                        (blur)="provee.codigo && validarCodigoAlertaEd(provee.codigo) " placeholder="AB123">
+                        <div class="errCEd"> Ingrese un codigo valido </div>
+                        <div class="valCEd">Codigo valido</div>
                     </div>
 
                     <div class="mb-3">
                         <label for="Cedula" class="col-form-label">Cedula:</label>
-                        <input type="number" class="form-control" id="Cedula" autofocus required
-                            [(ngModel)]="provee.Cedula" name="Cedula">
+                        <input type="text" class="form-control" id="Cedula" autofocus required
+                            [(ngModel)]="provee.Cedula" name="Cedula" 
+                            (blur)="provee.Cedula && validarCedulaAlertaEd(provee.Cedula) " placeholder="10 Digitos">
+                            <div class="errCEdula"> Ingrese una Cedula valida </div>
+                            <div class="valCEdula">Cedula valido</div>
+                        
                     </div>
                     <div class="mb-3">
                         <label for="NombreApellido" class="col-form-label">Nombre y Apellido:</label>
                         <input type="text" class="form-control" id="NombreApellido" autofocus required
-                            [(ngModel)]="provee.NombreApellido" name="NombreApellido">
+                        [(ngModel)]="provee.NombreApellido" name="NombreApellido" 
+                        (blur)="provee.NombreApellido && validarNombreAlertaEd(provee.NombreApellido) "
+                        placeholder="Nombre y Apellido">
+                    <div class="errNEd"> Ingrese un Nombre valido </div>
+                    <div class="valNEd">Nombre valido</div>
                     </div>
                     <div class="mb-3">
                         <label for="NumeroCelular" class="col-form-label">Numero Celular:</label>
-                        <input type="number" class="form-control" id="NumeroCelular" autofocus required
-                            [(ngModel)]="provee.NumeroCelular" name="NumeroCelular">
+                        <input type="text" class="form-control" id="NumeroCelular" autofocus required
+                            [(ngModel)]="provee.NumeroCelular" name="NumeroCelular"
+                            (blur)="provee.NumeroCelular && validarCelularAlertaEd(provee.NumeroCelular) " placeholder="+593 987306858">
+                            <div class="errCelEd"> Ingrese un Celular valido </div>
+                            <div class="valCelEd">Celular valido</div>
                     </div>
                     
                     <div class="mb-3">
                         <label for="CorreoElectronico" class="col-form-label">Correo Electronico:</label>
-                        <input type="email" class="form-control" id="CorreoElectronico" autofocus required
-                            [(ngModel)]="provee.CorreoElectronico" name="CorreoElectronico">
+                        <input type="text" class="form-control" id="CorreoElectronico" autofocus required
+                            [(ngModel)]="provee.CorreoElectronico" name="CorreoElectronico"
+                            (blur)="provee.CorreoElectronico && validarCorreoAlertaEd(provee.CorreoElectronico) " placeholder="_____@___.com">
+                            <div class="errCorrEd"> Ingrese un correo valido </div>
+                            <div class="valCorrEd">Correo valido</div>
                     </div>
                     
                     <div class="mb-3">
@@ -165,13 +182,19 @@
                     <div class="mb-3">
                         <label for="NombreEmpresa" class="col-form-label">Nombre de la Empresa:</label>
                         <input type="text" class="form-control" id="NombreEmpresa" autofocus required
-                            [(ngModel)]="provee.NombreEmpresa" name="Direccion">
+                            [(ngModel)]="provee.NombreEmpresa" name="NombreEmpresa"
+                            (blur)="provee.NombreEmpresa && validarNombreEmpresaAlertaEd(provee.NombreEmpresa) " placeholder="">
+                            <div class="errNemEd"> Ingrese un Nombre valido </div>
+                            <div class="valNemEd">Nombre valido</div>
                     </div>
 
                     <div class="mb-3">
                         <label for="TelefonoEmpresa" class="col-form-label">Telefono de la Empresa:</label>
-                        <input type="number" class="form-control" id="TelefonoEmpresa" autofocus required
-                            [(ngModel)]="provee.TelefonoEmpresa" name="Direccion">
+                        <input type="text" class="form-control" id="TelefonoEmpresa" autofocus required
+                            [(ngModel)]="provee.TelefonoEmpresa" name="TelefonoEmpresa"
+                            (blur)="provee.TelefonoEmpresa && validarTelefonoEmpresaAlertaEd(provee.TelefonoEmpresa) " placeholder="02 1234567">
+                            <div class="errTemEd"> Ingrese un Telefono valido </div>
+                            <div class="valTemEd">Telefono valido</div>
                     </div>
 
                     <div class="mb-3">
@@ -183,8 +206,11 @@
 
                     <div class="mb-3">
                         <label for="CorreoEmpresa" class="col-form-label">Correo de la Empresa:</label>
-                        <input type="email" class="form-control" id="CorreoEmpresa" autofocus required
-                            [(ngModel)]="provee.CorreoEmpresa" name="CorreoEmpresa">
+                        <input type="text" class="form-control" id="CorreoEmpresa" autofocus required
+                            [(ngModel)]="provee.CorreoEmpresa" name="CorreoEmpresa"
+                            (blur)="provee.CorreoEmpresa && validarCorreoEmpresaAlertaEd(provee.CorreoEmpresa) " placeholder="_____@___.com">
+                            <div class="errCemEd"> Ingrese un Correo valido </div>
+                            <div class="valCemEd">Correo valido</div>
                     </div>
                     
                 </div>
@@ -225,29 +251,48 @@
                     <div class="mb-3">
                         <label for="Codigo" class="col-form-label">Codigo:</label>
                         <input type="text" class="form-control" id="Codigo" autofocus required
-                        [(ngModel)]="provee.codigo" name="Codigo">
+                        [(ngModel)]="provee.codigo" name="Codigo" (blur)="provee.codigo && validarCodigoAlerta(provee.codigo) "
+                        placeholder="AB123">
+
+                    <div class="errC"> Ingrese un codigo valido </div>
+                    <div class="valC">Codigo valido</div>
                     </div>
 
                     <div class="mb-3">
                         <label for="Cedula" class="col-form-label">Cedula:</label>
                         <input type="number" class="form-control" id="Cedula" autofocus required
-                            [(ngModel)]="provee.Cedula" name="Cedula">
+                            [(ngModel)]="provee.Cedula" name="Cedula" 
+                            (blur)="provee.Cedula && validarCedulaAlerta(provee.Cedula) " placeholder="10 Digitos">
+                            <div class="errC"> Ingrese un codigo valido </div>
+                            <div class="valC">Codigo valido</div>
+                        
                     </div>
                     <div class="mb-3">
                         <label for="NombreApellido" class="col-form-label">Nombre y Apellido:</label>
                         <input type="text" class="form-control" id="Nombre" autofocus required
-                            [(ngModel)]="provee.NombreApellido" name="NombreApellido">
+                            [(ngModel)]="provee.NombreApellido" name="NombreApellido"
+                            (blur)="provee.NombreApellido && validarNombreAlerta(provee.NombreApellido) "
+                            placeholder="Nombre y Apellido ">
+                        <div class="errN"> Ingrese un nombre valido </div>
+                        <div class="valN">Nombre valido</div>
+                        
                     </div>
                     <div class="mb-3">
                         <label for="NumeroCelular" class="col-form-label">Numero Celular:</label>
                         <input type="number" class="form-control" id="Precio" autofocus required
-                            [(ngModel)]="provee.NumeroCelular" name="NumeroCelular">
+                            [(ngModel)]="provee.NumeroCelular" name="NumeroCelular" 
+                            (blur)="provee.NumeroCelular && validarCelularAlerta(provee.NumeroCelular) " placeholder="+593 987306858">
+                            <div class="errCel"> Ingrese un celular valido </div>
+                            <div class="valCel">Celuar valido</div>
                     </div>
                     
                     <div class="mb-3">
                         <label for="CorreoElectronico" class="col-form-label">Correo Electronico:</label>
                         <input type="email" class="form-control" id="CorreoElectronico" autofocus required
-                            [(ngModel)]="provee.CorreoElectronico" name="CorreoElectronico">
+                            [(ngModel)]="provee.CorreoElectronico" name="CorreoElectronico" 
+                            (blur)="provee.CorreoElectronico && validarCorreoAlerta(provee.CorreoElectronico) " placeholder="_____@___.com">
+                            <div class="errCorr"> Ingrese un correo valido </div>
+                            <div class="valCorr">Correo valido</div>
                     </div>
 
                     <div class="mb-3">
@@ -259,13 +304,19 @@
                     <div class="mb-3">
                         <label for="NombreEmpresa" class="col-form-label">Nombre de la Empresa:</label>
                         <input type="text" class="form-control" id="NombreEmpresa" autofocus required
-                            [(ngModel)]="provee.NombreEmpresa" name="NombreEmpresa">
+                            [(ngModel)]="provee.NombreEmpresa" name="NombreEmpresa"
+                            (blur)="provee.NombreEmpresa && validarNombreEmpresaAlerta(provee.NombreEmpresa) " placeholder="">
+                            <div class="errNem"> Ingrese un Nombre valido </div>
+                            <div class="valNem">Nombre valido</div>
                     </div>
 
                     <div class="mb-3">
                         <label for="TelefonoEmpresa" class="col-form-label">Telefono de la Empresa</label>
                         <input type="number" class="form-control" id="TelefonoEmpresa" autofocus required
-                            [(ngModel)]="provee.TelefonoEmpresa" name="TelefonoEmpresa">
+                            [(ngModel)]="provee.TelefonoEmpresa" name="TelefonoEmpresa"
+                            (blur)="provee.TelefonoEmpresa && validarTelefonoEmpresaAlerta(provee.TelefonoEmpresa) " placeholder="02 1234567">
+                            <div class="errTem"> Ingrese un Telefono valido </div>
+                            <div class="valTem">Telefono valido</div>
                     </div>
 
                     <div class="mb-3">
@@ -277,7 +328,10 @@
                     <div class="mb-3">
                         <label for="CorreoEmpresa" class="col-form-label">Correo de la Empresa:</label>
                         <input type="email" class="form-control" id="CorreoEmpresa" autofocus required
-                            [(ngModel)]="provee.CorreoEmpresa" name="CorreoEmpresa">
+                            [(ngModel)]="provee.CorreoEmpresa" name="CorreoEmpresa"
+                            (blur)="provee.CorreoEmpresa && validarCorreoEmpresaAlerta(provee.CorreoEmpresa) " placeholder="_____@___.com">
+                            <div class="errCem"> Ingrese un Correo valido </div>
+                            <div class="valCem">Correo valido</div>
                     </div>
                 </div>
                 <!-- onclick="location.reload()" -->
