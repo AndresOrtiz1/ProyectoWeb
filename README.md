@@ -20,6 +20,8 @@ al iniciar la creacion de las rutas en la rest API
 npm instal -g typescript   
 //este es el modulo para poder ejecutar los comandos de typescript y los modulos 
 
+//instalar angular
+npm install -g @angular/cli
 
 npm run build   
 // activa el comando para la Vigilancia de los cambios en los archivos .js
