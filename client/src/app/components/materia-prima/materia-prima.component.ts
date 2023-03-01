@@ -355,7 +355,5 @@ export class MateriaPrimaComponent implements OnInit {
       return true;
     }
   }
-
-  /// inpresion de reportes 
-
+ 
 }
