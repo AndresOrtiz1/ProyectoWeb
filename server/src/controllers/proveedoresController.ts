@@ -5,15 +5,16 @@ import  pool  from '../database';
 class ProveedoresController {
 
     public async list_proveedores (req: Request, res: Response) {
-        const [proveedores] = await pool.query(' SELECT * FROM proveedores  ');
+        const [proveedores] = await pool.query(' SELECT * FROM proveedores');
         res.json(proveedores);
+        res.json({message: ' Proveedrores escontrados'})
     }
 
     public async getOne (req: Request, res: Response):  Promise<any> {
         const {id} = req.params;
         const [proveedor] = await pool.query('SELECT * FROM proveedores WHERE  id = ?',[id]);
         console.log(proveedor);
-        // res.json({text:'econtrado'});
+        res.json({text:'producto encontrado'});
         
         res.json(proveedor);
     }

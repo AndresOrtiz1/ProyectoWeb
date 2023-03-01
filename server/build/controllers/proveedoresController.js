@@ -17,8 +17,9 @@ const database_1 = __importDefault(require("../database"));
 class ProveedoresController {
     list_proveedores(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const [proveedores] = yield database_1.default.query(' SELECT * FROM proveedores  ');
+            const [proveedores] = yield database_1.default.query(' SELECT * FROM proveedores');
             res.json(proveedores);
+            res.json({ message: ' Proveedrores escontrados' });
         });
     }
     getOne(req, res) {
@@ -26,7 +27,7 @@ class ProveedoresController {
             const { id } = req.params;
             const [proveedor] = yield database_1.default.query('SELECT * FROM proveedores WHERE  id = ?', [id]);
             console.log(proveedor);
-            // res.json({text:'econtrado'});
+            res.json({ text: 'producto encontrado' });
             res.json(proveedor);
         });
     }

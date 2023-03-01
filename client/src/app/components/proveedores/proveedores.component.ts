@@ -85,9 +85,9 @@ export class ProveedoresComponent implements OnInit {
       next: (v: any) => this.proveedoresArr = v,
       error: (e: any) => console.error(e),
       complete: () => console.info('complete')
-
     })
   }
+
 
   deleteMP(id: any) {
     this.ProveedoresService.deleteProveedores(id).subscribe({
