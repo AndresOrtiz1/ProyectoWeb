@@ -1,6 +1,5 @@
-import { Component, HostBinding, IterableDiffers, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Clientes } from 'src/app/models/clientes.models';
+import { Component, HostBinding, OnInit } from '@angular/core';
+ import { Clientes } from 'src/app/models/clientes.models';
 import { ClientesService } from '../../services/clientes.service'
 
 
@@ -253,35 +252,10 @@ export class ClientesComponent implements OnInit {
     }
   }
 
-
-  /// validacion EDIT    -------------------------------------------------
-
-  // validar cedula 
-  validarCedulaClienteED(cedulaCliente: string): boolean {
-    // validacion de cedula conste de 10 numeros
-    return /^([0-9]{10})$/.test(cedulaCliente);
-  }
-
-  validarCedulaClienteAlertaED(cedulaCliente: string): boolean {
-    // activaciond e los mensajes de error o aceptacion
-    if (!this.validarCedulaClienteED(cedulaCliente)) {
-      const element = document.querySelector('.errCedED') as HTMLElement;
-      element.style.display = "block";
-      const element2 = document.querySelector('.valCedED') as HTMLElement;
-      element2.style.display = "none";
-
-      return false;
-    } else {
-      const element = document.querySelector('.errCedED') as HTMLElement;
-      element.style.display = "none";
-      const element2 = document.querySelector('.valCedED') as HTMLElement;
-      element2.style.display = "block";
-
-      return true;
-    }
-  }
+ 
+ 
   //EDICION VALIDACIONES
-  // validar Nombre 
+ 
   validarNombreClienteED(nombresCliente: string): boolean {
     // solo tiene letras y no numeros
     return /^([A-Za-z ]{2,25})$/.test(nombresCliente);
@@ -353,6 +327,7 @@ export class ClientesComponent implements OnInit {
       return true;
     }
   }
+
   validarEdadClienteED(edadCliente: string): boolean {
 
     return /^([0-9]{1,5})$/.test(edadCliente);
@@ -377,31 +352,6 @@ export class ClientesComponent implements OnInit {
     }
   }
  
-  validarTelefonoClienteED(telefonoCliente: string): boolean {
-
-    return /^([0-9]{10})$/.test(telefonoCliente);
-  }
-
-  validarTelefonoClienteAlertaED(telefonoCliente: string): boolean {
-    // activaciond e los mensajes de error o aceptacion
-    if (!this.validarTelefonoClienteED(telefonoCliente)) {
-      const element = document.querySelector('.errTelED') as HTMLElement;
-      element.style.display = "block";
-      const element2 = document.querySelector('.valTelED') as HTMLElement;
-      element2.style.display = "none";
-
-      return false;
-    } else {
-      const element = document.querySelector('.errTelED') as HTMLElement;
-      element.style.display = "none";
-      const element2 = document.querySelector('.valTelED') as HTMLElement;
-      element2.style.display = "block";
-
-      return true;
-    }
-  }
-
-
-  /// inpresion de reportes 
+   
 
 }
