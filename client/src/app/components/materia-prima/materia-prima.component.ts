@@ -211,7 +211,7 @@ export class MateriaPrimaComponent implements OnInit {
 
   validarCantidad(cantidad: string): boolean {
     // el codigo debe tener 2 letras  mayusculas y 3 numeros
-    return /^([0-9]{1,4})$/.test(cantidad);
+    return /^([0-9]{1,5})$/.test(cantidad);
   }
 
   validarCantidadAlerta(cantidad: string): boolean {
@@ -335,7 +335,7 @@ export class MateriaPrimaComponent implements OnInit {
 
   validarCantidadEd(cantidad: string): boolean {
     // el codigo debe tener 2 letras  mayusculas y 3 numeros
-    return /^([0-9]{1,4})$/.test(cantidad);
+    return /^([0-9]{1,5})$/.test(cantidad);
   }
 
   validarCantidadAlertaEd(cantidad: string): boolean {

@@ -1,12 +1,14 @@
 <!-- sCONTENEDOR DE LOS ELEMENTOS QUE CON TIENE LA BASE DE DATOS -->
-<h2 class="ocultarcontent" style=" margin: auto; width: 95%;text-align: center;">Proveedores</h2> <br>
+<h2 class="ocultarcontent" style=" margin: auto; width: 95%;text-align: center;">Pedidos</h2> <br>
 
-<div class="row-md-3 imprimirPDF" >
-    <h3 class="text-center">Proveedores - reporte</h3>
+<div class="row-md-3 imprimirPDF">
+    <h3 class="text-center">Pedidos - reporte</h3>
     <h3></h3>
     <p>Numero de Documento: {{ codigo }}</p>
     <p>La fecha actual es: {{ fechaActual.toLocaleDateString('es-ES') }}</p>
 </div>
+
+
 <div class="row-md-3 printable ocultarcontent" *ngFor="let proveedores of proveedoresArr">
 
     <div class="row-md-1">
@@ -14,28 +16,25 @@
             <div class="row g-0">
                 <div class="col-md-10">
                     <div class="card-body">
-                        <h5 class="card-title">{{proveedores.NombreApellido}}</h5>
-                        <p class="card-text"><b>Codigo: </b>{{proveedores.codigo}} </p>
-                        <p class="card-text"><b>Cedula:</b> {{proveedores.Cedula}} </p>
-                        <p class="card-text"><b>Celular: </b>{{proveedores.NumeroCelular}}</p>
-                        <p class="card-text"><b>Correo Electronico:</b> {{proveedores.CorreoElectronico}}</p>
-                        <p class="card-text"><b>Direccion:</b> {{proveedores.Direccion}}</p>
-                        <p class="card-text"><b>Nombre de la Empresa:</b> {{proveedores.NombreEmpresa}}</p>
-                        <p class="card-text"><b>Telefono de la Empresa:</b> {{proveedores.TelefonoEmpresa}}</p>
-                        <p class="card-text"><b>Direccion de la Empresa:</b> {{proveedores.DireccionEmpresa}}</p>
-                        <p class="card-text"><b>Correo de la Empresa:</b> {{proveedores.CorreoEmpresa}}</p>
-                        
+                        <h5 class="card-title">PRODUCTO: &nbsp; - {{proveedores.NombreApellido}} -</h5>
 
-                        <div class="d-grid gap-2 d-md-flex justify-content-md-end"> 
+                        <p class="card-text"><b>Numero de Orden: </b>{{proveedores.id}} </p>
+                        <p class="card-text"><b>Codigo: </b>{{proveedores.codigo}} </p>
+                        <p class="card-text"><b>Cantidad:</b> {{proveedores.Cedula}} </p>
+                        <p class="card-text"><b>Precio: </b>{{proveedores.NumeroCelular}}</p>
+
+
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                             <button type="button" class="btn btn-success me-md-2" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal" data-bs-whatever="@mdo"
                                 (click)="get_MP(proveedores.id)">Editar</button>
-                          <!-- <button class="btn btn-danger me-md-2" type="button"
-                                (click)="deleteMP(materia_prima.id)">Eliminar</button>--> 
 
-                                <button type="button" class="btn btn-danger me-md-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="get_MP(proveedores.id)">
-                                    Eliminar
-                                  </button>
+
+                            <button type="button" class="btn btn-danger me-md-2" data-bs-toggle="modal"
+                                data-bs-target="#staticBackdrop" (click)="get_MP(proveedores.id)">
+                                Eliminar
+                            </button>
 
                         </div>
                     </div>
@@ -49,33 +48,21 @@
     <table class="table text-center  ">
         <thead class="table-dark">
             <tr>
-                <th>Id</th>
+                <th>Nnumero de Orden</th>
+                <th>Nombre</th>
                 <th>Codigo</th>
-                <th>Cedula</th>
-                <th>Nombre y apellido</th>
-                <th>Numero Celular</th>
-                <th>Correo</th>
-                <th>Direccion</th>
-                <th>Nombre de la Empresa</th>
-                <th>Telefono de la Empresa</th>
-                <th>Direccion de la Empresa</th>
-                <th>Correo de la Empresa</th>
-                 
+                <th>Cantidad</th>
+                <th>Precio</th>
+
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let proveedores of proveedoresArr">
                 <td>{{ proveedores.id }}</td>
+                <td>{{ proveedores.NombreApellido }}</td>
                 <td>{{ proveedores.codigo }}</td>
                 <td>{{ proveedores.Cedula }}</td>
-                <td>{{ proveedores.NombreApellido }}</td>
                 <td>{{ proveedores.NumeroCelular }}</td>
-                <td>{{ proveedores.CorreoElectronico }}</td>
-                <td>{{ proveedores.Direccion }}</td>
-                <td>{{ proveedores.NombreEmpresa }}</td>
-                <td>{{ proveedores.TelefonoEmpresa }}</td>
-                <td>{{ proveedores.DireccionEmpresa }}</td>
-                <td>{{ proveedores.CorreoEmpresa }}</td>
 
             </tr>
         </tbody>
@@ -84,34 +71,36 @@
 </div>
 
 
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="staticBackdropLabel">Eliminar</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Eliminar</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ¿Estas seguro de eliminar este proveedor?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button class="btn btn-danger me-md-2" type="button" (click)="deleteMP(provee.id)"
+                    data-bs-dismiss="modal">Eliminar</button>
+            </div>
         </div>
-        <div class="modal-body">
-          ¿Estas seguro de eliminar este proveedor?
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-          <button class="btn btn-danger me-md-2" type="button"
-          (click)="deleteMP(provee.id)" data-bs-dismiss="modal">Eliminar</button>
-        </div>
-      </div>
     </div>
-  </div>
+</div>
 
 
 <!-- BOTOM DE A;ADIR ELEMENTO  -->
 <div style="padding-bottom: 5px;" class="d-grid gap-">
-    <button type="button" class="btn btn-success ocultarcontent" data-bs-toggle="modal"
-        data-bs-target="#exampleModal2" data-bs-whatever="@mdo" (click)="reset()">Añadir Proveedor</button>
+    <button type="button" class="btn btn-success ocultarcontent" data-bs-toggle="modal" data-bs-target="#exampleModal2"
+        data-bs-whatever="@mdo" (click)="reset()">Añadir Orden</button>
 </div>
 <div class="d-grid gap-3">
-    
-    <button type="button" class="btn btn-secondary ocultarcontent " (click)="imprimir()" download="Materia_Prima.pdf">Imprimir</button>
+
+    <button type="button" class="btn btn-secondary ocultarcontent " (click)="imprimir()"
+        download="Materia_Prima.pdf">Imprimir</button>
 </div>
 
 
@@ -128,97 +117,45 @@
                 </div>
                 <div class="modal-body">
 
+                     
+
                     <div class="mb-3">
                         <label for="Codigo" class="col-form-label">Codigo:</label>
-                        <input type="text" class="form-control" id="Codigo" autofocus required
-                        [(ngModel)]="provee.codigo" name="Codigo"
-                        (blur)="provee.codigo && validarCodigoAlertaEd(provee.codigo) " placeholder="AB123">
-                        <div class="errCEd"> Ingrese un codigo valido </div>
+                        <input type="text" class="form-control" id="Codigo" required [(ngModel)]="provee.codigo"
+                            name="Codigo" (blur)="provee.codigo && validarCodigoAlertaEd(provee.codigo) "
+                            placeholder="AB123">
+
+                        <div class="errCEd"> Ingrese un Codigo valido </div>
                         <div class="valCEd">Codigo valido</div>
                     </div>
 
                     <div class="mb-3">
-                        <label for="Cedula" class="col-form-label">Cedula:</label>
-                        <input type="text" class="form-control" id="Cedula"  required
-                            [(ngModel)]="provee.Cedula" name="Cedula" 
-                            (blur)="provee.Cedula && validarCedulaAlertaEd(provee.Cedula) " placeholder="10 Digitos">
-                            <div class="errCEdula"> Ingrese una Cedula valida </div>
-                            <div class="valCEdula">Cedula valido</div>
-                        
-                    </div>
-                    <div class="mb-3">
-                        <label for="NombreApellido" class="col-form-label">Nombre y Apellido:</label>
-                        <input type="text" class="form-control" id="NombreApellido"  required
-                        [(ngModel)]="provee.NombreApellido" name="NombreApellido" 
-                        (blur)="provee.NombreApellido && validarNombreAlertaEd(provee.NombreApellido) "
-                        placeholder="Nombre y Apellido">
-                    <div class="errNEd"> Ingrese un Nombre valido </div>
-                    <div class="valNEd">Nombre valido</div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="NumeroCelular" class="col-form-label">Numero Celular:</label>
-                        <input type="text" class="form-control" id="NumeroCelular"  required
-                            [(ngModel)]="provee.NumeroCelular" name="NumeroCelular"
-                            (blur)="provee.NumeroCelular && validarCelularAlertaEd(provee.NumeroCelular) " placeholder="+593 987306858">
-                            <div class="errCelEd"> Ingrese un Celular valido </div>
-                            <div class="valCelEd">Celular valido</div>
-                    </div>
-                    
-                    <div class="mb-3">
-                        <label for="CorreoElectronico" class="col-form-label">Correo Electronico:</label>
-                        <input type="text" class="form-control" id="CorreoElectronico"  required
-                            [(ngModel)]="provee.CorreoElectronico" name="CorreoElectronico"
-                            (blur)="provee.CorreoElectronico && validarCorreoAlertaEd(provee.CorreoElectronico) " placeholder="user@dominio.ext">
-                            <div class="errCorrEd"> Ingrese un correo valido </div>
-                            <div class="valCorrEd">Correo valido</div>
-                    </div>
-                    
-                    <div class="mb-3">
-                        <label for="Direccion" class="col-form-label">Direccion:</label>
-                        <input type="text" class="form-control" id="Direccion"  required
-                            [(ngModel)]="provee.Direccion" name="Direccion">
+                        <label for="Cedula" class="col-form-label">Cantidad:</label>
+                        <input type="text" class="form-control" id="Cedula" required [(ngModel)]="provee.Cedula"
+                            name="Cedula" (blur)="provee.Cedula && validarCedulaAlertaEd(provee.Cedula) "
+                            placeholder="Numero de maximo 5 digitos">
+                        <div class="errCEdula"> Ingrese una Cantidad valida </div>
+                        <div class="valCEdula">Cantidad valida</div>
+
                     </div>
 
                     <div class="mb-3">
-                        <label for="NombreEmpresa" class="col-form-label">Nombre de la Empresa:</label>
-                        <input type="text" class="form-control" id="NombreEmpresa"  required
-                            [(ngModel)]="provee.NombreEmpresa" name="NombreEmpresa"
-                            (blur)="provee.NombreEmpresa && validarNombreEmpresaAlertaEd(provee.NombreEmpresa) " placeholder="">
-                            <div class="errNemEd"> Ingrese un Nombre valido </div>
-                            <div class="valNemEd">Nombre valido</div>
+                        <label for="NumeroCelular" class="col-form-label">Precio:</label>
+                        <input type="text" class="form-control" id="Precio" required [(ngModel)]="provee.NumeroCelular"
+                            name="NumeroCelular"
+                            (blur)="provee.NumeroCelular && validarCelularAlertaEd(provee.NumeroCelular) "
+                            placeholder="USD">
+                        <div class="errCelEd">Ingrese un Precio valido </div>
+                        <div class="valCelEd">Precio valido</div>
                     </div>
 
-                    <div class="mb-3">
-                        <label for="TelefonoEmpresa" class="col-form-label">Telefono de la Empresa:</label>
-                        <input type="text" class="form-control" id="TelefonoEmpresa"  required
-                            [(ngModel)]="provee.TelefonoEmpresa" name="TelefonoEmpresa"
-                            (blur)="provee.TelefonoEmpresa && validarTelefonoEmpresaAlertaEd(provee.TelefonoEmpresa) " placeholder="02 1234567">
-                            <div class="errTemEd"> Ingrese un Telefono valido </div>
-                            <div class="valTemEd">Telefono valido</div>
-                    </div>
 
-                    <div class="mb-3">
-                        <label for="DireccionEmpresa" class="col-form-label">Direccion de la Empresa:</label>
-                        <input type="text" class="form-control" id="DireccionEmpresa"  required
-                            [(ngModel)]="provee.DireccionEmpresa" name="DireccionEmpresa">
-                    </div>
-                    
-
-                    <div class="mb-3">
-                        <label for="CorreoEmpresa" class="col-form-label">Correo de la Empresa:</label>
-                        <input type="text" class="form-control" id="CorreoEmpresa"  required
-                            [(ngModel)]="provee.CorreoEmpresa" name="CorreoEmpresa"
-                            (blur)="provee.CorreoEmpresa && validarCorreoEmpresaAlertaEd(provee.CorreoEmpresa) " placeholder="user@dominio.ext">
-                            <div class="errCemEd"> Ingrese un Correo valido </div>
-                            <div class="valCemEd">Correo valido</div>
-                    </div>
-                    
                 </div>
-                <!-- onclick="location.reload()" -->
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="  reset() "  >Cerrar</button>
-                    <button type="button" class="btn btn-success" data-bs-dismiss="modal"
-                        (click)="updateMP(provee.id)" (click)="reset()">Guardar</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                        (click)="  reset() ">Cerrar</button>
+                    <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="updateMP(provee.id)"
+                        (click)="reset()">Guardar</button>
                 </div>
             </div>
         </div>
@@ -247,103 +184,61 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="NombreApellido" class="col-form-label">PRODUCTO: -- </label>
+                        <select id="NombreApellido" name="NombreApellido" class="form-select" [(ngModel)]="provee.NombreApellido" required="">
+
+                             
+                            <option *ngFor="let cliente of clientesArr" [value]="cliente.nombresCliente">
+                                {{cliente.nombresCliente}}</option>
+                        </select>
+
+                    </div>
 
                     <div class="mb-3">
                         <label for="Codigo" class="col-form-label">Codigo:</label>
-                        <input type="text" class="form-control" id="Codigo"  required
-                        [(ngModel)]="provee.codigo" name="Codigo" (blur)="provee.codigo && validarCodigoAlerta(provee.codigo) "
-                        placeholder="AB123">
+                        <input type="text" class="form-control" id="Codigo" required [(ngModel)]="provee.codigo"
+                            name="Codigo" (blur)="provee.codigo && validarCodigoAlerta(provee.codigo) "
+                            placeholder="AB123">
 
-                    <div class="errC"> Ingrese un codigo valido </div>
-                    <div class="valC">Codigo valido</div>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="Cedula" class="col-form-label">Cedula:</label>
-                        <input type="text" class="form-control" id="Cedula"  required
-                            [(ngModel)]="provee.Cedula" name="Cedula" 
-                            (blur)="provee.Cedula && validarCedulaAlerta(provee.Cedula) " placeholder="10 Digitos">
-                            <div class="errCed"> Ingrese un Numero de Cedula valido </div>
-                            <div class="valCed">Cedula valida</div>
-                        
-                    </div>
-                    <div class="mb-3">
-                        <label for="NombreApellido" class="col-form-label">Nombre y Apellido:</label>
-                        <input type="text" class="form-control" id="Nombre"  required
-                            [(ngModel)]="provee.NombreApellido" name="NombreApellido"
-                            (blur)="provee.NombreApellido && validarNombreAlerta(provee.NombreApellido) "
-                            placeholder="Nombre y Apellido ">
-                        <div class="errN"> Ingrese un nombre valido </div>
-                        <div class="valN">Nombre valido</div>
-                        
-                    </div>
-                    <div class="mb-3">
-                        <label for="NumeroCelular" class="col-form-label">Numero Celular:</label>
-                        <input type="text" class="form-control" id="Precio"  required
-                            [(ngModel)]="provee.NumeroCelular" name="NumeroCelular" 
-                            (blur)="provee.NumeroCelular && validarCelularAlerta(provee.NumeroCelular) " placeholder="+593 987306858">
-                            <div class="errCel"> Ingrese un celular valido </div>
-                            <div class="valCel">Celuar valido</div>
-                    </div>
-                    
-                    <div class="mb-3">
-                        <label for="CorreoElectronico" class="col-form-label">Correo Electronico:</label>
-                        <input type="email" class="form-control" id="CorreoElectronico"  required
-                            [(ngModel)]="provee.CorreoElectronico" name="CorreoElectronico" 
-                            (blur)="provee.CorreoElectronico && validarCorreoAlerta(provee.CorreoElectronico) " placeholder="user@dominio.ext">
-                            <div class="errCorr"> Ingrese un correo valido </div>
-                            <div class="valCorr">Correo valido</div>
+                        <div class="errC"> Ingrese un Codigo valido </div>
+                        <div class="valC">Codigo valido</div>
                     </div>
 
                     <div class="mb-3">
-                        <label for="Direccion" class="col-form-label">Direccion:</label>
-                        <input type="text" class="form-control" id="Direccion"  required
-                            [(ngModel)]="provee.Direccion" name="Direccion">
+                        <label for="Cedula" class="col-form-label">Cantidad:</label>
+                        <input type="text" class="form-control" id="Cedula" required [(ngModel)]="provee.Cedula"
+                            name="Cedula" (blur)="provee.Cedula && validarCedulaAlerta(provee.Cedula) "
+                            placeholder="Numero de maximo 5 digitos">
+                        <div class="errCed"> Ingrese una Cantidad valida </div>
+                        <div class="valCed">Cantidad valida</div>
+
                     </div>
 
                     <div class="mb-3">
-                        <label for="NombreEmpresa" class="col-form-label">Nombre de la Empresa:</label>
-                        <input type="text" class="form-control" id="NombreEmpresa"  required
-                            [(ngModel)]="provee.NombreEmpresa" name="NombreEmpresa"
-                            (blur)="provee.NombreEmpresa && validarNombreEmpresaAlerta(provee.NombreEmpresa) " placeholder="">
-                            <div class="errNem"> Ingrese un Nombre valido </div>
-                            <div class="valNem">Nombre valido</div>
+                        <label for="NumeroCelular" class="col-form-label">Precio:</label>
+                        <input type="text" class="form-control" id="Precio" required [(ngModel)]="provee.NumeroCelular"
+                            name="NumeroCelular"
+                            (blur)="provee.NumeroCelular && validarCelularAlerta(provee.NumeroCelular) "
+                            placeholder="USD">
+                        <div class="errCel">Ingrese un Precio valido </div>
+                        <div class="valCel">Precio valido</div>
                     </div>
 
-                    <div class="mb-3">
-                        <label for="TelefonoEmpresa" class="col-form-label">Telefono de la Empresa</label>
-                        <input type="text" class="form-control" id="TelefonoEmpresa"  required
-                            [(ngModel)]="provee.TelefonoEmpresa" name="TelefonoEmpresa"
-                            (blur)="provee.TelefonoEmpresa && validarTelefonoEmpresaAlerta(provee.TelefonoEmpresa) " placeholder="02 1234567">
-                            <div class="errTem"> Ingrese un Telefono valido </div>
-                            <div class="valTem">Telefono valido</div>
-                    </div>
 
-                    <div class="mb-3">
-                        <label for="DireccionEmpresa" class="col-form-label">Direccion de la Empresa:</label>
-                        <input type="text" class="form-control" id="DireccionEmpresa"  required
-                            [(ngModel)]="provee.DireccionEmpresa" name="DireccionEmpresa">
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="CorreoEmpresa" class="col-form-label">Correo de la Empresa:</label>
-                        <input type="text" class="form-control" id="CorreoEmpresa"  required
-                            [(ngModel)]="provee.CorreoEmpresa" name="CorreoEmpresa"
-                            (blur)="provee.CorreoEmpresa && validarCorreoEmpresaAlerta(provee.CorreoEmpresa) " placeholder="user@dominio.ext">
-                            <div class="errCem"> Ingrese un Correo valido </div>
-                            <div class="valCem">Correo valido</div>
-                    </div>
                 </div>
-                <!-- onclick="location.reload()" -->
+
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"  >Cerrar</button>
-                    <button type="button" class="btn btn-success" data-bs-dismiss="modal"
-                        (click)="  saveNewMP()">Guardar</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="  saveNewMP()"
+                        routerLink="/producto-terminado">Guardar</button>
                 </div>
             </div>
         </div>
     </div>
 </form>
+
+
 
 <script>const exampleModal2 = document.getElementById('exampleModal2')
     exampleModal2.addEventListener('show.bs.modal', event => {
@@ -355,4 +250,3 @@
         modalBodyInput.value = recipient
     })
 </script>
-
