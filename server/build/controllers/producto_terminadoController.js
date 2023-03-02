@@ -15,55 +15,68 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.producto_terminadoController = void 0;
 const database_1 = __importDefault(require("../database"));
 class Producto_terminadoController {
-    // public async list_materia_prima (req: Request, res: Response) {
-    //     const [rows, fields] = await pool.query('SELECT * FROM materia_prima');
-    //     /*const materia_prima = await pool.query('SELECT * FROM materia_prima');
-    //     console.log(materia_prima);*/
-    //     res.json(rows);
-    // }
     list_producto_terminado(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const [producto_terminado] = yield database_1.default.query(' SELECT * FROM producto_terminado  ');
-            res.json(producto_terminado);
+            const [recetas] = yield database_1.default.query('SELECT * FROM recetas');
+            const recetasConIngredientes = [];
+            for (const receta of recetas) {
+                const [ingredientes] = yield database_1.default.query('SELECT * FROM ingredientes WHERE receta_id = ?', [receta.id]);
+                recetasConIngredientes.push({ receta, ingredientes });
+            }
+            res.json(recetasConIngredientes);
         });
     }
-    // aun esta pendiente la confirmacion para que se pueda usar 
-    // public async getOne (req: Request, res: Response):  Promise<any> {
-    //     const {id} = req.params;
-    //     const [rows, fields] = await pool.query('SELECT * FROM materia_prima WHERE id =?',[id]);
-    //     console.log(rows);
-    //     res.json({text:'econtrado' });
-    // }
     getOne(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            const [producto_terminado] = yield database_1.default.query('SELECT * FROM producto_terminado WHERE  id = ?', [id]);
-            console.log(producto_terminado);
-            // res.json({text:'econtrado'});
-            res.json(producto_terminado);
+            const receta = yield database_1.default.query('SELECT * FROM recetas WHERE id = ?', [id]);
+            if (receta.length > 0) {
+                const [ingredientes] = yield database_1.default.query('SELECT * FROM ingredientes WHERE receta_id = ?', [id]);
+                res.json({ receta: receta[0], ingredientes });
+            }
+            else {
+                res.status(404).json({ message: 'Receta no encontrada' });
+            }
         });
     }
-    // public getOne(req: Request, res: Response){
-    //     res.json({text: 'ide ingresado: '+ req.params.id})
-    // }
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            yield database_1.default.query('INSERT INTO producto_terminado set ? ', [req.body]);
-            res.json({ message: 'nuevo producto terminado ingresaso . ' });
+            const { nombre, imagen, ingredientes } = req.body;
+            const newReceta = {
+                nombre,
+                imagen,
+            };
+            const result = yield database_1.default.query('INSERT INTO recetas SET ?', [newReceta]);
+            const recetaId = result.insertId;
+            const newIngredientes = ingredientes.map((ingrediente) => {
+                return [recetaId, ingrediente.materia_prima, ingrediente.cantidad, ingrediente.unidad_medida];
+            });
+            yield database_1.default.query('INSERT INTO ingredientes (receta_id, materia_prima, cantidad, unidad_medida) VALUES ?', [newIngredientes]);
+            res.json({ message: 'Receta guardada' });
         });
     }
     update(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            yield database_1.default.query('UPDATE producto_terminado set ? WHERE id = ?', [req.body, id]);
-            res.json({ message: ' se actualizo el elemento' });
+            const { nombre, imagen, ingredientes } = req.body;
+            const updatedReceta = {
+                nombre,
+                imagen,
+            };
+            yield database_1.default.query('UPDATE recetas SET ? WHERE id = ?', [updatedReceta, id]);
+            yield database_1.default.query('DELETE FROM ingredientes WHERE receta_id = ?', [id]);
+            const newIngredientes = ingredientes.map((ingrediente) => {
+                return [id, ingrediente.materia_prima, ingrediente.cantidad, ingrediente.unidad_medida];
+            });
+            yield database_1.default.query('INSERT INTO ingredientes (receta_id, materia_prima, cantidad, unidad_medida) VALUES ?', [newIngredientes]);
+            res.json({ message: 'Receta actualizada' });
         });
     }
     delete(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            yield database_1.default.query('DELETE FROM producto_terminado WHERE id = ?', [id]);
-            res.json({ message: ' Se a eliminado un elemento' });
+            yield database_1.default.query('DELETE FROM recetas WHERE id = ?', [id]);
+            res.json({ message: 'Receta eliminada' });
         });
     }
 }

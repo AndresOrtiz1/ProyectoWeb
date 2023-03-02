@@ -8,206 +8,64 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.recetasController = void 0;
-const RECETAS = [
-    {
-        "id": 1,
-        "nombrereceta": "Pizza",
-        "ingredientes": [
-            {
-                "producto": "Harina",
-                "cantidad": 1
-            },
-            {
-                "producto": "tomate riñon",
-                "cantidad": 1
-            },
-            {
-                "producto": "Queso mozarella",
-                "cantidad": 1
-            },
-            {
-                "producto": "Jamón",
-                "cantidad": 2
-            },
-            {
-                "producto": "pasta de tomate",
-                "cantidad": 1
-            },
-            {
-                "producto": "levadura",
-                "cantidad": 1
-            },
-            {
-                "producto": "aceite",
-                "cantidad": 1
-            }
-        ]
-    },
-    {
-        "id": 2,
-        "nombrereceta": "Lasaña de Carne",
-        "ingredientes": [
-            {
-                "producto": "Mantequilla",
-                "cantidad": 1
-            },
-            {
-                "producto": "Queso mozarella",
-                "cantidad": 1
-            },
-            {
-                "producto": "Apio",
-                "cantidad": 1
-            },
-            {
-                "producto": "Pimiento verde",
-                "cantidad": 1
-            },
-            {
-                "producto": "Pimiento rojo",
-                "cantidad": 1
-            },
-            {
-                "producto": "pasta de tomate",
-                "cantidad": 1
-            },
-            {
-                "producto": "Ajo",
-                "cantidad": 2
-            },
-            {
-                "producto": "Harina",
-                "cantidad": 1
-            },
-            {
-                "producto": "Leche evaporada",
-                "cantidad": 1
-            },
-            {
-                "producto": "Cebolla perla",
-                "cantidad": 1
-            },
-            {
-                "producto": "Salsa de tomate",
-                "cantidad": 1
-            },
-            {
-                "producto": "Carne de Res molida",
-                "cantidad": 3
-            },
-            {
-                "producto": "Pasta para Lasaña",
-                "cantidad": 1
-            }
-        ]
-    },
-    {
-        "id": 3,
-        "nombrereceta": "Lasaña de Pollo",
-        "ingredientes": [
-            {
-                "producto": "Mantequilla",
-                "cantidad": 1
-            },
-            {
-                "producto": "Queso mozarella",
-                "cantidad": 1
-            },
-            {
-                "producto": "Apio",
-                "cantidad": 1
-            },
-            {
-                "producto": "Pimiento verde",
-                "cantidad": 1
-            },
-            {
-                "producto": "Pimiento rojo",
-                "cantidad": 1
-            },
-            {
-                "producto": "pasta de tomate",
-                "cantidad": 1
-            },
-            {
-                "producto": "Ajo",
-                "cantidad": 2
-            },
-            {
-                "producto": "Harina",
-                "cantidad": 1
-            },
-            {
-                "producto": "Leche evaporada",
-                "cantidad": 1
-            },
-            {
-                "producto": "Cebolla perla",
-                "cantidad": 1
-            },
-            {
-                "producto": "Salsa de tomate",
-                "cantidad": 1
-            },
-            {
-                "producto": "Pollo",
-                "cantidad": 3
-            },
-            {
-                "producto": "Pasta para Lasaña",
-                "cantidad": 1
-            }
-        ]
-    },
-    {
-        "id": 4,
-        "nombrereceta": "Pasta Boloñesa",
-        "ingredientes": [
-            {
-                "producto": "mantequilla",
-                "cantidad": 1
-            },
-            {
-                "producto": "aceite",
-                "cantidad": 1
-            },
-            {
-                "producto": "cebolla perla",
-                "cantidad": 1
-            },
-            {
-                "producto": "Carne de Res molida",
-                "cantidad": 3
-            },
-            {
-                "producto": "pasta de tomate",
-                "cantidad": 2
-            },
-            {
-                "producto": "spaghetti",
-                "cantidad": 1
-            }
-        ]
-    }
-];
-class RecetasController {
-    list_recetas(req, res) {
+exports.producto_terminadoController = void 0;
+const database_1 = __importDefault(require("../database"));
+class Producto_terminadoController {
+    // public async list_materia_prima (req: Request, res: Response) {
+    //     const [rows, fields] = await pool.query('SELECT * FROM materia_prima');
+    //     /*const materia_prima = await pool.query('SELECT * FROM materia_prima');
+    //     console.log(materia_prima);*/
+    //     res.json(rows);
+    // }
+    list_producto_terminado(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            res.json(RECETAS);
+            const [producto_terminado] = yield database_1.default.query(' SELECT * FROM producto_terminado  ');
+            res.json(producto_terminado);
         });
     }
+    // aun esta pendiente la confirmacion para que se pueda usar 
+    // public async getOne (req: Request, res: Response):  Promise<any> {
+    //     const {id} = req.params;
+    //     const [rows, fields] = await pool.query('SELECT * FROM materia_prima WHERE id =?',[id]);
+    //     console.log(rows);
+    //     res.json({text:'econtrado' });
+    // }
     getOne(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            const receta = RECETAS.find((receta) => receta.id === Number(id));
-            if (!receta) {
-                return res.status(404).json({ text: "Receta no encontrada" });
-            }
-            return res.json(receta);
+            const [producto_terminado] = yield database_1.default.query('SELECT * FROM producto_terminado WHERE  id = ?', [id]);
+            console.log(producto_terminado);
+            // res.json({text:'econtrado'});
+            res.json(producto_terminado);
+        });
+    }
+    // public getOne(req: Request, res: Response){
+    //     res.json({text: 'ide ingresado: '+ req.params.id})
+    // }
+    create(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            yield database_1.default.query('INSERT INTO producto_terminado set ? ', [req.body]);
+            res.json({ message: 'nuevo producto terminado ingresaso . ' });
+        });
+    }
+    update(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { id } = req.params;
+            yield database_1.default.query('UPDATE producto_terminado set ? WHERE id = ?', [req.body, id]);
+            res.json({ message: ' se actualizo el elemento' });
+        });
+    }
+    delete(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { id } = req.params;
+            yield database_1.default.query('DELETE FROM producto_terminado WHERE id = ?', [id]);
+            res.json({ message: ' Se a eliminado un elemento' });
         });
     }
 }
-exports.recetasController = new RecetasController();
-exports.default = exports.recetasController;
+exports.producto_terminadoController = new Producto_terminadoController();
+exports.default = exports.producto_terminadoController;
