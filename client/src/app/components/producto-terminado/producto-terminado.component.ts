@@ -59,7 +59,7 @@ export class ProductoTerminadoComponent implements OnInit {
 
   mateiraP2: MateriaPrima = { nombre: '', cantidad: '', unidad_medida: '' };
   materiasPrimasAgregadas: MateriaPrima[] = [];
-  
+
   agregarIngrediente() {
     this.materiasPrimasAgregadas.push({
       nombre: this.mateiraP.nombre,
