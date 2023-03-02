@@ -346,4 +346,5 @@ eliminarIngrediente(ingrediente: Ingrediente) {
     this.ingredientesAgregados.splice(index, 1);
   }
 }
+
 }
