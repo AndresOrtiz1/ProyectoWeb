@@ -52,7 +52,28 @@ export class ProductoTerminadoComponent implements OnInit {
       complete: () => console.info('complete')
     })
   }
+  ingredientes: string[] = ['Tomate', 'Lechuga', 'Queso', 'Carne'];
+  unidadesDeMedida: string[] = ['Kg', 'L', 'Unidad'];
+  nuevoIngrediente: Ingrediente = { ingrediente: '', cantidad: '', unidad: '' };
+  ingredientesAgregados: Ingrediente[] = [];
 
+  mateiraP2: MateriaPrima = { nombre: '', cantidad: '', unidad_medida: '' };
+  materiasPrimasAgregadas: MateriaPrima[] = [];
+  
+  agregarIngrediente() {
+    this.materiasPrimasAgregadas.push({
+      nombre: this.mateiraP.nombre,
+      cantidad: this.mateiraP.cantidad,
+      unidad_medida: this.mateiraP.unidad_medida
+    });
+    this.mateiraP = { nombre: '', cantidad: '', unidad_medida: '' };
+  }
+  eliminarIngrediente(materiaPrima: MateriaPrima) {
+    const index = this.materiasPrimasAgregadas.indexOf(materiaPrima);
+    if (index !== -1) {
+      this.materiasPrimasAgregadas.splice(index, 1);
+    }
+  }
   
   produc: Producto_terminado= {
     id: 0,
@@ -326,24 +347,5 @@ validarCantidadAlertaEd(cantidad_terminado: string): boolean {
 }
 
 
-ingredientes: string[] = ['Tomate', 'Lechuga', 'Queso', 'Carne'];
-unidadesDeMedida: string[] = ['Kg', 'L', 'Unidad'];
-nuevoIngrediente: Ingrediente = { ingrediente: '', cantidad: '', unidad: '' };
-ingredientesAgregados: Ingrediente[] = [];
-
-agregarIngrediente() {
-  this.ingredientesAgregados.push({
-    ingrediente: this.nuevoIngrediente.ingrediente,
-    cantidad: this.nuevoIngrediente.cantidad,
-    unidad: this.nuevoIngrediente.unidad
-  });
-  this.nuevoIngrediente = { ingrediente: '', cantidad: '', unidad: '' };
-}
-
-eliminarIngrediente(ingrediente: Ingrediente) {
-  const index = this.ingredientesAgregados.indexOf(ingrediente);
-  if (index !== -1) {
-    this.ingredientesAgregados.splice(index, 1);
-  }
-}
+ 
 }

@@ -200,51 +200,57 @@
         </div>
         <div class="modal-body">
 
-            <div class="form-group">
-                <label for="imagen">Imagen</label>
-               
-              </div>
-              <div class="form-group">
-                <label for="ingrediente">Ingrediente</label>
-                <select class="form-control" id="ingrediente" name="ingrediente" [(ngModel)]="nuevoIngrediente.ingrediente">
-                  <option *ngFor="let ingrediente of ingredientes" [value]="ingrediente">{{ingrediente}}</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="cantidad">Cantidad</label>
-                <input type="text" class="form-control" id="cantidad" name="cantidad" [(ngModel)]="nuevoIngrediente.cantidad">
-              </div>
-              <div class="form-group">
-                <label for="unidad">Unidad de medida</label>
-                <select class="form-control" id="unidad" name="unidad" [(ngModel)]="nuevoIngrediente.unidad">
-                  <option *ngFor="let unidad of unidadesDeMedida" [value]="unidad">{{unidad}}</option>
-                </select>
-              </div>
-              <button type="button" class="btn btn-primary" (click)="agregarIngrediente()">Agregar ingrediente</button>
+          <label for="Imagen" class="col-form-label">Imagen</label>
+          <input type="url" class="form-control" id="Imagen" required [(ngModel)]="mateiraP.imagen" name="Imagen"
+            (blur)="mateiraP.imagen && validarImagenAlerta(mateiraP.imagen) " placeholder="https://...">
+          <div class="errI"> Ingrese la url de la imagen del elemento </div>
+          <div class="valI">URL valida</div>
 
-              <!-- Tabla de ingredientes agregados -->
-<table class="table">
-    <thead>
-      <tr>
-        <th>Ingrediente</th>
-        <th>Cantidad</th>
-        <th>Unidad de medida</th>
-        <th>Acciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let ingrediente of ingredientesAgregados">
-        <td>{{ingrediente.ingrediente}}</td>
-        <td>{{ingrediente.cantidad}}</td>
-        <td>{{ingrediente.unidad}}</td>
-        <td>
-          <button type="button" class="btn btn-danger" (click)="eliminarIngrediente(ingrediente)">Eliminar</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
 
-          
+          <div class="form-group">
+            <label for="ingrediente">Ingrediente</label>
+            <select class="form-control" id="ingrediente" name="ingrediente" [(ngModel)]="mateiraP2.nombre">
+              <option name="ingrediente" *ngFor="let materia_prima of materias_primasArr"
+                [value]="materia_prima.nombre">{{materia_prima.nombre}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="cantidad">Cantidad</label>
+            <input type="text" class="form-control" id="cantidad" name="cantidad" [(ngModel)]="mateiraP2.cantidad">
+          </div>
+          <div class="form-group">
+            <label for="unidad">Unidad de medida</label>
+            <select class="form-control" id="unidad" name="unidad" [(ngModel)]="mateiraP2.unidad_medida">
+              <option name="ingrediente" *ngFor="let materia_prima of materias_primasArr"
+                [value]="materia_prima.unidad_medida">{{materia_prima.unidad_medida}}</option>
+            </select>
+          </div>
+          <button type="button" class="btn btn-primary" (click)="agregarIngrediente()">Agregar ingrediente</button>
+
+          <!-- Tabla de ingredientes agregados -->
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Ingrediente</th>
+                <th>Cantidad</th>
+                <th>Unidad de medida</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let ingrediente of ingredientesAgregados">
+                <td>{{ingrediente.ingrediente}}</td>
+                <td>{{ingrediente.cantidad}}</td>
+                <td>{{ingrediente.unidad}}</td>
+                <td>
+                  <button type="button" class="btn btn-danger"
+                    (click)="eliminarIngrediente(ingrediente)">Eliminar</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+
         </div>
       </div>
     </div>
