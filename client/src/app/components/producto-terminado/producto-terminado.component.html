@@ -199,7 +199,10 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-
+            <div class="form-group">
+                <label for="nombre">Nombre Receta</label>
+                <input type="text" class="form-control" id="nombre" name="nombre">
+              </div>
           <label for="Imagen" class="col-form-label">Imagen</label>
           <input type="url" class="form-control" id="Imagen" required [(ngModel)]="mateiraP.imagen" name="Imagen"
             (blur)="mateiraP.imagen && validarImagenAlerta(mateiraP.imagen) " placeholder="https://...">
