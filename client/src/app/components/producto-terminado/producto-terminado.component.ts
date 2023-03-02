@@ -62,11 +62,11 @@ export class ProductoTerminadoComponent implements OnInit {
 
   agregarIngrediente() {
     this.materiasPrimasAgregadas.push({
-      nombre: this.mateiraP.nombre,
-      cantidad: this.mateiraP.cantidad,
-      unidad_medida: this.mateiraP.unidad_medida
+      nombre: this.mateiraP2.nombre,
+      cantidad: this.mateiraP2.cantidad,
+      unidad_medida: this.mateiraP2.unidad_medida
     });
-    this.mateiraP = { nombre: '', cantidad: '', unidad_medida: '' };
+    this.mateiraP2 = { nombre: '', cantidad: '', unidad_medida: '' };
   }
   eliminarIngrediente(materiaPrima: MateriaPrima) {
     const index = this.materiasPrimasAgregadas.indexOf(materiaPrima);

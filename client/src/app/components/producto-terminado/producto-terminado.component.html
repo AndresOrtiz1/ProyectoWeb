@@ -241,13 +241,13 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let materia_prima of materiasPrimasAgregadas">
-                <td>{{materia_prima.nombre}}</td>
-                <td>{{materia_prima.cantidad}}</td>
-                <td>{{materia_prima.unidad_medida}}</td>
+              <tr *ngFor="let materia_prima2 of materiasPrimasAgregadas">
+                <td>{{materia_prima2.nombre}}</td>
+                <td>{{materia_prima2.cantidad}}</td>
+                <td>{{materia_prima2.unidad_medida}}</td>
                 <td>
                   <button type="button" class="btn btn-danger"
-                    (click)="eliminarIngrediente(materia_prima)">Eliminar</button>
+                    (click)="eliminarIngrediente(materia_prima2)">Eliminar</button>
                 </td>
               </tr>
             </tbody>
