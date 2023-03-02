@@ -1,6 +1,5 @@
-import { Component, HostBinding, IterableDiffers, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Clientes } from 'src/app/models/clientes.models';
+import { Component, HostBinding, OnInit } from '@angular/core';
+ import { Clientes } from 'src/app/models/clientes.models';
 import { ClientesService } from '../../services/clientes.service'
 
 
@@ -29,10 +28,8 @@ export class ClientesComponent implements OnInit {
   }
 
   clientesArr: any = [];
-  edit: boolean = true;
-  constructor(
-    private ClientesServicesService: ClientesService,
-    private router: Router, private activatedRoute: ActivatedRoute) {
+   constructor(
+    private ClientesServicesService: ClientesService,) {
       this.fechaActual = new Date();
   }
 
@@ -54,7 +51,7 @@ export class ClientesComponent implements OnInit {
   saveNewMP() {
     delete this.clientes.id;
     this.ClientesServicesService.saveClientes(this.clientes).subscribe({
-      next: (v: any) => [this.clientes = v, this.edit = false],
+      next: (v: any) => [this.clientes = v,  ],
       error: (e: any) => console.error(e),
       complete: () => (this.getMP())
     })
@@ -79,7 +76,7 @@ export class ClientesComponent implements OnInit {
   }
   get_MP(id: string) {
     this.ClientesServicesService.getClientes(id).subscribe({
-      next: (v: any) => [[this.clientes] = v, this.edit = true, console.log(id)],
+      next: (v: any) => [[this.clientes] = v,  console.log(id)],
       error: (e: any) => console.error(e),
       complete: () => console.log('get cliente complete' + id)
     })
@@ -160,7 +157,7 @@ export class ClientesComponent implements OnInit {
 
   validarApellidoCliente(apellidosCliente: string): boolean {
     // los apellidos deben tener 2 letras  mayusculas y las demas minusculas
-    return /^([A-Za-z ]{2,25})$/.test(apellidosCliente);
+    return /^([A-Z]{2})([0-9]{3})$/.test(apellidosCliente);
   }
 
   validarApellidoClienteAlerta(apellidosCliente: string): boolean {
@@ -184,7 +181,7 @@ export class ClientesComponent implements OnInit {
 
   validarCorreoCliente(correoCliente: string): boolean {
  
-    return /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/.test(correoCliente);
+    return /^(https?:\/\/[\w\-]+(\.[\w\-]+)+[/#?]?.*)$/.test(correoCliente);
   }
 
   validarCorreoClienteAlerta(correoCliente: string): boolean {
@@ -207,7 +204,7 @@ export class ClientesComponent implements OnInit {
   }
   validarEdadCliente(edadCliente: string): boolean {
 
-    return /^([0-9]{2})$/.test(edadCliente);
+    return /^([0-9]{1,5})$/.test(edadCliente);
   }
 
   validarEdadClienteAlerta(edadCliente: string): boolean {
@@ -229,29 +226,7 @@ export class ClientesComponent implements OnInit {
     }
   }
 
-  // validarDireccionCliente(direccionCliente: string): boolean {
-
-  //   return /^([A-Za-z ]{2,50})$/.test(direccionCliente);
-  // }
-
-  // validarDireccionClienteAlerta(direccionCliente: string): boolean {
-  //   // activaciond e los mensajes de error o aceptacion
-  //   if (!this.validarDireccionCliente(direccionCliente)) {
-  //     const element = document.querySelector('.errDir') as HTMLElement;
-  //     element.style.display = "block";
-  //     const element2 = document.querySelector('.valDir') as HTMLElement;
-  //     element2.style.display = "none";
-
-  //     return false;
-  //   } else {
-  //     const element = document.querySelector('.errDir') as HTMLElement;
-  //     element.style.display = "none";
-  //     const element2 = document.querySelector('.valDir') as HTMLElement;
-  //     element2.style.display = "block";
-
-  //     return true;
-  //   }
-  // }
+ 
 
   validarTelefonoCliente(telefonoCliente: string): boolean {
 
@@ -277,35 +252,10 @@ export class ClientesComponent implements OnInit {
     }
   }
 
-
-  /// validacion EDIT    -------------------------------------------------
-
-  // validar cedula 
-  validarCedulaClienteED(cedulaCliente: string): boolean {
-    // validacion de cedula conste de 10 numeros
-    return /^([0-9]{10})$/.test(cedulaCliente);
-  }
-
-  validarCedulaClienteAlertaED(cedulaCliente: string): boolean {
-    // activaciond e los mensajes de error o aceptacion
-    if (!this.validarCedulaClienteED(cedulaCliente)) {
-      const element = document.querySelector('.errCedED') as HTMLElement;
-      element.style.display = "block";
-      const element2 = document.querySelector('.valCedED') as HTMLElement;
-      element2.style.display = "none";
-
-      return false;
-    } else {
-      const element = document.querySelector('.errCedED') as HTMLElement;
-      element.style.display = "none";
-      const element2 = document.querySelector('.valCedED') as HTMLElement;
-      element2.style.display = "block";
-
-      return true;
-    }
-  }
+ 
+ 
   //EDICION VALIDACIONES
-  // validar Nombre 
+ 
   validarNombreClienteED(nombresCliente: string): boolean {
     // solo tiene letras y no numeros
     return /^([A-Za-z ]{2,25})$/.test(nombresCliente);
@@ -332,7 +282,7 @@ export class ClientesComponent implements OnInit {
 
   validarApellidoClienteED(apellidosCliente: string): boolean {
     // los apellidos deben tener 2 letras  mayusculas y las demas minusculas
-    return /^([A-Za-z ]{2,25})$/.test(apellidosCliente);
+    return /^([A-Z]{2})([0-9]{3})$/.test(apellidosCliente);
   }
 
   validarApellidoClienteAlertaED(apellidosCliente: string): boolean {
@@ -356,7 +306,7 @@ export class ClientesComponent implements OnInit {
 
   validarCorreoClienteED(correoCliente: string): boolean {
     // el codigo debe tener 2 letras  mayusculas y 3 numeros
-    return /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/.test(correoCliente);
+    return /^(https?:\/\/[\w\-]+(\.[\w\-]+)+[/#?]?.*)$/.test(correoCliente);
   }
 
   validarCorreoClienteAlertaED(correoCliente: string): boolean {
@@ -377,9 +327,10 @@ export class ClientesComponent implements OnInit {
       return true;
     }
   }
+
   validarEdadClienteED(edadCliente: string): boolean {
 
-    return /^([0-9]{3})$/.test(edadCliente);
+    return /^([0-9]{1,5})$/.test(edadCliente);
   }
 
   validarEdadClienteAlertaED(edadCliente: string): boolean {
@@ -400,54 +351,7 @@ export class ClientesComponent implements OnInit {
       return true;
     }
   }
-  // validarDireccionClienteED(direccionCliente: string): boolean {
-
-  //   return /^([A-Za-z ]{2,50})$/.test(direccionCliente);
-  // }
-
-  // validarDireccionClienteAlertaED(direccionCliente: string): boolean {
-  //   // activaciond e los mensajes de error o aceptacion
-  //   if (!this.validarDireccionClienteED(direccionCliente)) {
-  //     const element = document.querySelector('.errDirED') as HTMLElement;
-  //     element.style.display = "block";
-  //     const element2 = document.querySelector('.valDirED') as HTMLElement;
-  //     element2.style.display = "none";
-
-  //     return false;
-  //   } else {
-  //     const element = document.querySelector('.errDirED') as HTMLElement;
-  //     element.style.display = "none";
-  //     const element2 = document.querySelector('.valDirED') as HTMLElement;
-  //     element2.style.display = "block";
-
-  //     return true;
-  //   }
-  // }
-  validarTelefonoClienteED(telefonoCliente: string): boolean {
-
-    return /^([0-9]{10})$/.test(telefonoCliente);
-  }
-
-  validarTelefonoClienteAlertaED(telefonoCliente: string): boolean {
-    // activaciond e los mensajes de error o aceptacion
-    if (!this.validarTelefonoClienteED(telefonoCliente)) {
-      const element = document.querySelector('.errTelED') as HTMLElement;
-      element.style.display = "block";
-      const element2 = document.querySelector('.valTelED') as HTMLElement;
-      element2.style.display = "none";
-
-      return false;
-    } else {
-      const element = document.querySelector('.errTelED') as HTMLElement;
-      element.style.display = "none";
-      const element2 = document.querySelector('.valTelED') as HTMLElement;
-      element2.style.display = "block";
-
-      return true;
-    }
-  }
-
-
-  /// inpresion de reportes 
+ 
+   
 
 }

@@ -2,8 +2,7 @@ import { Component, HostBinding, OnInit } from '@angular/core';
 import { MateriaPrima } from 'src/app/models/materia_prima.models';
 
 import { MateriaPrimaServicesService } from '../../services/materia-prima.services.service'
-import { RecetasService } from '../../services/recetas.service'
-import { Recetas, Ingrediente } from 'src/app/models/recetas.models'
+ 
 
 @Component({
   selector: 'app-materia-prima',
@@ -16,32 +15,9 @@ import { Recetas, Ingrediente } from 'src/app/models/recetas.models'
 export class MateriaPrimaComponent implements OnInit {
 
   @HostBinding('class') classes = 'modal-body';
-  ingredienteP: Ingrediente = {
-    producto: '',
-    cantidad: 0,
-  }
+ 
 
-  recetaP: Recetas = {
-    id: 0,
-    nombrereceta: '',
-    // ingredientes: [this.ingredienteP],
-
-  }
-  recetasArr: Recetas[] = [];
-  getREC() {
-    this.recetasService.getRecetaslist().subscribe({
-      next: (v: any) => { this.recetasArr = v; console.log(this.recetasArr) },
-      error: (e: any) => console.error(e),
-      complete: () => console.info('receta obtenida')
-    })
-  }
-  get_REC(id: string) {
-    this.recetasService.getRecetas(id).subscribe({
-      next: (v: any) => [[this.recetaP] = v, console.log(id)],
-      error: (e: any) => console.error(e),
-      complete: () => console.log('get materia prima complete' + id)
-    })
-  }
+  
 
   mateiraP: MateriaPrima = {
     id: 0,
@@ -61,7 +37,7 @@ export class MateriaPrimaComponent implements OnInit {
 
   constructor(
     private materiaPrimaServicesService: MateriaPrimaServicesService,
-    private recetasService: RecetasService,
+    
 
   ) {
     this.fechaActual = new Date();
@@ -69,8 +45,7 @@ export class MateriaPrimaComponent implements OnInit {
   ngOnInit() {
     this.codigo = Math.floor(10000 + Math.random() * 90000);
     this.getMP();
-    this.getREC();
- 
+  
   }
 
   imprimir(): void {
@@ -211,7 +186,7 @@ export class MateriaPrimaComponent implements OnInit {
 
   validarCantidad(cantidad: string): boolean {
     // el codigo debe tener 2 letras  mayusculas y 3 numeros
-    return /^([0-9]{1,4})$/.test(cantidad);
+    return /^([0-9]{1,5})$/.test(cantidad);
   }
 
   validarCantidadAlerta(cantidad: string): boolean {
@@ -335,7 +310,7 @@ export class MateriaPrimaComponent implements OnInit {
 
   validarCantidadEd(cantidad: string): boolean {
     // el codigo debe tener 2 letras  mayusculas y 3 numeros
-    return /^([0-9]{1,4})$/.test(cantidad);
+    return /^([0-9]{1,5})$/.test(cantidad);
   }
 
   validarCantidadAlertaEd(cantidad: string): boolean {
@@ -380,7 +355,5 @@ export class MateriaPrimaComponent implements OnInit {
       return true;
     }
   }
-
-  /// inpresion de reportes 
-
+ 
 }

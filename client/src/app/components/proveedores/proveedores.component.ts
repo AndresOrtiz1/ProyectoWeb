@@ -2,6 +2,9 @@ import { Component, HostBinding, IterableDiffers, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router'
 import { Proveedores } from 'src/app/models/proveedores.models';
 import { ProveedoresService } from '../../services/proveedores.service'
+import { Clientes } from 'src/app/models/clientes.models';
+import { ClientesService } from '../../services/clientes.service'
+
 @Component({
   selector: 'app-proveedores',
   templateUrl: './proveedores.component.html',
@@ -10,15 +13,14 @@ import { ProveedoresService } from '../../services/proveedores.service'
     <button (click)="imprimir()">Imprimir</button>
   `
 })
-export class ProveedoresComponent implements OnInit{
-  
-  @HostBinding('class') classes = 'modal-body';
-  API_URI = 'http://localhost:3000/api';
+export class ProveedoresComponent implements OnInit {
 
-  provee: Proveedores= {
+  @HostBinding('class') classes = 'modal-body';
+
+  provee: Proveedores = {
     id: 0,
     codigo: '',
-    NombreApellido:'',
+    NombreApellido: '',
     Cedula: '',
     NumeroCelular: '',
     CorreoElectronico: '',
@@ -32,16 +34,35 @@ export class ProveedoresComponent implements OnInit{
   proveedoresArr: any = [];
   codigo!: number;
   fechaActual: Date;
-  edit : boolean = true;
+
+  clientes: Clientes = {
+    id: 0,
+    nombresCliente: '',
+    apellidosCliente: '',
+    cedulaCliente: '',
+    correoCliente: '',
+    edadCliente: '',
+    direccionCliente: '',
+    telefonoCliente: ''
+  }
+
+  clientesArr: any = [];
+
   constructor(
-    private ProveedoresService: ProveedoresService, private router: Router , private activatedRoute : ActivatedRoute) 
-    {
+    private ProveedoresService: ProveedoresService, private ClientesServicesService: ClientesService,) {
     this.fechaActual = new Date();
   }
-  
+  getMC() {
+    this.ClientesServicesService.getClienteslist().subscribe({
+      next: (v: any) => this.clientesArr = v,
+      error: (e: any) => console.error(e),
+      complete: () => console.info('complete')
+    })
+  }
   ngOnInit() {
     this.codigo = Math.floor(10000 + Math.random() * 90000);
     this.getMP();
+    this.getMC();
   }
 
   imprimir(): void {
@@ -49,13 +70,13 @@ export class ProveedoresComponent implements OnInit{
   }
 
   saveNewMP() {
-     
+
     delete this.provee.id;
 
     this.ProveedoresService.saveProveedores(this.provee).subscribe({
-      next: (v: any) => [this.provee = v,this.edit = false ],
+      next: (v: any) => [this.provee = v,],
       error: (e: any) => console.error(e),
-      complete: () => ( this.getMP())
+      complete: () => (this.getMP())
     })
   }
 
@@ -64,54 +85,54 @@ export class ProveedoresComponent implements OnInit{
       next: (v: any) => this.proveedoresArr = v,
       error: (e: any) => console.error(e),
       complete: () => console.info('complete')
-      
     })
   }
 
+
   deleteMP(id: any) {
     this.ProveedoresService.deleteProveedores(id).subscribe({
-      next: (v: any) => [console.log(v),console.log(`se esta eliminando el elemento ${id}`)],
+      next: (v: any) => [console.log(v), console.log(`se esta eliminando el elemento ${id}`)],
       error: (e: any) => console.error(e),
       complete: () => this.getMP(),
 
     })
 
   }
-  get_MP(id : string) {
+  get_MP(id: string) {
     this.ProveedoresService.getProveedores(id).subscribe({
-      next: (v: any) => [[this.provee] = v, this.edit = true, console.log(id)],
+      next: (v: any) => [[this.provee] = v, console.log(id)],
       error: (e: any) => console.error(e),
-      complete: () => console.log('get proveedores complete'+id)
+      complete: () => console.log('get proveedores complete' + id)
     })
 
 
   }
 
-  updateMP(id: any){
-    this.ProveedoresService.updateProveedores(id,this.provee).subscribe({
+  updateMP(id: any) {
+    this.ProveedoresService.updateProveedores(id, this.provee).subscribe({
       next: (v: any) => [this.provee, console.log(v), console.log([this.provee], this.provee), console.log(id)],
       error: (e: any) => console.error(e),
-      complete: () => [this.getMP()]      
+      complete: () => [this.getMP()]
     })
-     
-     
+
+
   }
 
-  reset(){
-    this.provee.id= 0;
+  reset() {
+    this.provee.id = 0;
     this.provee.codigo = '';
-    this.provee.NombreApellido='';
-    this.provee.Cedula='';
-    this.provee.NumeroCelular='';
-    this.provee.CorreoElectronico='';
-    this.provee.Direccion='';
-    this.provee.NombreEmpresa='';
-    this.provee.TelefonoEmpresa='';
-    this.provee.DireccionEmpresa='';
-    this.provee.CorreoEmpresa='';
+    this.provee.NombreApellido = '';
+    this.provee.Cedula = '';
+    this.provee.NumeroCelular = '';
+    this.provee.CorreoElectronico = '';
+    this.provee.Direccion = '';
+    this.provee.NombreEmpresa = '';
+    this.provee.TelefonoEmpresa = '';
+    this.provee.DireccionEmpresa = '';
+    this.provee.CorreoEmpresa = '';
   }
 
-// validar codigo 
+  // validar codigo 
   validarCodigo(codigo: string): boolean {
     // el codigo debe tener 2 letras  mayusculas y 3 numeros
     return /^([A-Z]{2})([0-9]{3})$/.test(codigo);
@@ -139,7 +160,7 @@ export class ProveedoresComponent implements OnInit{
   // validar Nombre 
   validarNombre(NombreApellido: string): boolean {
     // el codigo debe tener 2 letras  mayusculas y 3 numeros
-    return /^([A-Z a-z]{2,25})([ ])([A-Z a-z]{2,25})$/.test(NombreApellido);
+    return /^([A-Za-z ]{2,25})$/.test(NombreApellido);
   }
 
   validarNombreAlerta(NombreApellido: string): boolean {
@@ -163,7 +184,7 @@ export class ProveedoresComponent implements OnInit{
 
   validarCedula(Cedula: string): boolean {
     // el codigo debe tener 2 letras  mayusculas y 3 numeros
-    return /^[0-9]{10}$/.test(Cedula);
+    return /^([0-9]{1,5})$/.test(Cedula);
   }
 
   validarCedulaAlerta(Cedula: string): boolean {
@@ -187,7 +208,7 @@ export class ProveedoresComponent implements OnInit{
 
   validarCelular(NumeroCelular: string): boolean {
     // el codigo debe tener 2 letras  mayusculas y 3 numeros
-    return /^\+593\ ([0-9]){9}$/.test(NumeroCelular);
+    return /^([0-9]{1,4}\.[0-9]{1,2})$/.test(NumeroCelular);
   }
 
   validarCelularAlerta(NumeroCelular: string): boolean {
@@ -209,296 +230,105 @@ export class ProveedoresComponent implements OnInit{
     }
   }
 
-  validarCorreo(CorreoElectronico: string): boolean {
+
+  /// validacion EDIT    -------------------------------------------------
+
+  validarCodigoEd(codigo: string): boolean {
     // el codigo debe tener 2 letras  mayusculas y 3 numeros
-    return /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/.test(CorreoElectronico);
+    return /^([A-Z]{2})([0-9]{3})$/.test(codigo);
   }
 
-  validarCorreoAlerta(CorreoElectronico: string): boolean {
+  validarCodigoAlertaEd(codigo: string): boolean {
     // activaciond e los mensajes de error o aceptacion
-    if (!this.validarCorreo(CorreoElectronico)) {
-      const element = document.querySelector('.errCorr') as HTMLElement;
+    if (!this.validarCodigoEd(codigo)) {
+      const element = document.querySelector('.errCEd') as HTMLElement;
       element.style.display = "block";
-      const element2 = document.querySelector('.valCorr') as HTMLElement;
+      const element2 = document.querySelector('.valCEd') as HTMLElement;
       element2.style.display = "none";
 
       return false;
     } else {
-      const element = document.querySelector('.errCorr') as HTMLElement;
+      const element = document.querySelector('.errCEd') as HTMLElement;
       element.style.display = "none";
-      const element2 = document.querySelector('.valCorr') as HTMLElement;
-      element2.style.display = "block";
-
-      return true;
-    }
-  }
-  
-  // validar Nombre Empresa
-  validarNombreEmpresa(NombreEmpresa: string): boolean {
-    // el codigo debe tener 2 letras  mayusculas y 3 numeros
-    return /^([A-Za-z ]{1,25})$/.test(NombreEmpresa);
-  }
-
-  validarNombreEmpresaAlerta(NombreEmpresa: string): boolean {
-    // activaciond e los mensajes de error o aceptacion
-    if (!this.validarNombreEmpresa(NombreEmpresa)) {
-      const element = document.querySelector('.errNem') as HTMLElement;
-      element.style.display = "block";
-      const element2 = document.querySelector('.valNem') as HTMLElement;
-      element2.style.display = "none";
-
-      return false;
-    } else {
-      const element = document.querySelector('.errNem') as HTMLElement;
-      element.style.display = "none";
-      const element2 = document.querySelector('.valNem') as HTMLElement;
+      const element2 = document.querySelector('.valCEd') as HTMLElement;
       element2.style.display = "block";
 
       return true;
     }
   }
 
-  validarCorreoEmpresa(CorreoEmpresa: string): boolean {
+  validarNombreEd(NombreApellido: string): boolean {
     // el codigo debe tener 2 letras  mayusculas y 3 numeros
-    return /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/.test(CorreoEmpresa);
-  }
-  
-  validarCorreoEmpresaAlerta(CorreoEmpresa: string): boolean {
-    // activaciond e los mensajes de error o aceptacion
-    if (!this.validarCorreoEmpresa(CorreoEmpresa)) {
-      const element = document.querySelector('.errCem') as HTMLElement;
-      element.style.display = "block";
-      const element2 = document.querySelector('.valCem') as HTMLElement;
-      element2.style.display = "none";
-  
-      return false;
-    } else {
-      const element = document.querySelector('.errCem') as HTMLElement;
-      element.style.display = "none";
-      const element2 = document.querySelector('.valCem') as HTMLElement;
-      element2.style.display = "block";
-  
-      return true;
-    }
+    return /^([A-Za-z ]{2,25})$/.test(NombreApellido);
   }
 
-  validarTelefonoEmpresa(TelefonoEmpresa: string): boolean {
-    // el codigo debe tener 2 letras  mayusculas y 3 numeros
-    return /^02\ [0-9]{7}$/.test(TelefonoEmpresa);
-  }
-
-  validarTelefonoEmpresaAlerta(TelefonoEmpresa: string): boolean {
+  validarNombreAlertaEd(NombreApellido: string): boolean {
     // activaciond e los mensajes de error o aceptacion
-    if (!this.validarTelefonoEmpresa(TelefonoEmpresa)) {
-      const element = document.querySelector('.errTem') as HTMLElement;
+    if (!this.validarNombreEd(NombreApellido)) {
+      const element = document.querySelector('.errNEd') as HTMLElement;
       element.style.display = "block";
-      const element2 = document.querySelector('.valTem') as HTMLElement;
+      const element2 = document.querySelector('.valNEd') as HTMLElement;
       element2.style.display = "none";
 
       return false;
     } else {
-      const element = document.querySelector('.errTem') as HTMLElement;
+      const element = document.querySelector('.errNEd') as HTMLElement;
       element.style.display = "none";
-      const element2 = document.querySelector('.valTem') as HTMLElement;
+      const element2 = document.querySelector('.valNEd') as HTMLElement;
       element2.style.display = "block";
 
       return true;
     }
   }
 
-/// validacion EDIT    -------------------------------------------------
-
-validarCodigoEd(codigo: string): boolean {
-  // el codigo debe tener 2 letras  mayusculas y 3 numeros
-  return /^([A-Z]{2})([0-9]{3})$/.test(codigo);
-}
-
-validarCodigoAlertaEd(codigo: string): boolean {
-  // activaciond e los mensajes de error o aceptacion
-  if (!this.validarCodigoEd(codigo)) {
-    const element = document.querySelector('.errCEd') as HTMLElement;
-    element.style.display = "block";
-    const element2 = document.querySelector('.valCEd') as HTMLElement;
-    element2.style.display = "none";
-
-    return false;
-  } else {
-    const element = document.querySelector('.errCEd') as HTMLElement;
-    element.style.display = "none";
-    const element2 = document.querySelector('.valCEd') as HTMLElement;
-    element2.style.display = "block";
-
-    return true;
+  validarCedulaEd(Cedula: string): boolean {
+    // el codigo debe tener 2 letras  mayusculas y 3 numeros
+    return /^([0-9]{1,5})$/.test(Cedula);
   }
-}
 
-validarNombreEd(NombreApellido: string): boolean {
-  // el codigo debe tener 2 letras  mayusculas y 3 numeros
-  return /^([A-Z a-z]{2,25})([ ])([A-Z a-z]{2,25})$/.test(NombreApellido);
-}
+  validarCedulaAlertaEd(Cedula: string): boolean {
+    // activaciond e los mensajes de error o aceptacion
+    if (!this.validarCedulaEd(Cedula)) {
+      const element = document.querySelector('.errCEdula') as HTMLElement;
+      element.style.display = "block";
+      const element2 = document.querySelector('.valCEdula') as HTMLElement;
+      element2.style.display = "none";
 
-validarNombreAlertaEd(NombreApellido: string): boolean {
-  // activaciond e los mensajes de error o aceptacion
-  if (!this.validarNombreEd(NombreApellido)) {
-    const element = document.querySelector('.errNEd') as HTMLElement;
-    element.style.display = "block";
-    const element2 = document.querySelector('.valNEd') as HTMLElement;
-    element2.style.display = "none";
+      return false;
+    } else {
+      const element = document.querySelector('.errCEdula') as HTMLElement;
+      element.style.display = "none";
+      const element2 = document.querySelector('.valCEdula') as HTMLElement;
+      element2.style.display = "block";
 
-    return false;
-  } else {
-    const element = document.querySelector('.errNEd') as HTMLElement;
-    element.style.display = "none";
-    const element2 = document.querySelector('.valNEd') as HTMLElement;
-    element2.style.display = "block";
-
-    return true;
+      return true;
+    }
   }
-}
 
-validarCedulaEd(Cedula: string): boolean {
-  // el codigo debe tener 2 letras  mayusculas y 3 numeros
-  return /^[0-9]{10}$/.test(Cedula);
-}
-
-validarCedulaAlertaEd(Cedula: string): boolean {
-  // activaciond e los mensajes de error o aceptacion
-  if (!this.validarCedulaEd(Cedula)) {
-    const element = document.querySelector('.errCEdula') as HTMLElement;
-    element.style.display = "block";
-    const element2 = document.querySelector('.valCEdula') as HTMLElement;
-    element2.style.display = "none";
-
-    return false;
-  } else {
-    const element = document.querySelector('.errCEdula') as HTMLElement;
-    element.style.display = "none";
-    const element2 = document.querySelector('.valCEdula') as HTMLElement;
-    element2.style.display = "block";
-
-    return true;
+  validarCelularEd(NumeroCelular: string): boolean {
+    // el codigo debe tener 2 letras  mayusculas y 3 numeros
+    return /^([0-9]{1,4}\.[0-9]{1,2})$/.test(NumeroCelular);
   }
-}
 
-validarCelularEd(NumeroCelular: string): boolean {
-  // el codigo debe tener 2 letras  mayusculas y 3 numeros
-  return /^\+593\ ([0-9]){9}$/.test(NumeroCelular);
-}
+  validarCelularAlertaEd(NumeroCelular: string): boolean {
+    // activaciond e los mensajes de error o aceptacion
+    if (!this.validarCelularEd(NumeroCelular)) {
+      const element = document.querySelector('.errCelEd') as HTMLElement;
+      element.style.display = "block";
+      const element2 = document.querySelector('.valCelEd') as HTMLElement;
+      element2.style.display = "none";
 
-validarCelularAlertaEd(NumeroCelular: string): boolean {
-  // activaciond e los mensajes de error o aceptacion
-  if (!this.validarCelularEd(NumeroCelular)) {
-    const element = document.querySelector('.errCelEd') as HTMLElement;
-    element.style.display = "block";
-    const element2 = document.querySelector('.valCelEd') as HTMLElement;
-    element2.style.display = "none";
+      return false;
+    } else {
+      const element = document.querySelector('.errCelEd') as HTMLElement;
+      element.style.display = "none";
+      const element2 = document.querySelector('.valCelEd') as HTMLElement;
+      element2.style.display = "block";
 
-    return false;
-  } else {
-    const element = document.querySelector('.errCelEd') as HTMLElement;
-    element.style.display = "none";
-    const element2 = document.querySelector('.valCelEd') as HTMLElement;
-    element2.style.display = "block";
-
-    return true;
+      return true;
+    }
   }
-}
 
-validarCorreoEd(CorreoElectronico: string): boolean {
-  // el codigo debe tener 2 letras  mayusculas y 3 numeros
-  return /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/.test(CorreoElectronico);
-}
-
-validarCorreoAlertaEd(CorreoElectronico: string): boolean {
-  // activaciond e los mensajes de error o aceptacion
-  if (!this.validarCorreoEd(CorreoElectronico)) {
-    const element = document.querySelector('.errCorrEd') as HTMLElement;
-    element.style.display = "block";
-    const element2 = document.querySelector('.valCorrEd') as HTMLElement;
-    element2.style.display = "none";
-
-    return false;
-  } else {
-    const element = document.querySelector('.errCorrEd') as HTMLElement;
-    element.style.display = "none";
-    const element2 = document.querySelector('.valCorrEd') as HTMLElement;
-    element2.style.display = "block";
-
-    return true;
-  }
-}
-
-// validar Nombre Empresa
-validarNombreEmpresaEd(NombreEmpresa: string): boolean {
-  // el codigo debe tener 2 letras  mayusculas y 3 numeros
-  return /^([A-Za-z ]{2,25})$/.test(NombreEmpresa);
-}
-
-validarNombreEmpresaAlertaEd(NombreEmpresa: string): boolean {
-  // activaciond e los mensajes de error o aceptacion
-  if (!this.validarNombreEmpresaEd(NombreEmpresa)) {
-    const element = document.querySelector('.errNemEd') as HTMLElement;
-    element.style.display = "block";
-    const element2 = document.querySelector('.valNemEd') as HTMLElement;
-    element2.style.display = "none";
-
-    return false;
-  } else {
-    const element = document.querySelector('.errNemEd') as HTMLElement;
-    element.style.display = "none";
-    const element2 = document.querySelector('.valNemEd') as HTMLElement;
-    element2.style.display = "block";
-
-    return true;
-  }
-}
-
-validarCorreoEmpresaEd(CorreoEmpresa: string): boolean {
-  // el codigo debe tener 2 letras  mayusculas y 3 numeros
-  return /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/.test(CorreoEmpresa);
-}
-
-validarCorreoEmpresaAlertaEd(CorreoEmpresa: string): boolean {
-  // activaciond e los mensajes de error o aceptacion
-  if (!this.validarCorreoEmpresaEd(CorreoEmpresa)) {
-    const element = document.querySelector('.errCemEd') as HTMLElement;
-    element.style.display = "block";
-    const element2 = document.querySelector('.valCemEd') as HTMLElement;
-    element2.style.display = "none";
-
-    return false;
-  } else {
-    const element = document.querySelector('.errCemEd') as HTMLElement;
-    element.style.display = "none";
-    const element2 = document.querySelector('.valCemEd') as HTMLElement;
-    element2.style.display = "block";
-
-    return true;
-  }
-}
-
-validarTelefonoEmpresaEd(TelefonoEmpresa: string): boolean {
-  // el codigo debe tener 2 letras  mayusculas y 3 numeros
-  return /^02\ [0-9]{7}$/.test(TelefonoEmpresa);
-}
-
-validarTelefonoEmpresaAlertaEd(TelefonoEmpresa: string): boolean {
-  // activaciond e los mensajes de error o aceptacion
-  if (!this.validarTelefonoEmpresaEd(TelefonoEmpresa)) {
-    const element = document.querySelector('.errTemEd') as HTMLElement;
-    element.style.display = "block";
-    const element2 = document.querySelector('.valTemEd') as HTMLElement;
-    element2.style.display = "none";
-
-    return false;
-  } else {
-    const element = document.querySelector('.errTemEd') as HTMLElement;
-    element.style.display = "none";
-    const element2 = document.querySelector('.valTemEd') as HTMLElement;
-    element2.style.display = "block";
-
-    return true;
-  }
-}
+ 
 
 }
