@@ -2,8 +2,11 @@ import { Component, HostBinding, IterableDiffers, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router'
 import { Producto_terminado} from 'src/app/models/producto_terminado';
 import { ProductoTerminadoService } from '../../services/producto-terminado.service'
+import { NgForm } from '@angular/forms';
 
+import { MateriaPrima } from 'src/app/models/materia_prima.models';
 
+import { MateriaPrimaServicesService } from '../../services/materia-prima.services.service'
 
 @Component({
   selector: 'app-producto-terminado',
@@ -16,9 +19,37 @@ import { ProductoTerminadoService } from '../../services/producto-terminado.serv
 export class ProductoTerminadoComponent implements OnInit {
 
   @HostBinding('class') classes = 'modal-body';
+  constructor(private ProductoTerminadoService: ProductoTerminadoService, private materiaPrimaServicesService: MateriaPrimaServicesService) {
+    this.fechaActual = new Date();}
   
-  API_URI = 'http://localhost:3000/api';
+  ngOnInit() {
+    this.codigo = Math.floor(10000 + Math.random() * 90000);
+    this.getMP();
+  }
 
+  mateiraP: MateriaPrima = {
+    id: 0,
+    codigo: ' ',
+    nombre: ' ',
+    precio: ' ',
+    unidad_medida: ' ',
+    cantidad: ' ',
+    fecha_ingreso: ' ',
+    fecha_caducidad: ' ',
+    imagen: ' '
+  }
+
+  materias_primasArr: any = [];
+
+  getMP() {
+    this.materiaPrimaServicesService.getMateria_prima_list().subscribe({
+      next: (v: any) => this.materias_primasArr = v,
+      error: (e: any) => console.error(e),
+      complete: () => console.info('complete')
+    })
+  }
+
+  
   produc: Producto_terminado= {
     id: 0,
     codigo: '',
@@ -32,13 +63,7 @@ export class ProductoTerminadoComponent implements OnInit {
   codigo!: number;
   edit : boolean = true;
   fechaActual: Date;
-  constructor(private ProductoTerminadoService: ProductoTerminadoService, private router: Router , private activatedRoute : ActivatedRoute) {
-    this.fechaActual = new Date();}
   
-  ngOnInit() {
-    this.codigo = Math.floor(10000 + Math.random() * 90000);
-    this.getMP();
-  }
   
   imprimir(): void {
     window.print();
@@ -55,7 +80,7 @@ export class ProductoTerminadoComponent implements OnInit {
     })
   }
 
-  getMP() {
+  getP() {
     this.ProductoTerminadoService.getProducto_terminadolist().subscribe({
       next: (v: any) => this.producArr = v,
       error: (e: any) => console.error(e),
@@ -295,5 +320,7 @@ validarCantidadAlertaEd(cantidad_terminado: string): boolean {
     return true;
   }
 }
+
+
 
 }
