@@ -9,38 +9,46 @@
   <p>Fecha de emisión: {{ fechaActual.toLocaleDateString('es-ES') }}</p>
 
 </div>
-<!-- 
-<div class="row-md-3 printable ocultarcontent" *ngFor="let productoterminado of producArr">
-    <div class="row-md-1">
-        <div class="card mb-3" style="margin: auto; width: 95%;">
-            <div class="row g-0">
-                <div class="col-md-2">
-                    <img src="{{productoterminado.imagen}}" class="img-fluid rounded-start" alt="..." width="200">
-                </div>
-                <div class="col-md-10">
-                    <div class="card-body">
-                        <h5 class="card-title">{{productoterminado.receta}}</h5>
-                        <p class="card-text"><b>Codigo: </b>{{productoterminado.codigo}} </p>
-                        <p class="card-text"><b>Cantidad: </b>{{productoterminado.cantidad_terminado}} </p>
-                        <p class="card-text"><b>Costo: </b>{{productoterminado.costo_terminado}} USD</p>
-                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <button type="button" class="btn btn-success me-md-2" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal" data-bs-whatever="@mdo"
-                                (click)="get_MP(productoterminado.id)">Editar</button>
- 
-                            <button type="button" class="btn btn-danger me-md-2" data-bs-toggle="modal"
-                                data-bs-target="#staticBackdrop" (click)="get_MP(productoterminado.id)">
-                                Eliminar
-                            </button>
 
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="row-md-3 " *ngFor="let recetas of recetasArr">
+  <p> receta : {{recetas.receta.id}}</p>
+  <p> receta : {{recetas.receta.nombre}}</p>
+  <p></p>
 </div>
 
+
+
+<div class="row-md-3 printable ocultarcontent" *ngFor="let recetas of recetasArr">
+  <div class="row-md-1">
+    <div class="card mb-3" style="margin: auto; width: 95%;">
+      <div class="row g-0">
+        <div class="col-md-2">
+          <img src="{{recetas.receta.imagen}}" class="img-fluid rounded-start" alt="..." width="200">
+        </div>
+        <div class="col-md-10">
+          <div class="card-body">
+            <h5 class="card-title">{{recetas.receta.nombre}}</h5>
+            <p class="card-text"><b>ID: </b>{{recetas.receta.id}} </p>
+            <div class="p-3" *ngFor="let ingredientesEx of recetasArr">
+            </div>
+
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+              <button type="button" class="btn btn-success me-md-2" data-bs-toggle="modal"
+                data-bs-target="#exampleModal" data-bs-whatever="@mdo">Editar</button>
+
+              <button type="button" class="btn btn-danger me-md-2" data-bs-toggle="modal"
+                data-bs-target="#staticBackdrop">
+                Eliminar
+              </button>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 
 <div class="container imprimirPDF">
     <table class="table text-center  ">
         <thead class="table-dark">
@@ -79,8 +87,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        <button class="btn btn-danger me-md-2" type="button" (click)="deleteMP(produc.id)"
-          data-bs-dismiss="modal">Eliminar</button>
+        <button class="btn btn-danger me-md-2" type="button" data-bs-dismiss="modal">Eliminar</button>
       </div>
     </div>
   </div>
@@ -91,7 +98,7 @@
 
 <div style="padding-bottom: 5px;" class="d-grid gap-">
   <button type="button" class="btn btn-success ocultarcontent" data-bs-toggle="modal" data-bs-target="#exampleModal2"
-    data-bs-whatever="@mdo" (click)="reset()">Añadir Receta</button>
+    data-bs-whatever="@mdo">Añadir Receta</button>
 </div>
 <div class="d-grid gap-3">
 
@@ -199,10 +206,10 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <div class="form-group">
-                <label for="nombre">Nombre Receta</label>
-                <input type="text" class="form-control" id="nombre" name="nombre">
-              </div>
+          <div class="form-group">
+            <label for="nombre">Nombre Receta</label>
+            <input type="text" class="form-control" id="nombre" name="nombre">
+          </div>
           <label for="Imagen" class="col-form-label">Imagen</label>
           <input type="url" class="form-control" id="Imagen" required [(ngModel)]="mateiraP.imagen" name="Imagen"
             (blur)="mateiraP.imagen && validarImagenAlerta(mateiraP.imagen) " placeholder="https://...">
@@ -228,9 +235,9 @@
                 [value]="materia_prima.unidad_medida">{{materia_prima.unidad_medida}}</option>
             </select>
           </div>
-            <br>
+          <br>
           <button type="button" class="btn btn-primary" (click)="agregarIngrediente()">Agregar ingrediente</button>
-<br><br>
+          <br><br>
           <!-- Tabla de ingredientes agregados -->
           <table class="table">
             <thead>
@@ -252,6 +259,7 @@
                 </td>
               </tr>
             </tbody>
+            <button class="btn btn-success ">Guardar Nueva receta</button>
           </table>
 
 
@@ -259,6 +267,7 @@
       </div>
     </div>
   </div>
+
 </form>
 
 <script>

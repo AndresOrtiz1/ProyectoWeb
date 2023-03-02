@@ -5,13 +5,11 @@ import { ProductoTerminadoService } from '../../services/producto-terminado.serv
 import { NgForm } from '@angular/forms';
 
 import { MateriaPrima } from 'src/app/models/materia_prima.models';
+import { Recetas } from 'src/app/models/receta.modules';
+import { Ingrediente } from 'src/app/models/ingrediente.models';
 
 import { MateriaPrimaServicesService } from '../../services/materia-prima.services.service'
-interface Ingrediente {
-  ingrediente: string;
-  cantidad: string;
-  unidad: string;
-}
+ 
 @Component({
   selector: 'app-producto-terminado',
   templateUrl: './producto-terminado.component.html',
@@ -23,14 +21,26 @@ interface Ingrediente {
 export class ProductoTerminadoComponent implements OnInit {
 
   @HostBinding('class') classes = 'modal-body';
-  constructor(private ProductoTerminadoService: ProductoTerminadoService, private materiaPrimaServicesService: MateriaPrimaServicesService) {
+
+  //contructor
+  constructor(
+    private ProductoTerminadoService: ProductoTerminadoService, private materiaPrimaServicesService: MateriaPrimaServicesService) {
     this.fechaActual = new Date();}
   
   ngOnInit() {
     this.codigo = Math.floor(10000 + Math.random() * 90000);
     this.getMP();
+    this.getRe();
   }
 
+  //variables
+  codigo!: number;
+  fechaActual: Date;
+
+
+  //inicialisacion de modelos 
+
+  //materia prima
   mateiraP: MateriaPrima = {
     id: 0,
     codigo: ' ',
@@ -43,7 +53,28 @@ export class ProductoTerminadoComponent implements OnInit {
     imagen: ' '
   }
 
+  //recetas 
+  recetaP: Recetas = {
+    id: 0,
+    nombre: ' ',
+    imagen: ' '
+  }
+
+  //ingredientes
+  ingredienteP: Ingrediente = {
+    id: 0,
+    receta_id: 0,
+    materia_prima: ' ',
+    cantidad: ' ',
+    unidad_medida: ' '
+  }
+
+  //arreglos
   materias_primasArr: any = [];
+  recetasArr: any = [];
+  ingredientesArr: any = [];
+
+  //metodos materia prima
 
   getMP() {
     this.materiaPrimaServicesService.getMateria_prima_list().subscribe({
@@ -52,10 +83,6 @@ export class ProductoTerminadoComponent implements OnInit {
       complete: () => console.info('complete')
     })
   }
-  ingredientes: string[] = ['Tomate', 'Lechuga', 'Queso', 'Carne'];
-  unidadesDeMedida: string[] = ['Kg', 'L', 'Unidad'];
-  nuevoIngrediente: Ingrediente = { ingrediente: '', cantidad: '', unidad: '' };
-  ingredientesAgregados: Ingrediente[] = [];
 
   mateiraP2: MateriaPrima = { nombre: '', cantidad: '', unidad_medida: '' };
   materiasPrimasAgregadas: MateriaPrima[] = [];
@@ -67,6 +94,7 @@ export class ProductoTerminadoComponent implements OnInit {
       unidad_medida: this.mateiraP2.unidad_medida
     });
     this.mateiraP2 = { nombre: '', cantidad: '', unidad_medida: '' };
+    console.log(this.materiasPrimasAgregadas)
   }
   eliminarIngrediente(materiaPrima: MateriaPrima) {
     const index = this.materiasPrimasAgregadas.indexOf(materiaPrima);
@@ -75,82 +103,36 @@ export class ProductoTerminadoComponent implements OnInit {
     }
   }
   
-  produc: Producto_terminado= {
-    id: 0,
-    codigo: '',
-    costo_terminado:'',
-    cantidad_terminado: '',
-    receta: '',
-    imagen: ''
+   //metodos recetas
+   getRe() {
+    this.ProductoTerminadoService.getProducto_terminadolist().subscribe({
+      next: (v: any) => this.recetasArr = v,
+      error: (e: any) => console.error(e),
+      complete: () => (console.info('complete'), console.log([this.recetasArr]) )
+    })
   }
 
-  producArr: any = [];
-  codigo!: number;
-  edit : boolean = true;
-  fechaActual: Date;
+  saveNewRe() {
+    delete this.recetaP.id;
+    this.materiaPrimaServicesService.saveMateria_prima(this.recetaP).subscribe({
+      next: (v: any) => this.recetasArr = v,
+      error: (e: any) => console.error(e),
+      complete: () => (this.getMP())
+    })
+  }
+
+  
   
   
   imprimir(): void {
     window.print();
   }
 
-  saveNewMP() {
-     
-    delete this.produc.id;
-
-    this.ProductoTerminadoService.saveProducto_terminado(this.produc).subscribe({
-      next: (v: any) => [this.produc = v,this.edit = false ],
-      error: (e: any) => console.error(e),
-      complete: () => ( this.getMP())
-    })
-  }
-
-  getP() {
-    this.ProductoTerminadoService.getProducto_terminadolist().subscribe({
-      next: (v: any) => this.producArr = v,
-      error: (e: any) => console.error(e),
-      complete: () => console.info('complete')
-      
-    })
-  }
-
-  deleteMP(id: any) {
-    this.ProductoTerminadoService.deleteProducto_terminado(id).subscribe({
-      next: (v: any) => [console.log(v),console.log(`se esta eliminando el elemento ${id}`)],
-      error: (e: any) => console.error(e),
-      complete: () => this.getMP(),
-
-    })
-
-  }
-  get_MP(id : string) {
-    this.ProductoTerminadoService.getProducto_terminado(id).subscribe({
-      next: (v: any) => [[this.produc] = v, this.edit = true, console.log(id)],
-      error: (e: any) => console.error(e),
-      complete: () => console.log('get producto terminado complete'+id)
-    })
 
 
-  }
 
-  updateMP(id: any){
-    this.ProductoTerminadoService.updateProducto_terminado(id,this.produc).subscribe({
-      next: (v: any) => [this.produc, console.log(v), console.log([this.produc], this.produc), console.log(id)],
-      error: (e: any) => console.error(e),
-      complete: () => [this.getMP()]      
-    })
-     
-     
-  }
 
-  reset(){
-    this.produc.id= 0;
-    this.produc.codigo = '';
-    this.produc.costo_terminado='';
-    this.produc.cantidad_terminado='';
-    this.produc.receta='';
-    this.produc.imagen = ''; 
-  }
+
 
 // validar codigo 
 validarCodigo(codigo: string): boolean {
@@ -249,6 +231,9 @@ validarCodigoAlerta(codigo: string): boolean {
       return true;
     }
   }
+
+
+
 
  /// validacion EDIT    -------------------------------------------------
  validarCodigoEd(codigo: string): boolean {

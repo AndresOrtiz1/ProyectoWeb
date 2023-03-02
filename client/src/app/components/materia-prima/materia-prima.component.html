@@ -9,15 +9,7 @@
     
 </div>
 
-<!-- parte extra para la receta que deve ir en el producto final -->
-<!-- <div *ngFor=" let receta of recetasArr">
-     
-    <p>{{receta.nombrereceta}}</p>
-</div>
-
-<select>
-    <option *ngFor="let receta of recetasArr" [value]="receta.nombrereceta">{{receta.nombrereceta}}</option>
-  </select> -->
+ 
 
 <div class="row-md-3 printable ocultarcontent" *ngFor="let materia_prima of materias_primasArr">
 
@@ -175,6 +167,7 @@
                             <option value="kg">Kg</option>
                             <option value="lt">Lt</option>
                             <option value="oz">oz</option>
+                            <option value="oz">Unidades</option>
                         </select>
                     </div>
                 
@@ -281,10 +274,11 @@
                         <select id="UnidadM" name="UnidadM" class="form-select" [(ngModel)]="mateiraP.unidad_medida"
                             required>
 
+                            <option selected>...</option>
                             <option value="kg">Kg</option>
                             <option value="lt">Lt</option>
                             <option value="oz">oz</option>
-                            <option selected value="...">Seleccione la unidad en de medida</option>
+                            <option value="oz">Unidades</option>
 
                         </select>
                     </div>
