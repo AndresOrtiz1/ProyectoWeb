@@ -2,8 +2,7 @@ import { Component, HostBinding, IterableDiffers, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router'
 import { Producto_terminado} from 'src/app/models/producto_terminado';
 import { ProductoTerminadoService } from '../../services/producto-terminado.service'
-import { Recetas, Ingrediente } from 'src/app/models/recetas.models'
-import { RecetasService } from '../../services/recetas.service'
+
 
 
 @Component({
@@ -17,32 +16,7 @@ import { RecetasService } from '../../services/recetas.service'
 export class ProductoTerminadoComponent implements OnInit {
 
   @HostBinding('class') classes = 'modal-body';
-  ingredienteP: Ingrediente = {
-    producto: '',
-    cantidad: 0,
-  }
-
-  recetaP: Recetas = {
-    id: 0,
-    nombrereceta: '',
-    // ingredientes: [this.ingredienteP],
-
-  }
-  recetasArr: Recetas[] = [];
-  getREC() {
-    this.recetasService.getRecetaslist().subscribe({
-      next: (v: any) => { this.recetasArr = v; console.log(this.recetasArr) },
-      error: (e: any) => console.error(e),
-      complete: () => console.info('receta obtenida')
-    })
-  }
-  get_REC(id: string) {
-    this.recetasService.getRecetas(id).subscribe({
-      next: (v: any) => [[this.recetaP] = v, console.log(id)],
-      error: (e: any) => console.error(e),
-      complete: () => console.log('get materia prima complete' + id)
-    })
-  }
+  
   API_URI = 'http://localhost:3000/api';
 
   produc: Producto_terminado= {
@@ -58,7 +32,7 @@ export class ProductoTerminadoComponent implements OnInit {
   codigo!: number;
   edit : boolean = true;
   fechaActual: Date;
-  constructor(private ProductoTerminadoService: ProductoTerminadoService, private router: Router , private activatedRoute : ActivatedRoute, private recetasService: RecetasService) {
+  constructor(private ProductoTerminadoService: ProductoTerminadoService, private router: Router , private activatedRoute : ActivatedRoute) {
     this.fechaActual = new Date();}
   
   ngOnInit() {
