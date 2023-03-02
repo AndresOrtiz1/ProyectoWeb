@@ -45,14 +45,14 @@ export class MateriaPrimaComponent implements OnInit {
 
   mateiraP: MateriaPrima = {
     id: 0,
-    codigo: '',
-    nombre: '',
-    precio: '',
-    unidad_medida: '',
-    cantidad: '',
-    fecha_ingreso: '',
-    fecha_caducidad: '',
-    imagen: ''
+    codigo: ' ',
+    nombre: ' ',
+    precio: ' ',
+    unidad_medida: ' ',
+    cantidad: ' ',
+    fecha_ingreso: ' ',
+    fecha_caducidad: ' ',
+    imagen: ' '
   }
 
   materias_primasArr: any = [];
