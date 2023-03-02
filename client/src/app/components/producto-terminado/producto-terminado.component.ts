@@ -7,7 +7,11 @@ import { NgForm } from '@angular/forms';
 import { MateriaPrima } from 'src/app/models/materia_prima.models';
 
 import { MateriaPrimaServicesService } from '../../services/materia-prima.services.service'
-
+interface Ingrediente {
+  ingrediente: string;
+  cantidad: string;
+  unidad: string;
+}
 @Component({
   selector: 'app-producto-terminado',
   templateUrl: './producto-terminado.component.html',
@@ -322,5 +326,24 @@ validarCantidadAlertaEd(cantidad_terminado: string): boolean {
 }
 
 
+ingredientes: string[] = ['Tomate', 'Lechuga', 'Queso', 'Carne'];
+unidadesDeMedida: string[] = ['Kg', 'L', 'Unidad'];
+nuevoIngrediente: Ingrediente = { ingrediente: '', cantidad: '', unidad: '' };
+ingredientesAgregados: Ingrediente[] = [];
 
+agregarIngrediente() {
+  this.ingredientesAgregados.push({
+    ingrediente: this.nuevoIngrediente.ingrediente,
+    cantidad: this.nuevoIngrediente.cantidad,
+    unidad: this.nuevoIngrediente.unidad
+  });
+  this.nuevoIngrediente = { ingrediente: '', cantidad: '', unidad: '' };
+}
+
+eliminarIngrediente(ingrediente: Ingrediente) {
+  const index = this.ingredientesAgregados.indexOf(ingrediente);
+  if (index !== -1) {
+    this.ingredientesAgregados.splice(index, 1);
+  }
+}
 }

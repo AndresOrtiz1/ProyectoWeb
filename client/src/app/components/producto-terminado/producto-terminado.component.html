@@ -3,10 +3,10 @@
 
 
 <div class="row-md-3 imprimirPDF">
-    <h3 class="text-center">Producto Final - reporte</h3>
-    <h3></h3>
-    <p>Numero de Documento: {{ codigo }}</p>
-    <p>Fecha de emisión: {{ fechaActual.toLocaleDateString('es-ES') }}</p>
+  <h3 class="text-center">Producto Final - reporte</h3>
+  <h3></h3>
+  <p>Numero de Documento: {{ codigo }}</p>
+  <p>Fecha de emisión: {{ fechaActual.toLocaleDateString('es-ES') }}</p>
 
 </div>
 <!-- 
@@ -67,36 +67,36 @@
 
 
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel">Eliminar</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                ¿Estas seguro de eliminar este elemento?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button class="btn btn-danger me-md-2" type="button" (click)="deleteMP(produc.id)"
-                    data-bs-dismiss="modal">Eliminar</button>
-            </div>
-        </div>
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Eliminar</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ¿Estas seguro de eliminar este elemento?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button class="btn btn-danger me-md-2" type="button" (click)="deleteMP(produc.id)"
+          data-bs-dismiss="modal">Eliminar</button>
+      </div>
     </div>
+  </div>
 </div>
 
 
 <!-- BOTOM DE A;ADIR ELEMENTO  -->
 
 <div style="padding-bottom: 5px;" class="d-grid gap-">
-    <button type="button" class="btn btn-success ocultarcontent" data-bs-toggle="modal" data-bs-target="#exampleModal2"
-        data-bs-whatever="@mdo" (click)="reset()">Añadir Receta</button>
+  <button type="button" class="btn btn-success ocultarcontent" data-bs-toggle="modal" data-bs-target="#exampleModal2"
+    data-bs-whatever="@mdo" (click)="reset()">Añadir Receta</button>
 </div>
 <div class="d-grid gap-3">
 
-    <button type="button" class="btn btn-secondary ocultarcontent " (click)="imprimir()"
-        download="Producto_terminado.pdf">Reporte Producto Final </button>
+  <button type="button" class="btn btn-secondary ocultarcontent " (click)="imprimir()"
+    download="Producto_terminado.pdf">Reporte Producto Final </button>
 </div>
 
 
@@ -191,52 +191,75 @@
 
 <!-- FORMULARIO DE AÑADIR PRODUCTO -->
 <form #agregarIngredienteForm="ngForm">
-    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-xl">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Añadir Producto Terminado</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-
-
-                    <div class="form-group">
-                        <label  class="col-form-label" for="imagen">Imagen</label>
-                        <input type="file" id="imagen" name="imagen" ng2FileSelect accept=".jpg,.png,.jpeg"  >
-                    </div>
-                    <div class="form-group">
-                        <label  class="col-form-label" for="ingrediente">Ingrediente</label>
-                        <select class="form-control" id="ingrediente" name="ingrediente">
-                            <option *ngFor="let materia_prima of materias_primasArr" [value]="materia_prima.nombre">{{
-                                materia_prima.nombre }}</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label  class="col-form-label" for="cantidad">Cantidad</label>
-                        <input type="text" class="form-control" id="cantidad" name="cantidad"  >
-                    </div>
-                    <div class="form-group">
-                        <label  class="col-form-label" for="unidad">Unidad de medida</label>
-                        <select class="form-control" id="unidad" name="unidad">
-                            <option *ngFor="let materia_prima of materias_primasArr"
-                                [value]="materia_prima.unidad_medida">{{ materia_prima.unidad_medida }}</option>
-                        </select>
-                    </div>
-                    <button type="button" class="btn btn-primary mt-4">Agregar ingrediente</button>
-                </div>
-            </div>
+  <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Añadir Producto Terminado</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
+        <div class="modal-body">
+
+            <div class="form-group">
+                <label for="imagen">Imagen</label>
+               
+              </div>
+              <div class="form-group">
+                <label for="ingrediente">Ingrediente</label>
+                <select class="form-control" id="ingrediente" name="ingrediente" [(ngModel)]="nuevoIngrediente.ingrediente">
+                  <option *ngFor="let ingrediente of ingredientes" [value]="ingrediente">{{ingrediente}}</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="cantidad">Cantidad</label>
+                <input type="text" class="form-control" id="cantidad" name="cantidad" [(ngModel)]="nuevoIngrediente.cantidad">
+              </div>
+              <div class="form-group">
+                <label for="unidad">Unidad de medida</label>
+                <select class="form-control" id="unidad" name="unidad" [(ngModel)]="nuevoIngrediente.unidad">
+                  <option *ngFor="let unidad of unidadesDeMedida" [value]="unidad">{{unidad}}</option>
+                </select>
+              </div>
+              <button type="button" class="btn btn-primary" (click)="agregarIngrediente()">Agregar ingrediente</button>
+
+              <!-- Tabla de ingredientes agregados -->
+<table class="table">
+    <thead>
+      <tr>
+        <th>Ingrediente</th>
+        <th>Cantidad</th>
+        <th>Unidad de medida</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let ingrediente of ingredientesAgregados">
+        <td>{{ingrediente.ingrediente}}</td>
+        <td>{{ingrediente.cantidad}}</td>
+        <td>{{ingrediente.unidad}}</td>
+        <td>
+          <button type="button" class="btn btn-danger" (click)="eliminarIngrediente(ingrediente)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+          
+        </div>
+      </div>
     </div>
+  </div>
 </form>
 
-<script>const exampleModal2 = document.getElementById('exampleModal2')
-    exampleModal2.addEventListener('show.bs.modal', event => {
-        const button = event.relatedTarget
-        const recipient = button.getAttribute('data-bs-whatever')
-        const modalTitle = exampleModal2.querySelector('.modal-title')
-        const modalBodyInput = exampleModal2.querySelector('.modal-body input')
-        modalTitle.textContent = `New message to ${recipient}`
-        modalBodyInput.value = recipient
-    })
+<script>
+  const exampleModal2 = document.getElementById('exampleModal2')
+  exampleModal2.addEventListener('show.bs.modal', event => {
+    const button = event.relatedTarget
+    const recipient = button.getAttribute('data-bs-whatever')
+    const modalTitle = exampleModal2.querySelector('.modal-title')
+    const modalBodyInput = exampleModal2.querySelector('.modal-body input')
+    modalTitle.textContent = `New message to ${recipient}`
+    modalBodyInput.value = recipient
+  })
+
 </script>
