@@ -1,13 +1,13 @@
 import { Component, HostBinding, IterableDiffers, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router'
-import { Producto_terminado, Ingrediente} from 'src/app/models/producto_terminado.models';
+import { Producto_terminado, Ingrediente } from 'src/app/models/producto_terminado.models';
 import { ProductoTerminadoService } from '../../services/producto-terminado.service'
 import { NgForm } from '@angular/forms';
 import { MateriaPrima } from 'src/app/models/materia_prima.models';
 
 
 import { MateriaPrimaServicesService } from '../../services/materia-prima.services.service'
- 
+
 @Component({
   selector: 'app-producto-terminado',
   templateUrl: './producto-terminado.component.html',
@@ -23,8 +23,9 @@ export class ProductoTerminadoComponent implements OnInit {
   //contructor
   constructor(
     private ProductoTerminadoService: ProductoTerminadoService, private materiaPrimaServicesService: MateriaPrimaServicesService) {
-    this.fechaActual = new Date();}
-  
+    this.fechaActual = new Date();
+  }
+
   ngOnInit() {
     this.codigo = Math.floor(10000 + Math.random() * 90000);
     this.getMP();
@@ -52,26 +53,24 @@ export class ProductoTerminadoComponent implements OnInit {
   }
 
   //recetas 
-  recetaP: Producto_terminado = {
+  productoTerminado: Producto_terminado = {
     id: 0,
-    nombre: ' ',
-    imagen: ' '
-  }
+    nombre: '',
+    imagen: '',
+    ingredientes: []
+  };
 
-  //ingredientes
-  ingredienteP: Ingrediente = {
-    id: 0,
+  ingrediente: Ingrediente = {
     receta_id: 0,
-    materia_prima: ' ',
-    cantidad: ' ',
-    unidad_medida: ' '
-  }
+    materia_prima: '',
+    cantidad: '',
+    unidad_medida: ''
+  };
 
   //arreglos
   materias_primasArr: any = [];
-  recetasArr: any = [];
-  ingredientesArr: any = [];
-  edit : boolean = true;
+  productoTerminadoArr: any = [];
+  edit: boolean = true;
   //metodos materia prima
 
   getMP() {
@@ -82,87 +81,96 @@ export class ProductoTerminadoComponent implements OnInit {
     })
   }
 
-  mateiraP2: MateriaPrima = { nombre: '', cantidad: '', unidad_medida: '' };
-  materiasPrimasAgregadas: MateriaPrima[] = [];
+
+  ingredientes: Ingrediente[] = [];
 
   agregarIngrediente() {
-    this.materiasPrimasAgregadas.push({
-      nombre: this.mateiraP2.nombre,
-      cantidad: this.mateiraP2.cantidad,
-      unidad_medida: this.mateiraP2.unidad_medida
+    this.ingredientes.push({
+      receta_id: this.ingrediente.receta_id,
+      materia_prima: this.ingrediente.materia_prima,
+      cantidad: this.ingrediente.cantidad,
+      unidad_medida: this.ingrediente.unidad_medida
     });
-    this.mateiraP2 = { nombre: '', cantidad: '', unidad_medida: '' };
-    console.log(this.materiasPrimasAgregadas)
+    this.ingrediente = { receta_id: 0, materia_prima: '', cantidad: '', unidad_medida: '' };
+    console.log(this.ingredientes)
   }
+
   eliminarIngrediente(materiaPrima: MateriaPrima) {
-    const index = this.materiasPrimasAgregadas.indexOf(materiaPrima);
+    const index = this.ingredientes.indexOf(materiaPrima);
     if (index !== -1) {
-      this.materiasPrimasAgregadas.splice(index, 1);
+      this.ingredientes.splice(index, 1);
     }
   }
-  
-   //metodos recetas
-   getRe() {
+
+  //metodos recetas
+  getRe() {
     this.ProductoTerminadoService.getProducto_terminadolist().subscribe({
-      next: (v: any) => this.recetasArr = v,
+      next: (v: any) => (this.productoTerminadoArr = v, console.log([this.productoTerminadoArr])),
       error: (e: any) => console.error(e),
       complete: () => console.info('complete')
     })
   }
 
   saveNewRe() {
-    delete this.recetaP.id;
-    this.ProductoTerminadoService.saveProducto_terminado(this.recetaP).subscribe({
-      next: (v: any) => this.recetasArr = v,
+    delete this.productoTerminado.id;
+    this.ProductoTerminadoService.saveProducto_terminado(this.productoTerminado).subscribe({
+      next: (v: any) => (this.productoTerminado = v, this.getRe(), console.log([this.productoTerminado])),
       error: (e: any) => console.error(e),
-      complete: () => (this.getMP())
+      complete: () => console.info('guardado')
     })
   }
- saveNewReceta(){
-  delete this.recetaP.id;
-  this.ProductoTerminadoService.saveProducto_terminado(this.recetaP).subscribe({
-    next: (v: any) => [this.recetaP = v,this.edit = false ],
-    error: (e: any) => console.error(e),
-    complete: () => (this.getRe())
-  })
- }
-  
-  
-  
+
+
+
+
+
   imprimir(): void {
     window.print();
   }
 
+  // mateiraP2: MateriaPrima = { nombre: '', cantidad: '', unidad_medida: '' };
+  // materiasPrimasAgregadas: MateriaPrima[] = [];
+
+  // agregarIngrediente() {
+  //   this.materiasPrimasAgregadas.push({
+  //     nombre: this.mateiraP2.nombre,
+  //     cantidad: this.mateiraP2.cantidad,
+  //     unidad_medida: this.mateiraP2.unidad_medida
+  //   });
+  //   this.mateiraP2 = { nombre: '', cantidad: '', unidad_medida: '' };
+  //   console.log(this.materiasPrimasAgregadas)
+  // }
+
+  // mateiraP2: MateriaPrima = { nombre: '', cantidad: '', unidad_medida: '' };
 
 
 
 
 
-
-// validar codigo 
-validarCodigo(codigo: string): boolean {
-  // el codigo debe tener 2 letras  mayusculas y 3 numeros
-  return /^([A-Z]{2})([0-9]{3})$/.test(codigo);
-}
-
-validarCodigoAlerta(codigo: string): boolean {
-  // activaciond e los mensajes de error o aceptacion
-  if (!this.validarCodigo(codigo)) {
-    const element = document.querySelector('.errC') as HTMLElement;
-    element.style.display = "block";
-    const element2 = document.querySelector('.valC') as HTMLElement;
-    element2.style.display = "none";
-
-    return false;
-  } else {
-    const element = document.querySelector('.errC') as HTMLElement;
-    element.style.display = "none";
-    const element2 = document.querySelector('.valC') as HTMLElement;
-    element2.style.display = "block";
-
-    return true;
+  // validar codigo 
+  validarCodigo(codigo: string): boolean {
+    // el codigo debe tener 2 letras  mayusculas y 3 numeros
+    return /^([A-Z]{2})([0-9]{3})$/.test(codigo);
   }
-}
+
+  validarCodigoAlerta(codigo: string): boolean {
+    // activaciond e los mensajes de error o aceptacion
+    if (!this.validarCodigo(codigo)) {
+      const element = document.querySelector('.errC') as HTMLElement;
+      element.style.display = "block";
+      const element2 = document.querySelector('.valC') as HTMLElement;
+      element2.style.display = "none";
+
+      return false;
+    } else {
+      const element = document.querySelector('.errC') as HTMLElement;
+      element.style.display = "none";
+      const element2 = document.querySelector('.valC') as HTMLElement;
+      element2.style.display = "block";
+
+      return true;
+    }
+  }
 
 
   validarPrecio(costo_terminado: string): boolean {
@@ -240,102 +248,102 @@ validarCodigoAlerta(codigo: string): boolean {
 
 
 
- /// validacion EDIT    -------------------------------------------------
- validarCodigoEd(codigo: string): boolean {
-  // el codigo debe tener 2 letras  mayusculas y 3 numeros
-  return /^([A-Z]{2})([0-9]{3})$/.test(codigo);
-}
-
-validarCodigoAlertaEd(codigo: string): boolean {
-  // activaciond e los mensajes de error o aceptacion
-  if (!this.validarCodigoEd(codigo)) {
-    const element = document.querySelector('.errCEd') as HTMLElement;
-    element.style.display = "block";
-    const element2 = document.querySelector('.valCEd') as HTMLElement;
-    element2.style.display = "none";
-
-    return false;
-  } else {
-    const element = document.querySelector('.errCEd') as HTMLElement;
-    element.style.display = "none";
-    const element2 = document.querySelector('.valCEd') as HTMLElement;
-    element2.style.display = "block";
-
-    return true;
+  /// validacion EDIT    -------------------------------------------------
+  validarCodigoEd(codigo: string): boolean {
+    // el codigo debe tener 2 letras  mayusculas y 3 numeros
+    return /^([A-Z]{2})([0-9]{3})$/.test(codigo);
   }
-}
- validarPrecioEd(costo_terminado: string): boolean {
-  // el codigo debe tener 2 letras  mayusculas y 3 numeros
-  return /^([0-9]{1,4}\.[0-9]{1,2})$/.test(costo_terminado);
-}
 
-validarPrecioAlertaEd(costo_terminado: string): boolean {
-  // activaciond e los mensajes de error o aceptacion
-  if (!this.validarPrecioEd(costo_terminado)) {
-    const element = document.querySelector('.errPEd') as HTMLElement;
-    element.style.display = "block";
-    const element2 = document.querySelector('.valPEd') as HTMLElement;
-    element2.style.display = "none";
+  validarCodigoAlertaEd(codigo: string): boolean {
+    // activaciond e los mensajes de error o aceptacion
+    if (!this.validarCodigoEd(codigo)) {
+      const element = document.querySelector('.errCEd') as HTMLElement;
+      element.style.display = "block";
+      const element2 = document.querySelector('.valCEd') as HTMLElement;
+      element2.style.display = "none";
 
-    return false;
-  } else {
-    const element = document.querySelector('.errPEd') as HTMLElement;
-    element.style.display = "none";
-    const element2 = document.querySelector('.valPEd') as HTMLElement;
-    element2.style.display = "block";
+      return false;
+    } else {
+      const element = document.querySelector('.errCEd') as HTMLElement;
+      element.style.display = "none";
+      const element2 = document.querySelector('.valCEd') as HTMLElement;
+      element2.style.display = "block";
 
-    return true;
+      return true;
+    }
   }
-}
-
-validarImagenEd(imagen: string): boolean {
-  // el codigo debe tener 2 letras  mayusculas y 3 numeros
-  return /^(https?:\/\/[\w\-]+(\.[\w\-]+)+[/#?]?.*)$/.test(imagen);
-}
-
-validarImagenAlertaEd(imagen: string): boolean {
-  // activaciond e los mensajes de error o aceptacion
-  if (!this.validarImagenEd(imagen)) {
-    const element = document.querySelector('.errIEd') as HTMLElement;
-    element.style.display = "block";
-    const element2 = document.querySelector('.valIEd') as HTMLElement;
-    element2.style.display = "none";
-
-    return false;
-  } else {
-    const element = document.querySelector('.errIEd') as HTMLElement;
-    element.style.display = "none";
-    const element2 = document.querySelector('.valIEd') as HTMLElement;
-    element2.style.display = "block";
-
-    return true;
+  validarPrecioEd(costo_terminado: string): boolean {
+    // el codigo debe tener 2 letras  mayusculas y 3 numeros
+    return /^([0-9]{1,4}\.[0-9]{1,2})$/.test(costo_terminado);
   }
-}
 
-validarCantidadEd(cantidad_terminado: string): boolean {
-  // el codigo debe tener 2 letras  mayusculas y 3 numeros
-  return /^([0-9]{1,4})$/.test(cantidad_terminado);
-}
+  validarPrecioAlertaEd(costo_terminado: string): boolean {
+    // activaciond e los mensajes de error o aceptacion
+    if (!this.validarPrecioEd(costo_terminado)) {
+      const element = document.querySelector('.errPEd') as HTMLElement;
+      element.style.display = "block";
+      const element2 = document.querySelector('.valPEd') as HTMLElement;
+      element2.style.display = "none";
 
-validarCantidadAlertaEd(cantidad_terminado: string): boolean {
-  // activaciond e los mensajes de error o aceptacion
-  if (!this.validarCantidad(cantidad_terminado)) {
-    const element = document.querySelector('.errCaEd') as HTMLElement;
-    element.style.display = "block";
-    const element2 = document.querySelector('.valCaEd') as HTMLElement;
-    element2.style.display = "none";
+      return false;
+    } else {
+      const element = document.querySelector('.errPEd') as HTMLElement;
+      element.style.display = "none";
+      const element2 = document.querySelector('.valPEd') as HTMLElement;
+      element2.style.display = "block";
 
-    return false;
-  } else {
-    const element = document.querySelector('.errCaEd') as HTMLElement;
-    element.style.display = "none";
-    const element2 = document.querySelector('.valCaEd') as HTMLElement;
-    element2.style.display = "block";
-
-    return true;
+      return true;
+    }
   }
-}
+
+  validarImagenEd(imagen: string): boolean {
+    // el codigo debe tener 2 letras  mayusculas y 3 numeros
+    return /^(https?:\/\/[\w\-]+(\.[\w\-]+)+[/#?]?.*)$/.test(imagen);
+  }
+
+  validarImagenAlertaEd(imagen: string): boolean {
+    // activaciond e los mensajes de error o aceptacion
+    if (!this.validarImagenEd(imagen)) {
+      const element = document.querySelector('.errIEd') as HTMLElement;
+      element.style.display = "block";
+      const element2 = document.querySelector('.valIEd') as HTMLElement;
+      element2.style.display = "none";
+
+      return false;
+    } else {
+      const element = document.querySelector('.errIEd') as HTMLElement;
+      element.style.display = "none";
+      const element2 = document.querySelector('.valIEd') as HTMLElement;
+      element2.style.display = "block";
+
+      return true;
+    }
+  }
+
+  validarCantidadEd(cantidad_terminado: string): boolean {
+    // el codigo debe tener 2 letras  mayusculas y 3 numeros
+    return /^([0-9]{1,4})$/.test(cantidad_terminado);
+  }
+
+  validarCantidadAlertaEd(cantidad_terminado: string): boolean {
+    // activaciond e los mensajes de error o aceptacion
+    if (!this.validarCantidad(cantidad_terminado)) {
+      const element = document.querySelector('.errCaEd') as HTMLElement;
+      element.style.display = "block";
+      const element2 = document.querySelector('.valCaEd') as HTMLElement;
+      element2.style.display = "none";
+
+      return false;
+    } else {
+      const element = document.querySelector('.errCaEd') as HTMLElement;
+      element.style.display = "none";
+      const element2 = document.querySelector('.valCaEd') as HTMLElement;
+      element2.style.display = "block";
+
+      return true;
+    }
+  }
 
 
- 
+
 }

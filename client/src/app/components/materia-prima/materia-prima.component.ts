@@ -54,7 +54,7 @@ export class MateriaPrimaComponent implements OnInit {
     this.materiaPrimaServicesService.saveMateria_prima(this.mateiraP).subscribe({
       next: (v: any) => [this.mateiraP = v, this.getMP()],
       error: (e: any) => console.error(e),
-      complete: () => (this.getMP())
+      complete: () => console.info('materia ingresada')
     })
   }
 
