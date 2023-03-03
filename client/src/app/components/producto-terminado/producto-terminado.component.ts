@@ -1,12 +1,10 @@
 import { Component, HostBinding, IterableDiffers, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router'
-import { Producto_terminado} from 'src/app/models/producto_terminado';
+import { Producto_terminado, Ingrediente} from 'src/app/models/producto_terminado.models';
 import { ProductoTerminadoService } from '../../services/producto-terminado.service'
 import { NgForm } from '@angular/forms';
-
 import { MateriaPrima } from 'src/app/models/materia_prima.models';
-import { Recetas } from 'src/app/models/receta.modules';
-import { Ingrediente } from 'src/app/models/ingrediente.models';
+
 
 import { MateriaPrimaServicesService } from '../../services/materia-prima.services.service'
  
@@ -54,7 +52,7 @@ export class ProductoTerminadoComponent implements OnInit {
   }
 
   //recetas 
-  recetaP: Recetas = {
+  recetaP: Producto_terminado = {
     id: 0,
     nombre: ' ',
     imagen: ' '
@@ -73,7 +71,7 @@ export class ProductoTerminadoComponent implements OnInit {
   materias_primasArr: any = [];
   recetasArr: any = [];
   ingredientesArr: any = [];
-
+  edit : boolean = true;
   //metodos materia prima
 
   getMP() {
@@ -108,19 +106,26 @@ export class ProductoTerminadoComponent implements OnInit {
     this.ProductoTerminadoService.getProducto_terminadolist().subscribe({
       next: (v: any) => this.recetasArr = v,
       error: (e: any) => console.error(e),
-      complete: () => (console.info('complete'), console.log([this.recetasArr]) )
+      complete: () => console.info('complete')
     })
   }
 
   saveNewRe() {
     delete this.recetaP.id;
-    this.materiaPrimaServicesService.saveMateria_prima(this.recetaP).subscribe({
+    this.ProductoTerminadoService.saveProducto_terminado(this.recetaP).subscribe({
       next: (v: any) => this.recetasArr = v,
       error: (e: any) => console.error(e),
       complete: () => (this.getMP())
     })
   }
-
+ saveNewReceta(){
+  delete this.recetaP.id;
+  this.ProductoTerminadoService.saveProducto_terminado(this.recetaP).subscribe({
+    next: (v: any) => [this.recetaP = v,this.edit = false ],
+    error: (e: any) => console.error(e),
+    complete: () => (this.getRe())
+  })
+ }
   
   
   

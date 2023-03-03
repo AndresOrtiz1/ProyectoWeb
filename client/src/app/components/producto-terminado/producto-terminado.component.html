@@ -213,17 +213,17 @@
             <label for="nombre">Nombre Receta</label>
             <input type="text" class="form-control" id="nombre" name="nombre">
           </div>
-          <label for="Imagen" class="col-form-label">Imagen</label>
-          <input type="url" class="form-control" id="Imagen" required [(ngModel)]="mateiraP.imagen" name="Imagen"
-            (blur)="mateiraP.imagen && validarImagenAlerta(mateiraP.imagen) " placeholder="https://...">
+          <label for="imagen" class="col-form-label">Imagen</label>
+          <input type="url" class="form-control" id="imagen" required name="imagen"
+            (blur)="recetaP.imagen && validarImagenAlerta(recetaP.imagen) " placeholder="https://...">
           <div class="errI"> Ingrese la url de la imagen del elemento </div>
           <div class="valI">URL valida</div>
 
 
           <div class="form-group">
-            <label for="ingrediente">Ingrediente</label>
-            <select class="form-control" id="ingrediente" name="ingrediente" [(ngModel)]="mateiraP2.nombre">
-              <option name="ingrediente" *ngFor="let materia_prima of materias_primasArr"
+            <label for=" materia_prima">Ingrediente</label>
+            <select class="form-control" id=" materia_prima" name=" materia_prima" [(ngModel)]="mateiraP2.nombre">
+              <option name="materia_prima" *ngFor="let materia_prima of materias_primasArr"
                 [value]="materia_prima.nombre">{{materia_prima.nombre}}</option>
             </select>
           </div>
@@ -232,9 +232,9 @@
             <input type="text" class="form-control" id="cantidad" name="cantidad" [(ngModel)]="mateiraP2.cantidad">
           </div>
           <div class="form-group">
-            <label for="unidad">Unidad de medida</label>
-            <select class="form-control" id="unidad" name="unidad" [(ngModel)]="mateiraP2.unidad_medida">
-              <option name="ingrediente" *ngFor="let materia_prima of materias_primasArr"
+            <label for="unidad_medida">Unidad de medida</label>
+            <select class="form-control" id="unidad_medida" name="unidad_medida" [(ngModel)]="mateiraP2.unidad_medida">
+              <option name="unidad_medida" *ngFor="let materia_prima of materias_primasArr"
                 [value]="materia_prima.unidad_medida">{{materia_prima.unidad_medida}}</option>
             </select>
           </div>
@@ -262,7 +262,7 @@
                 </td>
               </tr>
             </tbody>
-            <button class="btn btn-success ">Guardar Nueva receta</button>
+            <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="  saveNewReceta()">Guardar Nueva receta</button>
           </table>
 
 
