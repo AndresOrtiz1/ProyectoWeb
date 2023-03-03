@@ -61,6 +61,7 @@ export class ProductoTerminadoComponent implements OnInit {
   };
 
   ingrediente: Ingrediente = {
+    id: 0,
     receta_id: 0,
     materia_prima: '',
     cantidad: '',
@@ -93,6 +94,12 @@ export class ProductoTerminadoComponent implements OnInit {
     });
     this.ingrediente = { receta_id: 0, materia_prima: '', cantidad: '', unidad_medida: '' };
     console.log(this.ingredientes)
+    console.log(this.productoTerminado.ingredientes = this.ingredientes)
+    console.log(this.productoTerminado)
+    this.productoTerminado.nombre
+    this.productoTerminado.imagen
+
+
   }
 
   eliminarIngrediente(materiaPrima: MateriaPrima) {
@@ -113,7 +120,17 @@ export class ProductoTerminadoComponent implements OnInit {
 
   saveNewRe() {
     delete this.productoTerminado.id;
-    this.ProductoTerminadoService.saveProducto_terminado(this.productoTerminado).subscribe({
+    delete this.ingrediente.id;
+    const receta = {
+      nombre: this.productoTerminado.nombre,
+      imagen: this.productoTerminado.imagen,
+    };
+
+    const data = {
+      receta,
+      ingredientes: this.ingredientes,
+    };
+    this.ProductoTerminadoService.saveProducto_terminado(data).subscribe({
       next: (v: any) => (this.productoTerminado = v, this.getRe(), console.log([this.productoTerminado])),
       error: (e: any) => console.error(e),
       complete: () => console.info('guardado')

@@ -1,6 +1,6 @@
 import {Request, Response, text} from 'express';
-
-import  pool  from '../database';
+ 
+import  pool  from '../database'; 
 
 class ClientesController {
 

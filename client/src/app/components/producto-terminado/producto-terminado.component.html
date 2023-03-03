@@ -10,7 +10,7 @@
 
 </div>
 
- 
+
 
 
 
@@ -26,14 +26,14 @@
           <div class="card-body">
             <h5 class="card-title">{{producto.receta.nombre}}</h5>
             <p class="card-text"><b>ID: </b>{{producto.receta.id}} </p>
-            
+
             <h4>ingrediente usados </h4>
             <ul>
               <li *ngFor="let ingrediente of producto.ingredientes">
                 {{ ingrediente.materia_prima }} - {{ ingrediente.cantidad }} {{ ingrediente.unidad_medida }}
               </li>
             </ul>
-          
+
 
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
               <button type="button" class="btn btn-success me-md-2" data-bs-toggle="modal"
@@ -211,18 +211,21 @@
         <div class="modal-body">
           <div class="form-group">
             <label for="nombre">Nombre Receta</label>
-            <input type="text" class="form-control" id="nombre" name="nombre"  [(ngModel)]="productoTerminado.nombre">
+            <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="productoTerminado.nombre">
           </div>
           <label for="imagen" class="col-form-label">Imagen</label>
-          <input type="url" class="form-control" id="imagen" required name="imagen"  [(ngModel)]="productoTerminado.imagen"
-            (blur)="productoTerminado.imagen && validarImagenAlerta(productoTerminado.imagen) " placeholder="https://...">
+          <input type="url" class="form-control" id="imagen" required name="imagen"
+            [(ngModel)]="productoTerminado.imagen"
+            (blur)="productoTerminado.imagen && validarImagenAlerta(productoTerminado.imagen) "
+            placeholder="https://...">
           <div class="errI"> Ingrese la url de la imagen del elemento </div>
           <div class="valI">URL valida</div>
 
 
           <div class="form-group">
             <label for=" materia_prima">Ingrediente</label>
-            <select class="form-control" id=" materia_prima" name=" materia_prima" [(ngModel)]="ingrediente.materia_prima">
+            <select class="form-control" id=" materia_prima" name=" materia_prima"
+              [(ngModel)]="ingrediente.materia_prima">
               <option name="materia_prima" *ngFor="let materia_prima of materias_primasArr"
                 [value]="materia_prima.nombre">{{materia_prima.nombre}}</option>
             </select>
@@ -239,7 +242,8 @@
 
           <div class="form-group">
             <label for="unidad_medida">Unidad de medida</label>
-            <select class="form-control" id="unidad_medida" name="unidad_medida" [(ngModel)]="ingrediente.unidad_medida">
+            <select class="form-control" id="unidad_medida" name="unidad_medida"
+              [(ngModel)]="ingrediente.unidad_medida">
               <option name="unidad_medida" *ngFor="let materia_prima of materias_primasArr"
                 [value]="materia_prima.unidad_medida">{{materia_prima.unidad_medida}}</option>
             </select>
@@ -260,7 +264,7 @@
             </thead>
             <tbody>
               <tr *ngFor="let materia_prima2 of ingredientes">
-                
+
                 <td>{{materia_prima2.receta_id}}</td>
                 <td>{{materia_prima2.materia_prima}}</td>
                 <td>{{materia_prima2.cantidad}}</td>
@@ -271,7 +275,8 @@
                 </td>
               </tr>
             </tbody>
-            <button type="button" class="btn btn-success" data-bs-dismiss="modal"   (click)="saveNewRe()"  >Guardar Nueva receta</button>
+            <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="saveNewRe()">Guardar Nueva
+              receta</button>
           </table>
 
 
