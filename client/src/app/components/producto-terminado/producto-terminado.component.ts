@@ -1,10 +1,12 @@
 import { Component, HostBinding, IterableDiffers, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router'
-import { Producto_terminado} from 'src/app/models/producto_terminado';
+import { Producto_terminado, Ingrediente } from 'src/app/models/producto_terminado.models';
 import { ProductoTerminadoService } from '../../services/producto-terminado.service'
-import { Recetas, Ingrediente } from 'src/app/models/recetas.models'
-import { RecetasService } from '../../services/recetas.service'
+import { NgForm } from '@angular/forms';
+import { MateriaPrima } from 'src/app/models/materia_prima.models';
 
+
+import { MateriaPrimaServicesService } from '../../services/materia-prima.services.service'
 
 @Component({
   selector: 'app-producto-terminado',
@@ -17,141 +19,175 @@ import { RecetasService } from '../../services/recetas.service'
 export class ProductoTerminadoComponent implements OnInit {
 
   @HostBinding('class') classes = 'modal-body';
-  ingredienteP: Ingrediente = {
-    producto: '',
-    cantidad: 0,
+
+  //contructor
+  constructor(
+    private ProductoTerminadoService: ProductoTerminadoService, private materiaPrimaServicesService: MateriaPrimaServicesService) {
+    this.fechaActual = new Date();
   }
 
-  recetaP: Recetas = {
-    id: 0,
-    nombrereceta: '',
-    // ingredientes: [this.ingredienteP],
-
-  }
-  recetasArr: Recetas[] = [];
-  getREC() {
-    this.recetasService.getRecetaslist().subscribe({
-      next: (v: any) => { this.recetasArr = v; console.log(this.recetasArr) },
-      error: (e: any) => console.error(e),
-      complete: () => console.info('receta obtenida')
-    })
-  }
-  get_REC(id: string) {
-    this.recetasService.getRecetas(id).subscribe({
-      next: (v: any) => [[this.recetaP] = v, console.log(id)],
-      error: (e: any) => console.error(e),
-      complete: () => console.log('get materia prima complete' + id)
-    })
-  }
-  API_URI = 'http://localhost:3000/api';
-
-  produc: Producto_terminado= {
-    id: 0,
-    codigo: '',
-    costo_terminado:'',
-    cantidad_terminado: '',
-    receta: '',
-    imagen: ''
-  }
-
-  producArr: any = [];
-  codigo!: number;
-  edit : boolean = true;
-  fechaActual: Date;
-  constructor(private ProductoTerminadoService: ProductoTerminadoService, private router: Router , private activatedRoute : ActivatedRoute, private recetasService: RecetasService) {
-    this.fechaActual = new Date();}
-  
   ngOnInit() {
     this.codigo = Math.floor(10000 + Math.random() * 90000);
     this.getMP();
+    this.getRe();
   }
-  
+
+  //variables
+  codigo!: number;
+  fechaActual: Date;
+
+
+  //inicialisacion de modelos 
+
+  //materia prima
+  mateiraP: MateriaPrima = {
+    id: 0,
+    codigo: ' ',
+    nombre: ' ',
+    precio: ' ',
+    unidad_medida: ' ',
+    cantidad: ' ',
+    fecha_ingreso: ' ',
+    fecha_caducidad: ' ',
+    imagen: ' '
+  }
+
+  //recetas 
+  productoTerminado: Producto_terminado = {
+    id: 0,
+    nombre: '',
+    imagen: '',
+    ingredientes: []
+  };
+
+  ingrediente: Ingrediente = {
+    id: 0,
+    receta_id: 0,
+    materia_prima: '',
+    cantidad: '',
+    unidad_medida: ''
+  };
+
+  //arreglos
+  materias_primasArr: any = [];
+  productoTerminadoArr: any = [];
+  edit: boolean = true;
+  //metodos materia prima
+
+  getMP() {
+    this.materiaPrimaServicesService.getMateria_prima_list().subscribe({
+      next: (v: any) => this.materias_primasArr = v,
+      error: (e: any) => console.error(e),
+      complete: () => console.info('complete')
+    })
+  }
+
+
+  ingredientes: Ingrediente[] = [];
+
+  agregarIngrediente() {
+    this.ingredientes.push({
+      receta_id: this.ingrediente.receta_id,
+      materia_prima: this.ingrediente.materia_prima,
+      cantidad: this.ingrediente.cantidad,
+      unidad_medida: this.ingrediente.unidad_medida
+    });
+    this.ingrediente = { receta_id: 0, materia_prima: '', cantidad: '', unidad_medida: '' };
+    console.log(this.ingredientes)
+    console.log(this.productoTerminado.ingredientes = this.ingredientes)
+    console.log(this.productoTerminado)
+    this.productoTerminado.nombre
+    this.productoTerminado.imagen
+
+
+  }
+
+  eliminarIngrediente(materiaPrima: MateriaPrima) {
+    const index = this.ingredientes.indexOf(materiaPrima);
+    if (index !== -1) {
+      this.ingredientes.splice(index, 1);
+    }
+  }
+
+  //metodos recetas
+  getRe() {
+    this.ProductoTerminadoService.getProducto_terminadolist().subscribe({
+      next: (v: any) => (this.productoTerminadoArr = v, console.log([this.productoTerminadoArr])),
+      error: (e: any) => console.error(e),
+      complete: () => console.info('complete')
+    })
+  }
+
+  saveNewRe() {
+    delete this.productoTerminado.id;
+    delete this.ingrediente.id;
+    const receta = {
+      nombre: this.productoTerminado.nombre,
+      imagen: this.productoTerminado.imagen,
+    };
+
+    const data = {
+      receta,
+      ingredientes: this.ingredientes,
+    };
+    this.ProductoTerminadoService.saveProducto_terminado(data).subscribe({
+      next: (v: any) => (this.productoTerminado = v, this.getRe(), console.log([this.productoTerminado])),
+      error: (e: any) => console.error(e),
+      complete: () => console.info('guardado')
+    })
+  }
+
+
+
+
+
   imprimir(): void {
     window.print();
   }
 
-  saveNewMP() {
-     
-    delete this.produc.id;
+  // mateiraP2: MateriaPrima = { nombre: '', cantidad: '', unidad_medida: '' };
+  // materiasPrimasAgregadas: MateriaPrima[] = [];
 
-    this.ProductoTerminadoService.saveProducto_terminado(this.produc).subscribe({
-      next: (v: any) => [this.produc = v,this.edit = false ],
-      error: (e: any) => console.error(e),
-      complete: () => ( this.getMP())
-    })
+  // agregarIngrediente() {
+  //   this.materiasPrimasAgregadas.push({
+  //     nombre: this.mateiraP2.nombre,
+  //     cantidad: this.mateiraP2.cantidad,
+  //     unidad_medida: this.mateiraP2.unidad_medida
+  //   });
+  //   this.mateiraP2 = { nombre: '', cantidad: '', unidad_medida: '' };
+  //   console.log(this.materiasPrimasAgregadas)
+  // }
+
+  // mateiraP2: MateriaPrima = { nombre: '', cantidad: '', unidad_medida: '' };
+
+
+
+
+
+  // validar codigo 
+  validarCodigo(codigo: string): boolean {
+    // el codigo debe tener 2 letras  mayusculas y 3 numeros
+    return /^([A-Z]{2})([0-9]{3})$/.test(codigo);
   }
 
-  getMP() {
-    this.ProductoTerminadoService.getProducto_terminadolist().subscribe({
-      next: (v: any) => this.producArr = v,
-      error: (e: any) => console.error(e),
-      complete: () => console.info('complete')
-      
-    })
+  validarCodigoAlerta(codigo: string): boolean {
+    // activaciond e los mensajes de error o aceptacion
+    if (!this.validarCodigo(codigo)) {
+      const element = document.querySelector('.errC') as HTMLElement;
+      element.style.display = "block";
+      const element2 = document.querySelector('.valC') as HTMLElement;
+      element2.style.display = "none";
+
+      return false;
+    } else {
+      const element = document.querySelector('.errC') as HTMLElement;
+      element.style.display = "none";
+      const element2 = document.querySelector('.valC') as HTMLElement;
+      element2.style.display = "block";
+
+      return true;
+    }
   }
-
-  deleteMP(id: any) {
-    this.ProductoTerminadoService.deleteProducto_terminado(id).subscribe({
-      next: (v: any) => [console.log(v),console.log(`se esta eliminando el elemento ${id}`)],
-      error: (e: any) => console.error(e),
-      complete: () => this.getMP(),
-
-    })
-
-  }
-  get_MP(id : string) {
-    this.ProductoTerminadoService.getProducto_terminado(id).subscribe({
-      next: (v: any) => [[this.produc] = v, this.edit = true, console.log(id)],
-      error: (e: any) => console.error(e),
-      complete: () => console.log('get producto terminado complete'+id)
-    })
-
-
-  }
-
-  updateMP(id: any){
-    this.ProductoTerminadoService.updateProducto_terminado(id,this.produc).subscribe({
-      next: (v: any) => [this.produc, console.log(v), console.log([this.produc], this.produc), console.log(id)],
-      error: (e: any) => console.error(e),
-      complete: () => [this.getMP()]      
-    })
-     
-     
-  }
-
-  reset(){
-    this.produc.id= 0;
-    this.produc.codigo = '';
-    this.produc.costo_terminado='';
-    this.produc.cantidad_terminado='';
-    this.produc.receta='';
-    this.produc.imagen = ''; 
-  }
-
-// validar codigo 
-validarCodigo(codigo: string): boolean {
-  // el codigo debe tener 2 letras  mayusculas y 3 numeros
-  return /^([A-Z]{2})([0-9]{3})$/.test(codigo);
-}
-
-validarCodigoAlerta(codigo: string): boolean {
-  // activaciond e los mensajes de error o aceptacion
-  if (!this.validarCodigo(codigo)) {
-    const element = document.querySelector('.errC') as HTMLElement;
-    element.style.display = "block";
-    const element2 = document.querySelector('.valC') as HTMLElement;
-    element2.style.display = "none";
-
-    return false;
-  } else {
-    const element = document.querySelector('.errC') as HTMLElement;
-    element.style.display = "none";
-    const element2 = document.querySelector('.valC') as HTMLElement;
-    element2.style.display = "block";
-
-    return true;
-  }
-}
 
 
   validarPrecio(costo_terminado: string): boolean {
@@ -226,100 +262,105 @@ validarCodigoAlerta(codigo: string): boolean {
     }
   }
 
- /// validacion EDIT    -------------------------------------------------
- validarCodigoEd(codigo: string): boolean {
-  // el codigo debe tener 2 letras  mayusculas y 3 numeros
-  return /^([A-Z]{2})([0-9]{3})$/.test(codigo);
-}
 
-validarCodigoAlertaEd(codigo: string): boolean {
-  // activaciond e los mensajes de error o aceptacion
-  if (!this.validarCodigoEd(codigo)) {
-    const element = document.querySelector('.errCEd') as HTMLElement;
-    element.style.display = "block";
-    const element2 = document.querySelector('.valCEd') as HTMLElement;
-    element2.style.display = "none";
 
-    return false;
-  } else {
-    const element = document.querySelector('.errCEd') as HTMLElement;
-    element.style.display = "none";
-    const element2 = document.querySelector('.valCEd') as HTMLElement;
-    element2.style.display = "block";
 
-    return true;
+  /// validacion EDIT    -------------------------------------------------
+  validarCodigoEd(codigo: string): boolean {
+    // el codigo debe tener 2 letras  mayusculas y 3 numeros
+    return /^([A-Z]{2})([0-9]{3})$/.test(codigo);
   }
-}
- validarPrecioEd(costo_terminado: string): boolean {
-  // el codigo debe tener 2 letras  mayusculas y 3 numeros
-  return /^([0-9]{1,4}\.[0-9]{1,2})$/.test(costo_terminado);
-}
 
-validarPrecioAlertaEd(costo_terminado: string): boolean {
-  // activaciond e los mensajes de error o aceptacion
-  if (!this.validarPrecioEd(costo_terminado)) {
-    const element = document.querySelector('.errPEd') as HTMLElement;
-    element.style.display = "block";
-    const element2 = document.querySelector('.valPEd') as HTMLElement;
-    element2.style.display = "none";
+  validarCodigoAlertaEd(codigo: string): boolean {
+    // activaciond e los mensajes de error o aceptacion
+    if (!this.validarCodigoEd(codigo)) {
+      const element = document.querySelector('.errCEd') as HTMLElement;
+      element.style.display = "block";
+      const element2 = document.querySelector('.valCEd') as HTMLElement;
+      element2.style.display = "none";
 
-    return false;
-  } else {
-    const element = document.querySelector('.errPEd') as HTMLElement;
-    element.style.display = "none";
-    const element2 = document.querySelector('.valPEd') as HTMLElement;
-    element2.style.display = "block";
+      return false;
+    } else {
+      const element = document.querySelector('.errCEd') as HTMLElement;
+      element.style.display = "none";
+      const element2 = document.querySelector('.valCEd') as HTMLElement;
+      element2.style.display = "block";
 
-    return true;
+      return true;
+    }
   }
-}
-
-validarImagenEd(imagen: string): boolean {
-  // el codigo debe tener 2 letras  mayusculas y 3 numeros
-  return /^(https?:\/\/[\w\-]+(\.[\w\-]+)+[/#?]?.*)$/.test(imagen);
-}
-
-validarImagenAlertaEd(imagen: string): boolean {
-  // activaciond e los mensajes de error o aceptacion
-  if (!this.validarImagenEd(imagen)) {
-    const element = document.querySelector('.errIEd') as HTMLElement;
-    element.style.display = "block";
-    const element2 = document.querySelector('.valIEd') as HTMLElement;
-    element2.style.display = "none";
-
-    return false;
-  } else {
-    const element = document.querySelector('.errIEd') as HTMLElement;
-    element.style.display = "none";
-    const element2 = document.querySelector('.valIEd') as HTMLElement;
-    element2.style.display = "block";
-
-    return true;
+  validarPrecioEd(costo_terminado: string): boolean {
+    // el codigo debe tener 2 letras  mayusculas y 3 numeros
+    return /^([0-9]{1,4}\.[0-9]{1,2})$/.test(costo_terminado);
   }
-}
 
-validarCantidadEd(cantidad_terminado: string): boolean {
-  // el codigo debe tener 2 letras  mayusculas y 3 numeros
-  return /^([0-9]{1,4})$/.test(cantidad_terminado);
-}
+  validarPrecioAlertaEd(costo_terminado: string): boolean {
+    // activaciond e los mensajes de error o aceptacion
+    if (!this.validarPrecioEd(costo_terminado)) {
+      const element = document.querySelector('.errPEd') as HTMLElement;
+      element.style.display = "block";
+      const element2 = document.querySelector('.valPEd') as HTMLElement;
+      element2.style.display = "none";
 
-validarCantidadAlertaEd(cantidad_terminado: string): boolean {
-  // activaciond e los mensajes de error o aceptacion
-  if (!this.validarCantidad(cantidad_terminado)) {
-    const element = document.querySelector('.errCaEd') as HTMLElement;
-    element.style.display = "block";
-    const element2 = document.querySelector('.valCaEd') as HTMLElement;
-    element2.style.display = "none";
+      return false;
+    } else {
+      const element = document.querySelector('.errPEd') as HTMLElement;
+      element.style.display = "none";
+      const element2 = document.querySelector('.valPEd') as HTMLElement;
+      element2.style.display = "block";
 
-    return false;
-  } else {
-    const element = document.querySelector('.errCaEd') as HTMLElement;
-    element.style.display = "none";
-    const element2 = document.querySelector('.valCaEd') as HTMLElement;
-    element2.style.display = "block";
-
-    return true;
+      return true;
+    }
   }
-}
+
+  validarImagenEd(imagen: string): boolean {
+    // el codigo debe tener 2 letras  mayusculas y 3 numeros
+    return /^(https?:\/\/[\w\-]+(\.[\w\-]+)+[/#?]?.*)$/.test(imagen);
+  }
+
+  validarImagenAlertaEd(imagen: string): boolean {
+    // activaciond e los mensajes de error o aceptacion
+    if (!this.validarImagenEd(imagen)) {
+      const element = document.querySelector('.errIEd') as HTMLElement;
+      element.style.display = "block";
+      const element2 = document.querySelector('.valIEd') as HTMLElement;
+      element2.style.display = "none";
+
+      return false;
+    } else {
+      const element = document.querySelector('.errIEd') as HTMLElement;
+      element.style.display = "none";
+      const element2 = document.querySelector('.valIEd') as HTMLElement;
+      element2.style.display = "block";
+
+      return true;
+    }
+  }
+
+  validarCantidadEd(cantidad_terminado: string): boolean {
+    // el codigo debe tener 2 letras  mayusculas y 3 numeros
+    return /^([0-9]{1,4})$/.test(cantidad_terminado);
+  }
+
+  validarCantidadAlertaEd(cantidad_terminado: string): boolean {
+    // activaciond e los mensajes de error o aceptacion
+    if (!this.validarCantidad(cantidad_terminado)) {
+      const element = document.querySelector('.errCaEd') as HTMLElement;
+      element.style.display = "block";
+      const element2 = document.querySelector('.valCaEd') as HTMLElement;
+      element2.style.display = "none";
+
+      return false;
+    } else {
+      const element = document.querySelector('.errCaEd') as HTMLElement;
+      element.style.display = "none";
+      const element2 = document.querySelector('.valCaEd') as HTMLElement;
+      element2.style.display = "block";
+
+      return true;
+    }
+  }
+
+
 
 }

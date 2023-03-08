@@ -7,7 +7,6 @@ import inventoryRoutes from './routes/inventoryRoutes';
 import materia_primaRoutes from './routes/materia_primaRoutes';
 import proveedoresRoutes from './routes/proveedoresRoutes';
 import clientesRoutes from './routes/clientesRoutes';
-import recetasRoutes from './routes/recetasRoutes';
 import producto_terminadoRoutes from './routes/producto_terminadoRoutes'; 
 
 
@@ -35,7 +34,6 @@ class Server{
         this.app.use('/api/materia-prima', materia_primaRoutes);    
         this.app.use('/api/proveedores', proveedoresRoutes);
         this.app.use('/api/clientes', clientesRoutes);
-        this.app.use('/api/recetas', recetasRoutes);
         this.app.use('/api/producto_terminado', producto_terminadoRoutes);
 
     }

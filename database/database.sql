@@ -33,7 +33,7 @@ CREATE TABLE proveedores (
   CorreoEmpresa varchar(255) NOT NULL,
   PRIMARY KEY (id)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb3;
---base de datos clientes
+-- base de datos clientes
 
 CREATE TABLE clientes (
   id int(11) NOT NULL AUTO_INCREMENT,
@@ -47,13 +47,19 @@ CREATE TABLE clientes (
   PRIMARY KEY (id)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
--- tabla producto terminado
-CREATE TABLE producto_terminado (
-  id int(11) NOT NULL AUTO_INCREMENT, 
-  codigo varchar(255) NOT NULL,
-  costo_terminado varchar(255) NOT NULL,
-  cantidad_terminado varchar(255) NOT NULL,
-  receta varchar(255) NOT NULL,
-  imagen longtext NOT NULL,
-  PRIMARY KEY (id)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+-- tablas recetas
+CREATE TABLE recetas (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  nombre VARCHAR(255) NOT NULL,
+  imagen VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE ingredientes (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  receta_id INT NOT NULL,
+  materia_prima VARCHAR(255) NOT NULL,
+  cantidad FLOAT NOT NULL,
+  unidad_medida VARCHAR(255) NOT NULL,
+  FOREIGN KEY (receta_id) REFERENCES recetas(id) ON DELETE CASCADE
+);
+

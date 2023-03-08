@@ -22,4 +22,4 @@ class InventoryRoutes {
 }
 
 const inventoryRoutes = new InventoryRoutes();
-export default inventoryRoutes.router;    
+export default inventoryRoutes.router;      

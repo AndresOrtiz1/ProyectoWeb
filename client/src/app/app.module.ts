@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http'
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule,NgForm} from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -29,6 +29,7 @@ import { ProductoTerminadoComponent } from './components/producto-terminado/prod
     ProveedoresComponent,
     ClientesComponent,
     ProductoTerminadoComponent,
+   
 
     
        
@@ -38,12 +39,15 @@ import { ProductoTerminadoComponent } from './components/producto-terminado/prod
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    
+    
     
   ],
   //exportar los metodos para poder pedir datos
   providers: [
     MateriaPrimaServicesService,
+    NgForm,
   
   ],
   bootstrap: [AppComponent]

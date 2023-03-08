@@ -1,65 +1,84 @@
-import {Request, Response, text} from 'express';
-
-import  pool  from '../database';
+import { Request, Response } from 'express';
+import pool from '../database';
 
 class Producto_terminadoController {
 
+    public async list_producto_terminado(req: Request, res: Response){
+        const [recetas] = await pool.query('SELECT * FROM recetas');
+        const recetasConIngredientes = [];
     
-    // public async list_materia_prima (req: Request, res: Response) {
-    //     const [rows, fields] = await pool.query('SELECT * FROM materia_prima');
-    //     /*const materia_prima = await pool.query('SELECT * FROM materia_prima');
-    //     console.log(materia_prima);*/
-    //     res.json(rows);
-    // }
-
-    public async list_producto_terminado (req: Request, res: Response) {
-        const [producto_terminado] = await pool.query(' SELECT * FROM producto_terminado  ');
-        res.json(producto_terminado);
-    }
-
-    // aun esta pendiente la confirmacion para que se pueda usar 
+        for (const receta of recetas) {
+            const [ingredientes] = await pool.query('SELECT * FROM ingredientes WHERE receta_id = ?', [receta.id]);
+            recetasConIngredientes.push({ receta, ingredientes });
+        }
     
-
-    // public async getOne (req: Request, res: Response):  Promise<any> {
-    //     const {id} = req.params;
-    //     const [rows, fields] = await pool.query('SELECT * FROM materia_prima WHERE id =?',[id]);
-    //     console.log(rows);
-    //     res.json({text:'econtrado' });
-    // }
-
-    public async getOne (req: Request, res: Response):  Promise<any> {
-        const {id} = req.params;
-        const [producto_terminado] = await pool.query('SELECT * FROM producto_terminado WHERE  id = ?',[id]);
-        console.log(producto_terminado);
-        // res.json({text:'econtrado'});
-        
-        res.json(producto_terminado);
+        res.json(recetasConIngredientes);
     }
     
-    // public getOne(req: Request, res: Response){
-    //     res.json({text: 'ide ingresado: '+ req.params.id})
 
-    // }
-    
-    public async create (req: Request, res: Response): Promise<void> {
-        await pool.query('INSERT INTO producto_terminado set ? ', [req.body] )
-        res.json({message:'nuevo producto terminado ingresaso . '})
-        
-    }
-    
-    public async update (req: Request, res: Response): Promise<void> {
+    public async getOne(req: Request, res: Response): Promise<void> {
         const { id } = req.params;
-        await pool.query('UPDATE producto_terminado set ? WHERE id = ?',[req.body , id]);
-        res.json({message: ' se actualizo el elemento'})
+        const receta = await pool.query('SELECT * FROM recetas WHERE id = ?', [id]);
+
+        if (receta.length > 0) {
+            const [ingredientes] = await pool.query('SELECT * FROM ingredientes WHERE receta_id = ?', [id]);
+            res.json({ receta: receta[0], ingredientes });
+        } else {
+            res.status(404).json({ message: 'Receta no encontrada' });
+        }
     }
-    
-    
-    public async delete (req: Request, res: Response) {
+
+    public async create(req: Request, res: Response): Promise<void> {
+        const { nombre, imagen, ingredientes } = req.body;
+
+        const newReceta = {
+            nombre,
+            imagen,
+        };
+
+        const result = await pool.query('INSERT INTO recetas SET ?', [newReceta]);
+
+        const recetaId = (result as any).insertId;
+
+
+        const newIngredientes = ingredientes.map((ingrediente: any) => {
+            return [recetaId, ingrediente.materia_prima, ingrediente.cantidad, ingrediente.unidad_medida];
+        });
+
+        await pool.query('INSERT INTO ingredientes (receta_id, materia_prima, cantidad, unidad_medida) VALUES ?', [newIngredientes]);
+
+        res.json({ message: 'Receta guardada' });
+    }
+
+    public async update(req: Request, res: Response): Promise<void> {
         const { id } = req.params;
-        await pool.query('DELETE FROM producto_terminado WHERE id = ?',[id]);
-        res.json({message: ' Se a eliminado un elemento' })
+        const { nombre, imagen, ingredientes } = req.body;
+
+        const updatedReceta = {
+            nombre,
+            imagen,
+        };
+
+        await pool.query('UPDATE recetas SET ? WHERE id = ?', [updatedReceta, id]);
+
+        await pool.query('DELETE FROM ingredientes WHERE receta_id = ?', [id]);
+
+        const newIngredientes = ingredientes.map((ingrediente: any) => {
+            return [id, ingrediente.materia_prima, ingrediente.cantidad, ingrediente.unidad_medida];
+        });
+
+        await pool.query('INSERT INTO ingredientes (receta_id, materia_prima, cantidad, unidad_medida) VALUES ?', [newIngredientes]);
+
+        res.json({ message: 'Receta actualizada' });
     }
-      
+
+    public async delete(req: Request, res: Response): Promise<void> {
+        const { id } = req.params;
+
+        await pool.query('DELETE FROM recetas WHERE id = ?', [id]);
+
+        res.json({ message: 'Receta eliminada' });
+    }
 
 }
 

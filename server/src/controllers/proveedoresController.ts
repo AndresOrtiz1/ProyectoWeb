@@ -21,18 +21,18 @@ class ProveedoresController {
     
 
     // public async getOne (req: Request, res: Response):  Promise<any> {
-    //     const {id} = req.params;
+    //     const {id} = req.params; 
     //     const [rows, fields] = await pool.query('SELECT * FROM materia_prima WHERE id =?',[id]);
     //     console.log(rows);
     //     res.json({text:'econtrado' });
     // }
-
+ 
     public async getOne (req: Request, res: Response):  Promise<any> {
         const {id} = req.params;
         const [proveedor] = await pool.query('SELECT * FROM proveedores WHERE  id = ?',[id]);
         console.log(proveedor);
         // res.json({text:'econtrado'});
-        
+         
         res.json(proveedor);
     }
     

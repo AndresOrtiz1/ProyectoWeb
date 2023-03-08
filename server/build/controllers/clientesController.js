@@ -15,25 +15,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.clientesController = void 0;
 const database_1 = __importDefault(require("../database"));
 class ClientesController {
-    // public async list_materia_prima (req: Request, res: Response) {
-    //     const [rows, fields] = await pool.query('SELECT * FROM materia_prima');
-    //     /*const materia_prima = await pool.query('SELECT * FROM materia_prima');
-    //     console.log(materia_prima);*/
-    //     res.json(rows);
-    // }
     list_clientes(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const [clientes] = yield database_1.default.query(' SELECT * FROM clientes  ');
             res.json(clientes);
         });
     }
-    // aun esta pendiente la confirmacion para que se pueda usar 
-    // public async getOne (req: Request, res: Response):  Promise<any> {
-    //     const {id} = req.params;
-    //     const [rows, fields] = await pool.query('SELECT * FROM materia_prima WHERE id =?',[id]);
-    //     console.log(rows);
-    //     res.json({text:'econtrado' });
-    // }
     getOne(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
@@ -43,9 +30,6 @@ class ClientesController {
             res.json(cliente);
         });
     }
-    // public getOne(req: Request, res: Response){
-    //     res.json({text: 'ide ingresado: '+ req.params.id})
-    // }
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             yield database_1.default.query('INSERT INTO clientes set ? ', [req.body]);

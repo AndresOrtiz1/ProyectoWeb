@@ -2,46 +2,56 @@
 <h2 class="ocultarcontent" style="margin: auto; width: 95%;text-align: center;">Producto Terminado</h2> <br>
 
 
-<div class="row-md-3 imprimirPDF" >
-    <h3 class="text-center">Producto Final - reporte</h3>
-    <h3></h3>
-    <p>Numero de Documento: {{ codigo }}</p>
-    <p>Fecha de emisión: {{ fechaActual.toLocaleDateString('es-ES') }}</p>
-    
+<div class="row-md-3 imprimirPDF">
+  <h3 class="text-center">Producto Final - reporte</h3>
+  <h3></h3>
+  <p>Numero de Documento: {{ codigo }}</p>
+  <p>Fecha de emisión: {{ fechaActual.toLocaleDateString('es-ES') }}</p>
+
 </div>
-<div class="row-md-3 printable ocultarcontent" *ngFor="let productoterminado of producArr">
-    <div class="row-md-1">
-        <div class="card mb-3" style="margin: auto; width: 95%;">
-            <div class="row g-0">
-                <div class="col-md-2">
-                    <img src="{{productoterminado.imagen}}" class="img-fluid rounded-start" alt="..." width="200">
-                </div>
-                <div class="col-md-10">
-                    <div class="card-body">
-                        <h5 class="card-title">{{productoterminado.receta}}</h5>
-                        <p class="card-text"><b>Codigo: </b>{{productoterminado.codigo}} </p>
-                        <p class="card-text"><b>Cantidad: </b>{{productoterminado.cantidad_terminado}} </p>
-                        <p class="card-text"><b>Costo: </b>{{productoterminado.costo_terminado}} USD</p>
-                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <button type="button" class="btn btn-success me-md-2" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal" data-bs-whatever="@mdo"
-                                (click)="get_MP(productoterminado.id)">Editar</button>
-                            <!-- <button class="btn btn-danger me-md-2" type="button"
-                                (click)="deleteMP(materia_prima.id)">Eliminar</button>-->
 
-                            <button type="button" class="btn btn-danger me-md-2" data-bs-toggle="modal"
-                                data-bs-target="#staticBackdrop" (click)="get_MP(productoterminado.id)">
-                                Eliminar
-                            </button>
 
-                        </div>
-                    </div>
-                </div>
-            </div>
+
+
+
+
+<div class="row-md-3 printable ocultarcontent" *ngFor="let producto of productoTerminadoArr">
+  <div class="row-md-1">
+    <div class="card mb-3" style="margin: auto; width: 95%;">
+      <div class="row g-0">
+        <div class="col-md-2">
+          <img src="{{producto.receta.imagen}}" class="img-fluid rounded-start" alt="..." width="200">
         </div>
-    </div>
-</div>
+        <div class="col-md-10">
+          <div class="card-body">
+            <h5 class="card-title">{{producto.receta.nombre}}</h5>
+            <p class="card-text"><b>ID: </b>{{producto.receta.id}} </p>
 
+            <h4>ingrediente usados </h4>
+            <ul>
+              <li *ngFor="let ingrediente of producto.ingredientes">
+                {{ ingrediente.materia_prima }} - {{ ingrediente.cantidad }} {{ ingrediente.unidad_medida }}
+              </li>
+            </ul>
+
+
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+              <button type="button" class="btn btn-success me-md-2" data-bs-toggle="modal"
+                data-bs-target="#exampleModal" data-bs-whatever="@mdo">Editar</button>
+
+              <button type="button" class="btn btn-danger me-md-2" data-bs-toggle="modal"
+                data-bs-target="#staticBackdrop">
+                Eliminar
+              </button>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 
 <div class="container imprimirPDF">
     <table class="table text-center  ">
         <thead class="table-dark">
@@ -64,39 +74,39 @@
         </tbody>
     </table>
 
-</div>
+</div> -->
 
 
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel">Eliminar</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                ¿Estas seguro de eliminar este elemento?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button class="btn btn-danger me-md-2" type="button" (click)="deleteMP(produc.id)"
-                    data-bs-dismiss="modal">Eliminar</button>
-            </div>
-        </div>
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Eliminar</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ¿Estas seguro de eliminar este elemento?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button class="btn btn-danger me-md-2" type="button" data-bs-dismiss="modal">Eliminar</button>
+      </div>
     </div>
+  </div>
 </div>
 
 
 <!-- BOTOM DE A;ADIR ELEMENTO  -->
 
 <div style="padding-bottom: 5px;" class="d-grid gap-">
-    <button type="button" class="btn btn-success ocultarcontent" data-bs-toggle="modal"
-        data-bs-target="#exampleModal2" data-bs-whatever="@mdo" (click)="reset()">Añadir Receta</button>
+  <button type="button" class="btn btn-success ocultarcontent" data-bs-toggle="modal" data-bs-target="#exampleModal2"
+    data-bs-whatever="@mdo">Añadir Receta</button>
 </div>
 <div class="d-grid gap-3">
-    
-    <button type="button" class="btn btn-secondary ocultarcontent " (click)="imprimir()" download="Producto_terminado.pdf">Reporte Producto Final </button>
+
+  <button type="button" class="btn btn-secondary ocultarcontent " (click)="imprimir()"
+    download="Producto_terminado.pdf">Reporte Producto Final </button>
 </div>
 
 
@@ -104,7 +114,7 @@
 
 <!-- FORULARIO DE EDITAR DATOS DEL ELEMENTO -->
 
-<form>
+<!-- <form>
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-xl">
             <div class="modal-content">
@@ -166,8 +176,7 @@
   
 
                 </div>
-                <!-- onclick="location.reload()" -->
-                <div class="modal-footer">
+                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
                         (click)="  reset() ">Cerrar</button>
                     <button type="button" class="btn btn-success" data-bs-dismiss="modal"
@@ -176,9 +185,9 @@
             </div>
         </div>
     </div>
-</form>
+</form> 
 
-<script>const exampleModal = document.getElementById('exampleModal')
+  <script>const exampleModal = document.getElementById('exampleModal')
     exampleModal.addEventListener('show.bs.modal', event => {
         const button = event.relatedTarget
         const recipient = button.getAttribute('data-bs-whatever')
@@ -187,89 +196,106 @@
         modalTitle.textContent = `New message to ${recipient}`
         modalBodyInput.value = recipient
     })
-</script>
+</script> -->
 
 
 <!-- FORMULARIO DE AÑADIR PRODUCTO -->
-<form >
-    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-xl">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Añadir Producto Terminado</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                        
-
-                    <div class="mb-3">
-                        <label for="Codigo" class="col-form-label">Codigo:</label>
-                        <input type="text" class="form-control" id="Codigo" required [(ngModel)]="produc.codigo"
-                            name="Codigo" (blur)="produc.codigo && validarCodigoAlerta(produc.codigo) "
-                            placeholder="AB123">
-                        <div class="errC"> Ingrese un codigo valido </div>
-                        <div class="valC">Codigo valido</div>
-
-                    </div>
-                    <div class="mb-3">
-                        <label for="Costo" class="col-form-label">Costo:</label>
-                        <input type="number" class="form-control" id="Costo" autofocus required
-                            [(ngModel)]="produc.costo_terminado" name="Costo"
-                            (blur)="produc.costo_terminado && validarPrecioAlerta(produc.costo_terminado) " placeholder="USD">
-                        <div class="errP"> Ingrese una cantidad de dinero en con decimales </div>
-                        <div class="valP">Formato correcto</div>
-
-                    </div>
-                    <div class="mb-3">
-                        <label for="Cantidad" class="col-form-label">Catidad:</label>
-                        <input type="number" class="form-control" id="Cantidad" autofocus required
-                            [(ngModel)]="produc.cantidad_terminado" name="Cantidad"
-                            (blur)="produc.cantidad_terminado&& validarCantidadAlerta(produc.cantidad_terminado) "
-                            placeholder="Cantidad de elementos existentes">
-                        <div class="errCa"> Ingrese un numero entero </div>
-                        <div class="valCa">Cantidad correcta</div>
-                    </div>
-                    <div class="form-group">
-                        <label for="Receta">Receta</label>
-                        <select id="Receta" name="Receta" class="form-select" [(ngModel)]="produc.receta"
-                            required>
-
-                            <option selected value="Pizza">Pizza</option>
-                            <option selected value="Pasta">Pasta</option>
-                            <option selected value="Lasagna">Lasagna</option>
-                            <option selected>...</option>
-
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="Imagen" class="col-form-label">Imagen</label>
-                        <input type="url" class="form-control" id="Imagen" autofocus required
-                            [(ngModel)]="produc.imagen" name="Imagen"
-                            (blur)="produc.imagen && validarImagenAlerta(produc.imagen) "
-                            placeholder="https://...">
-                        <div class="errI"> Ingrese la url de la imagen del elemento </div>
-                        <div class="valI">URL valida</div>
-                    </div>
-  
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="  saveNewMP()"
-                         >Guardar</button> 
-                </div>
-            </div>
+<form #agregarIngredienteForm="ngForm">
+  <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Añadir Receta</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="nombre">Nombre Receta</label>
+            <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="productoTerminado.nombre">
+          </div>
+          <label for="imagen" class="col-form-label">Imagen</label>
+          <input type="url" class="form-control" id="imagen" required name="imagen"
+            [(ngModel)]="productoTerminado.imagen"
+            (blur)="productoTerminado.imagen && validarImagenAlerta(productoTerminado.imagen) "
+            placeholder="https://...">
+          <div class="errI"> Ingrese la url de la imagen del elemento </div>
+          <div class="valI">URL valida</div>
+
+
+          <div class="form-group">
+            <label for=" materia_prima">Ingrediente</label>
+            <select class="form-control" id=" materia_prima" name=" materia_prima"
+              [(ngModel)]="ingrediente.materia_prima">
+              <option name="materia_prima" *ngFor="let materia_prima of materias_primasArr"
+                [value]="materia_prima.nombre">{{materia_prima.nombre}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="cantidad">Cantidad</label>
+            <input type="number" class="form-control" id="cantidad" name="cantidad" [(ngModel)]="ingrediente.cantidad">
+          </div>
+
+          <div class="form-group">
+            <label for="Id">Id</label>
+            <input type="number" class="form-control" id="Id" name="Id" [(ngModel)]="ingrediente.receta_id">
+          </div>
+
+          <div class="form-group">
+            <label for="unidad_medida">Unidad de medida</label>
+            <select class="form-control" id="unidad_medida" name="unidad_medida"
+              [(ngModel)]="ingrediente.unidad_medida">
+              <option name="unidad_medida" *ngFor="let materia_prima of materias_primasArr"
+                [value]="materia_prima.unidad_medida">{{materia_prima.unidad_medida}}</option>
+            </select>
+          </div>
+          <br>
+          <button type="button" class="btn btn-primary" (click)="agregarIngrediente()">Agregar ingrediente</button>
+          <br><br>
+          <!-- Tabla de ingredientes agregados -->
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Ingrediente</th>
+                <th>Cantidad</th>
+                <th>Unidad de medida</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let materia_prima2 of ingredientes">
+
+                <td>{{materia_prima2.receta_id}}</td>
+                <td>{{materia_prima2.materia_prima}}</td>
+                <td>{{materia_prima2.cantidad}}</td>
+                <td>{{materia_prima2.unidad_medida}}</td>
+                <td>
+                  <button type="button" class="btn btn-danger"
+                    (click)="eliminarIngrediente(materia_prima2)">Eliminar</button>
+                </td>
+              </tr>
+            </tbody>
+            <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="saveNewRe()">Guardar Nueva
+              receta</button>
+          </table>
+
+
+        </div>
+      </div>
     </div>
+  </div>
+
 </form>
 
-<script>const exampleModal2 = document.getElementById('exampleModal2')
-    exampleModal2.addEventListener('show.bs.modal', event => {
-        const button = event.relatedTarget
-        const recipient = button.getAttribute('data-bs-whatever')
-        const modalTitle = exampleModal2.querySelector('.modal-title')
-        const modalBodyInput = exampleModal2.querySelector('.modal-body input')
-        modalTitle.textContent = `New message to ${recipient}`
-        modalBodyInput.value = recipient
-    })
+<script>
+  const exampleModal2 = document.getElementById('exampleModal2')
+  exampleModal2.addEventListener('show.bs.modal', event => {
+    const button = event.relatedTarget
+    const recipient = button.getAttribute('data-bs-whatever')
+    const modalTitle = exampleModal2.querySelector('.modal-title')
+    const modalBodyInput = exampleModal2.querySelector('.modal-body input')
+    modalTitle.textContent = `New message to ${recipient}`
+    modalBodyInput.value = recipient
+  })
+
 </script>
